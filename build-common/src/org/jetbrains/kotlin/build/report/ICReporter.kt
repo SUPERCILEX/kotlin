@@ -3,7 +3,7 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
-package org.jetbrains.kotlin.incremental
+package org.jetbrains.kotlin.build.report
 
 import org.jetbrains.kotlin.cli.common.ExitCode
 import java.io.File
@@ -17,3 +17,5 @@ interface ICReporter {
     fun reportMarkDirtyMember(affectedFiles: Iterable<File>, scope: String, name: String)
     fun reportMarkDirty(affectedFiles: Iterable<File>, reason: String)
 }
+
+
