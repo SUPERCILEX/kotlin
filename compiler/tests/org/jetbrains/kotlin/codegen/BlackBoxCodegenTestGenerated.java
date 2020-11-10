@@ -13815,6 +13815,11 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
             runTest("compiler/testData/codegen/box/functions/recursiveIncrementCall.kt");
         }
 
+        @TestMetadata("typeParameterAsUpperBound.kt")
+        public void testTypeParameterAsUpperBound() throws Exception {
+            runTest("compiler/testData/codegen/box/functions/typeParameterAsUpperBound.kt");
+        }
+
         @TestMetadata("typeParametersInLocalFunction.kt")
         public void testTypeParametersInLocalFunction() throws Exception {
             runTest("compiler/testData/codegen/box/functions/typeParametersInLocalFunction.kt");
@@ -17202,6 +17207,11 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
             runTest("compiler/testData/codegen/box/ir/simple.kt");
         }
 
+        @TestMetadata("suppressConflictingSignatureErrors.kt")
+        public void testSuppressConflictingSignatureErrors() throws Exception {
+            runTest("compiler/testData/codegen/box/ir/suppressConflictingSignatureErrors.kt");
+        }
+
         @TestMetadata("compiler/testData/codegen/box/ir/closureConversion")
         @TestDataPath("$PROJECT_ROOT")
         @RunWith(JUnit3RunnerWithInners.class)
@@ -17367,6 +17377,11 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
         @TestMetadata("genericSamSmartcast.kt")
         public void testGenericSamSmartcast() throws Exception {
             runTest("compiler/testData/codegen/box/javaInterop/genericSamSmartcast.kt");
+        }
+
+        @TestMetadata("kt43217.kt")
+        public void testKt43217() throws Exception {
+            runTest("compiler/testData/codegen/box/javaInterop/kt43217.kt");
         }
 
         @TestMetadata("lambdaInstanceOf.kt")
@@ -24342,6 +24357,16 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
             @TestMetadata("kt13241_Collection.kt")
             public void testKt13241_Collection() throws Exception {
                 runTest("compiler/testData/codegen/box/ranges/forInIndices/kt13241_Collection.kt");
+            }
+
+            @TestMetadata("kt43159_ArrayUpperBound.kt")
+            public void testKt43159_ArrayUpperBound() throws Exception {
+                runTest("compiler/testData/codegen/box/ranges/forInIndices/kt43159_ArrayUpperBound.kt");
+            }
+
+            @TestMetadata("kt43159_GenericArray.kt")
+            public void testKt43159_GenericArray() throws Exception {
+                runTest("compiler/testData/codegen/box/ranges/forInIndices/kt43159_GenericArray.kt");
             }
         }
 

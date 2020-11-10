@@ -109,6 +109,11 @@ public class BytecodeListingTestGenerated extends AbstractBytecodeListingTest {
         runTest("compiler/testData/codegen/bytecodeListing/kt42879.kt");
     }
 
+    @TestMetadata("kt43217.kt")
+    public void testKt43217() throws Exception {
+        runTest("compiler/testData/codegen/bytecodeListing/kt43217.kt");
+    }
+
     @TestMetadata("localFunctionInInitBlock.kt")
     public void testLocalFunctionInInitBlock() throws Exception {
         runTest("compiler/testData/codegen/bytecodeListing/localFunctionInInitBlock.kt");
@@ -751,6 +756,11 @@ public class BytecodeListingTestGenerated extends AbstractBytecodeListingTest {
         @TestMetadata("deprecatedProperty.kt")
         public void testDeprecatedProperty() throws Exception {
             runTest("compiler/testData/codegen/bytecodeListing/deprecated/deprecatedProperty.kt");
+        }
+
+        @TestMetadata("hidden.kt")
+        public void testHidden() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeListing/deprecated/hidden.kt");
         }
     }
 

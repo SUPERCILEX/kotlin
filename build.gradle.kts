@@ -29,6 +29,7 @@ buildscript {
 
         classpath("org.jetbrains.kotlin:kotlin-build-gradle-plugin:0.0.20")
         classpath(kotlin("gradle-plugin", bootstrapKotlinVersion))
+        classpath(kotlin("serialization", bootstrapKotlinVersion))
         classpath("org.jetbrains.dokka:dokka-gradle-plugin:0.9.17")
         classpath("org.jfrog.buildinfo:build-info-extractor-gradle:4.17.2")
     }
@@ -292,7 +293,8 @@ extra["compilerModules"] = arrayOf(
     ":compiler:fir:jvm",
     ":compiler:fir:checkers",
     ":compiler:fir:entrypoint",
-    ":compiler:fir:analysis-tests"
+    ":compiler:fir:analysis-tests",
+    ":wasm:wasm.ir"
 )
 
 extra["compilerModulesForJps"] = listOf(
@@ -650,8 +652,8 @@ tasks {
     }
 
     register("wasmCompilerTest") {
-//  TODO: fix once
-//        dependsOn(":js:js.tests:wasmTest")
+        dependsOn(":js:js.tests:wasmTest")
+        dependsOn(":wasm:wasm.ir:test")
     }
 
     register("nativeCompilerTest") {
