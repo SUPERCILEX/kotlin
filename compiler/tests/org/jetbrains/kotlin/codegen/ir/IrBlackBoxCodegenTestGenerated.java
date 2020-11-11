@@ -6883,6 +6883,11 @@ public class IrBlackBoxCodegenTestGenerated extends AbstractIrBlackBoxCodegenTes
             runTestWithPackageReplacement("compiler/testData/codegen/box/coroutines/noSuspensionPoints.kt", "kotlin.coroutines");
         }
 
+        @TestMetadata("nonLocalReturn.kt")
+        public void testNonLocalReturn() throws Exception {
+            runTest("compiler/testData/codegen/box/coroutines/nonLocalReturn.kt");
+        }
+
         @TestMetadata("nonLocalReturnFromInlineLambdaDeep.kt")
         public void testNonLocalReturnFromInlineLambdaDeep_1_3() throws Exception {
             runTestWithPackageReplacement("compiler/testData/codegen/box/coroutines/nonLocalReturnFromInlineLambdaDeep.kt", "kotlin.coroutines");
@@ -15337,6 +15342,11 @@ public class IrBlackBoxCodegenTestGenerated extends AbstractIrBlackBoxCodegenTes
             runTest("compiler/testData/codegen/box/innerNested/innerWithDefaultArgument.kt");
         }
 
+        @TestMetadata("innerWithDefaultInner.kt")
+        public void testInnerWithDefaultInner() throws Exception {
+            runTest("compiler/testData/codegen/box/innerNested/innerWithDefaultInner.kt");
+        }
+
         @TestMetadata("kt3132.kt")
         public void testKt3132() throws Exception {
             runTest("compiler/testData/codegen/box/innerNested/kt3132.kt");
@@ -16034,6 +16044,16 @@ public class IrBlackBoxCodegenTestGenerated extends AbstractIrBlackBoxCodegenTes
             @TestMetadata("javaNestedSamInterface.kt")
             public void testJavaNestedSamInterface() throws Exception {
                 runTest("compiler/testData/codegen/box/javaInterop/generics/javaNestedSamInterface.kt");
+            }
+
+            @TestMetadata("kt42824.kt")
+            public void testKt42824() throws Exception {
+                runTest("compiler/testData/codegen/box/javaInterop/generics/kt42824.kt");
+            }
+
+            @TestMetadata("kt42825.kt")
+            public void testKt42825() throws Exception {
+                runTest("compiler/testData/codegen/box/javaInterop/generics/kt42825.kt");
             }
 
             @TestMetadata("propertyVarianceConflict.kt")

@@ -9,6 +9,8 @@ abstract class WasmExpressionBuilder {
     abstract fun buildInstr(op: WasmOp, vararg immediates: WasmImmediate)
     abstract var numberOfNestedBlocks: Int
 
+    abstract val lastInstr: WasmOp?
+
     fun buildConstI32(value: Int) {
         buildInstr(WasmOp.I32_CONST, WasmImmediate.ConstI32(value))
     }
@@ -30,19 +32,26 @@ abstract class WasmExpressionBuilder {
     }
 
     fun buildUnreachable() {
+        // Unreachable is not needed
+        if (lastInstr == WasmOp.UNREACHABLE || lastInstr == WasmOp.RETURN)
+            return
+
         buildInstr(WasmOp.UNREACHABLE)
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun buildBlock(label: String?, resultType: WasmType? = null) {
         numberOfNestedBlocks++
         buildInstr(WasmOp.BLOCK, WasmImmediate.BlockType.Value(resultType))
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun buildLoop(label: String?, resultType: WasmType? = null) {
         numberOfNestedBlocks++
         buildInstr(WasmOp.LOOP, WasmImmediate.BlockType.Value(resultType))
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun buildIf(label: String?, resultType: WasmType? = null) {
         numberOfNestedBlocks++
         buildInstr(WasmOp.IF, WasmImmediate.BlockType.Value(resultType))
