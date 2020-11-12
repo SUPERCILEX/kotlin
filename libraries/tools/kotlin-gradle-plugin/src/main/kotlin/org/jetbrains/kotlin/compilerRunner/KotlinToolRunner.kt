@@ -85,7 +85,8 @@ internal abstract class KotlinToolRunner(
         project.logger.info(
             """|Run "$displayName" tool in a separate JVM process
                |Main class = $mainClass
-               |Arguments = ${transformedArgs.toPrettyString()}
+               |Arguments = ${args.toPrettyString()}
+               |Transformed arguments = ${if (transformedArgs == args) "same as arguments" else transformedArgs.toPrettyString()}
                |Classpath = ${classpath.files.map { it.absolutePath }.toPrettyString()}
                |JVM options = ${jvmArgs.toPrettyString()}
                |Java system properties = ${systemProperties.toPrettyString()}
@@ -150,6 +151,10 @@ internal abstract class KotlinToolRunner(
         }
 
         private fun String.toPrettyString(): String =
-            if (isEmpty()) "\"\"" else escapeStringCharacters(this).let { if (any(Char::isWhitespace)) "\"$it\"" else it }
+            when {
+                isEmpty() -> "\"\""
+                any { it == '"' || it.isWhitespace() } -> '"' + escapeStringCharacters(this) + '"'
+                else -> this
+            }
     }
 }

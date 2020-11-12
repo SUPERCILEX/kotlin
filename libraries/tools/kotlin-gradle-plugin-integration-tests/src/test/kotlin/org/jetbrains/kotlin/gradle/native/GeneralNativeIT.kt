@@ -818,13 +818,14 @@ class GeneralNativeIT : BaseGradleIT() {
         build("compileKotlin${nativeHostTargetName.capitalize()}") {
             assertSuccessful()
             checkNativeCommandLineArguments(":compileKotlin${nativeHostTargetName.capitalize()}") { arguments ->
-                val escapedQuotedPath = "\"${fileWithSpacesInPath.absolutePath.replace("\"", "\\\"")}\""
+                val escapedQuotedPath =
+                    "\"${fileWithSpacesInPath.absolutePath.replace("\\", "\\\\").replace("\"", "\\\"")}\""
                 assertTrue(
                     escapedQuotedPath in arguments,
                     """
                         Command-line arguments do not contain path with spaces.
                         Raw path = ${fileWithSpacesInPath.absolutePath}
-                        Escaped quoted path = escapedQuotedPath
+                        Escaped quoted path = $escapedQuotedPath
                         Arguments: ${arguments.joinToString(separator = " ")}
                     """.trimIndent()
                 )

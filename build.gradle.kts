@@ -168,9 +168,8 @@ extra["versions.junit"] = "4.12"
 extra["versions.javaslang"] = "2.0.6"
 extra["versions.ant"] = "1.8.2"
 extra["versions.android"] = "2.3.1"
-val coroutinesVersion = if (Platform[192].orHigher()) "1.3.7" else "1.1.1"
-extra["versions.kotlinx-coroutines-core"] = coroutinesVersion
-extra["versions.kotlinx-coroutines-jdk8"] = coroutinesVersion
+extra["versions.kotlinx-coroutines-core"] = "1.3.7"
+extra["versions.kotlinx-coroutines-jdk8"] = "1.3.7"
 extra["versions.json"] = "20160807"
 extra["versions.native-platform"] = "0.14"
 extra["versions.ant-launcher"] = "1.8.0"
@@ -189,7 +188,7 @@ extra["versions.kotlinx-collections-immutable-jvm"] = immutablesVersion
 extra["versions.ktor-network"] = "1.0.1"
 
 if (!project.hasProperty("versions.kotlin-native")) {
-    extra["versions.kotlin-native"] = "1.4.30-dev-16766"
+    extra["versions.kotlin-native"] = "1.4.30-dev-17200"
 }
 
 val intellijUltimateEnabled by extra(project.kotlinBuildProperties.intellijUltimateEnabled)
@@ -653,7 +652,10 @@ tasks {
 
     register("wasmCompilerTest") {
         dependsOn(":js:js.tests:wasmTest")
-        dependsOn(":wasm:wasm.ir:test")
+        // Windows WABT release requires Visual C++ Redistributable
+        if (!kotlinBuildProperties.isTeamcityBuild || !org.gradle.internal.os.OperatingSystem.current().isWindows) {
+            dependsOn(":wasm:wasm.ir:test")
+        }
     }
 
     register("nativeCompilerTest") {
@@ -868,8 +870,8 @@ tasks {
             ":compiler:test",
             ":js:js.tests:test"
         )
-        if (Ide.IJ193.orHigher())
-            dependsOn(":kotlin-gradle-plugin-integration-tests:test")
+
+        dependsOn(":kotlin-gradle-plugin-integration-tests:test")
         if (Ide.AS40.orHigher())
             dependsOn(":kotlin-ultimate:ide:android-studio-native:test")
 
@@ -903,7 +905,6 @@ tasks {
                 ":prepare:ide-plugin-dependencies:incremental-compilation-impl-tests-for-ide:publish",
                 ":prepare:ide-plugin-dependencies:kotlin-build-common-tests-for-ide:publish",
                 ":prepare:ide-plugin-dependencies:kotlin-compiler-for-ide:publish",
-                ":prepare:ide-plugin-dependencies:kotlin-dist-for-ide:publish",
                 ":prepare:ide-plugin-dependencies:kotlin-gradle-statistics-for-ide:publish",
                 ":prepare:ide-plugin-dependencies:kotlinx-serialization-compiler-plugin-for-ide:publish",
                 ":prepare:ide-plugin-dependencies:noarg-compiler-plugin-for-ide:publish",
