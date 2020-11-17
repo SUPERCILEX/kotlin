@@ -782,6 +782,11 @@ public class BytecodeListingTestGenerated extends AbstractBytecodeListingTest {
         public void testHidden() throws Exception {
             runTest("compiler/testData/codegen/bytecodeListing/deprecated/hidden.kt");
         }
+
+        @TestMetadata("inlineClassTypesInSignature.kt")
+        public void testInlineClassTypesInSignature() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeListing/deprecated/inlineClassTypesInSignature.kt");
+        }
     }
 
     @TestMetadata("compiler/testData/codegen/bytecodeListing/inline")
@@ -955,6 +960,11 @@ public class BytecodeListingTestGenerated extends AbstractBytecodeListingTest {
         @TestMetadata("inlineClassWithManyKindsOfMembers.kt")
         public void testInlineClassWithManyKindsOfMembers() throws Exception {
             runTest("compiler/testData/codegen/bytecodeListing/inlineClasses/inlineClassWithManyKindsOfMembers.kt");
+        }
+
+        @TestMetadata("memberExtensionProperty.kt")
+        public void testMemberExtensionProperty() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeListing/inlineClasses/memberExtensionProperty.kt");
         }
 
         @TestMetadata("noArgConstructorForInlineClassParameter.kt")
