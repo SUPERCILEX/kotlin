@@ -14397,6 +14397,11 @@ public class IrBlackBoxCodegenTestGenerated extends AbstractIrBlackBoxCodegenTes
                 runTest("compiler/testData/codegen/box/inlineClasses/boxReturnValueOnOverride/kt35234a.kt");
             }
 
+            @TestMetadata("overrideGenericWithInlineClass.kt")
+            public void testOverrideGenericWithInlineClass() throws Exception {
+                runTest("compiler/testData/codegen/box/inlineClasses/boxReturnValueOnOverride/overrideGenericWithInlineClass.kt");
+            }
+
             @TestMetadata("overrideGenericWithNullableInlineClassUpperBoundWithNonNullAny.kt")
             public void testOverrideGenericWithNullableInlineClassUpperBoundWithNonNullAny() throws Exception {
                 runTest("compiler/testData/codegen/box/inlineClasses/boxReturnValueOnOverride/overrideGenericWithNullableInlineClassUpperBoundWithNonNullAny.kt");
@@ -19481,6 +19486,11 @@ public class IrBlackBoxCodegenTestGenerated extends AbstractIrBlackBoxCodegenTes
         @TestMetadata("kt4086.kt")
         public void testKt4086() throws Exception {
             runTest("compiler/testData/codegen/box/objects/kt4086.kt");
+        }
+
+        @TestMetadata("kt42758.kt")
+        public void testKt42758() throws Exception {
+            runTest("compiler/testData/codegen/box/objects/kt42758.kt");
         }
 
         @TestMetadata("kt535.kt")
@@ -32255,6 +32265,11 @@ public class IrBlackBoxCodegenTestGenerated extends AbstractIrBlackBoxCodegenTes
         @TestMetadata("kt2466.kt")
         public void testKt2466() throws Exception {
             runTest("compiler/testData/codegen/box/when/kt2466.kt");
+        }
+
+        @TestMetadata("kt43242.kt")
+        public void testKt43242() throws Exception {
+            runTest("compiler/testData/codegen/box/when/kt43242.kt");
         }
 
         @TestMetadata("kt5307.kt")

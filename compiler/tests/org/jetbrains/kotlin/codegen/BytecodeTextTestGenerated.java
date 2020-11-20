@@ -4396,6 +4396,11 @@ public class BytecodeTextTestGenerated extends AbstractBytecodeTextTest {
             runTest("compiler/testData/codegen/bytecodeText/sam/samWrapperForNullableInitialization.kt");
         }
 
+        @TestMetadata("samWrapperInInlineLambda.kt")
+        public void testSamWrapperInInlineLambda() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeText/sam/samWrapperInInlineLambda.kt");
+        }
+
         @TestMetadata("samWrapperOfLambda.kt")
         public void testSamWrapperOfLambda() throws Exception {
             runTest("compiler/testData/codegen/bytecodeText/sam/samWrapperOfLambda.kt");
@@ -4404,6 +4409,11 @@ public class BytecodeTextTestGenerated extends AbstractBytecodeTextTest {
         @TestMetadata("samWrapperOfReference.kt")
         public void testSamWrapperOfReference() throws Exception {
             runTest("compiler/testData/codegen/bytecodeText/sam/samWrapperOfReference.kt");
+        }
+
+        @TestMetadata("samWrapperRawTypes.kt")
+        public void testSamWrapperRawTypes() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeText/sam/samWrapperRawTypes.kt");
         }
     }
 

@@ -44,6 +44,7 @@ import org.jetbrains.kotlin.codegen.when.SwitchCodegen;
 import org.jetbrains.kotlin.codegen.when.SwitchCodegenProvider;
 import org.jetbrains.kotlin.config.ApiVersion;
 import org.jetbrains.kotlin.config.JVMAssertionsMode;
+import org.jetbrains.kotlin.config.JVMConfigurationKeys;
 import org.jetbrains.kotlin.config.LanguageFeature;
 import org.jetbrains.kotlin.descriptors.*;
 import org.jetbrains.kotlin.descriptors.impl.AnonymousFunctionDescriptor;
@@ -2684,7 +2685,21 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
             fd = ArgumentGeneratorKt.getFunctionWithDefaultArguments(fd);
         }
 
-        return typeMapper.mapToCallableMethod(fd, superCall, null, resolvedCall);
+        CallableMethod method = typeMapper.mapToCallableMethod(fd, superCall, null, resolvedCall);
+
+        if (method.getAsmMethod().getName().contains("-") &&
+            !state.getConfiguration().getBoolean(JVMConfigurationKeys.USE_OLD_INLINE_CLASSES_MANGLING_SCHEME)
+        ) {
+            Boolean classFileContainsMethod =
+                    InlineClassesCodegenUtilKt.classFileContainsMethod(fd, state, method.getAsmMethod());
+            if (classFileContainsMethod != null && !classFileContainsMethod) {
+                typeMapper.setUseOldManglingRulesForFunctionAcceptingInlineClass(true);
+                method = typeMapper.mapToCallableMethod(fd, superCall, null, resolvedCall);
+                typeMapper.setUseOldManglingRulesForFunctionAcceptingInlineClass(false);
+            }
+        }
+
+        return method;
     }
 
     public void invokeMethodWithArguments(
@@ -2900,6 +2915,17 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
 
         sourceCompiler.initializeInlineFunctionContext(functionDescriptor);
         JvmMethodSignature signature = typeMapper.mapSignatureWithGeneric(functionDescriptor, sourceCompiler.getContextKind());
+        if (signature.getAsmMethod().getName().contains("-") &&
+            !state.getConfiguration().getBoolean(JVMConfigurationKeys.USE_OLD_INLINE_CLASSES_MANGLING_SCHEME)
+        ) {
+            Boolean classFileContainsMethod =
+                    InlineClassesCodegenUtilKt.classFileContainsMethod(functionDescriptor, state, signature.getAsmMethod());
+            if (classFileContainsMethod != null && !classFileContainsMethod) {
+                typeMapper.setUseOldManglingRulesForFunctionAcceptingInlineClass(true);
+                signature = typeMapper.mapSignatureWithGeneric(functionDescriptor, sourceCompiler.getContextKind());
+                typeMapper.setUseOldManglingRulesForFunctionAcceptingInlineClass(false);
+            }
+        }
         Type methodOwner = typeMapper.mapImplementationOwner(functionDescriptor);
         if (isDefaultCompilation) {
             return new InlineCodegenForDefaultBody(functionDescriptor, this, state, methodOwner, signature, sourceCompiler);
