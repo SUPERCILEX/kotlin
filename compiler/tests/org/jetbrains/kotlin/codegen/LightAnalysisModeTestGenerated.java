@@ -1542,6 +1542,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
             runTest("compiler/testData/codegen/box/bridges/kt318.kt");
         }
 
+        @TestMetadata("kt42137.kt")
+        public void testKt42137() throws Exception {
+            runTest("compiler/testData/codegen/box/bridges/kt42137.kt");
+        }
+
         @TestMetadata("longChainOneBridge.kt")
         public void testLongChainOneBridge() throws Exception {
             runTest("compiler/testData/codegen/box/bridges/longChainOneBridge.kt");
@@ -22561,6 +22566,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
                 runTest("compiler/testData/codegen/box/primitiveTypes/equalityWithObject/intEqualsNullableIntWithSmartCasts.kt");
             }
 
+            @TestMetadata("kt42281.kt")
+            public void testKt42281() throws Exception {
+                runTest("compiler/testData/codegen/box/primitiveTypes/equalityWithObject/kt42281.kt");
+            }
+
             @TestMetadata("objectWithAsymmetricEqualsEqPrimitive.kt")
             public void testObjectWithAsymmetricEqualsEqPrimitive() throws Exception {
                 runTest("compiler/testData/codegen/box/primitiveTypes/equalityWithObject/objectWithAsymmetricEqualsEqPrimitive.kt");
@@ -30777,6 +30787,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
         @TestMetadata("abstractClassInheritsFromInterface.kt")
         public void testAbstractClassInheritsFromInterface() throws Exception {
             runTest("compiler/testData/codegen/box/traits/abstractClassInheritsFromInterface.kt");
+        }
+
+        @TestMetadata("abstractClassWithFakeOverride.kt")
+        public void testAbstractClassWithFakeOverride() throws Exception {
+            runTest("compiler/testData/codegen/box/traits/abstractClassWithFakeOverride.kt");
         }
 
         public void testAllFilesPresentInTraits() throws Exception {

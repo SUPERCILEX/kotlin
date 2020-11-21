@@ -1137,6 +1137,11 @@ public class JsCodegenBoxTestGenerated extends AbstractJsCodegenBoxTest {
             runTest("compiler/testData/codegen/box/bridges/kt318.kt");
         }
 
+        @TestMetadata("kt42137.kt")
+        public void testKt42137() throws Exception {
+            runTest("compiler/testData/codegen/box/bridges/kt42137.kt");
+        }
+
         @TestMetadata("longChainOneBridge.kt")
         public void testLongChainOneBridge() throws Exception {
             runTest("compiler/testData/codegen/box/bridges/longChainOneBridge.kt");
@@ -17201,6 +17206,11 @@ public class JsCodegenBoxTestGenerated extends AbstractJsCodegenBoxTest {
                 runTest("compiler/testData/codegen/box/primitiveTypes/equalityWithObject/intEqualsNullableIntWithSmartCasts.kt");
             }
 
+            @TestMetadata("kt42281.kt")
+            public void testKt42281() throws Exception {
+                runTest("compiler/testData/codegen/box/primitiveTypes/equalityWithObject/kt42281.kt");
+            }
+
             @TestMetadata("objectWithAsymmetricEqualsEqPrimitive.kt")
             public void testObjectWithAsymmetricEqualsEqPrimitive() throws Exception {
                 runTest("compiler/testData/codegen/box/primitiveTypes/equalityWithObject/objectWithAsymmetricEqualsEqPrimitive.kt");
@@ -25413,6 +25423,11 @@ public class JsCodegenBoxTestGenerated extends AbstractJsCodegenBoxTest {
     public static class Traits extends AbstractJsCodegenBoxTest {
         private void runTest(String testDataFilePath) throws Exception {
             KotlinTestUtils.runTest0(this::doTest, TargetBackend.JS, testDataFilePath);
+        }
+
+        @TestMetadata("abstractClassWithFakeOverride.kt")
+        public void testAbstractClassWithFakeOverride() throws Exception {
+            runTest("compiler/testData/codegen/box/traits/abstractClassWithFakeOverride.kt");
         }
 
         public void testAllFilesPresentInTraits() throws Exception {
