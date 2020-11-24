@@ -119,6 +119,11 @@ public class BytecodeListingTestGenerated extends AbstractBytecodeListingTest {
         runTest("compiler/testData/codegen/bytecodeListing/kt43217.kt");
     }
 
+    @TestMetadata("kt43440.kt")
+    public void testKt43440() throws Exception {
+        runTest("compiler/testData/codegen/bytecodeListing/kt43440.kt");
+    }
+
     @TestMetadata("localFunctionInInitBlock.kt")
     public void testLocalFunctionInInitBlock() throws Exception {
         runTest("compiler/testData/codegen/bytecodeListing/localFunctionInInitBlock.kt");
@@ -234,6 +239,11 @@ public class BytecodeListingTestGenerated extends AbstractBytecodeListingTest {
         @TestMetadata("kt27895.kt")
         public void testKt27895() throws Exception {
             runTest("compiler/testData/codegen/bytecodeListing/annotations/kt27895.kt");
+        }
+
+        @TestMetadata("kt43399.kt")
+        public void testKt43399() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeListing/annotations/kt43399.kt");
         }
 
         @TestMetadata("kt9320.kt")

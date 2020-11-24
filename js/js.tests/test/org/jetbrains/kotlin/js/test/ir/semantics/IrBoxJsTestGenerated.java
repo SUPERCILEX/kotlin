@@ -1025,6 +1025,16 @@ public class IrBoxJsTestGenerated extends AbstractIrBoxJsTest {
             runTest("js/js.translator/testData/box/defaultArguments/extensionFunWithDefArgs.kt");
         }
 
+        @TestMetadata("externalTailArgsClass.kt")
+        public void testExternalTailArgsClass() throws Exception {
+            runTest("js/js.translator/testData/box/defaultArguments/externalTailArgsClass.kt");
+        }
+
+        @TestMetadata("externalTailArgsFun.kt")
+        public void testExternalTailArgsFun() throws Exception {
+            runTest("js/js.translator/testData/box/defaultArguments/externalTailArgsFun.kt");
+        }
+
         @TestMetadata("funInAbstractClassWithDefArg.kt")
         public void testFunInAbstractClassWithDefArg() throws Exception {
             runTest("js/js.translator/testData/box/defaultArguments/funInAbstractClassWithDefArg.kt");
@@ -5145,6 +5155,24 @@ public class IrBoxJsTestGenerated extends AbstractIrBoxJsTest {
         }
     }
 
+    @TestMetadata("js/js.translator/testData/box/jsExport")
+    @TestDataPath("$PROJECT_ROOT")
+    @RunWith(JUnit3RunnerWithInners.class)
+    public static class JsExport extends AbstractIrBoxJsTest {
+        private void runTest(String testDataFilePath) throws Exception {
+            KotlinTestUtils.runTest0(this::doTest, TargetBackend.JS_IR, testDataFilePath);
+        }
+
+        public void testAllFilesPresentInJsExport() throws Exception {
+            KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("js/js.translator/testData/box/jsExport"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.JS_IR, true);
+        }
+
+        @TestMetadata("recursiveExport.kt")
+        public void testRecursiveExport() throws Exception {
+            runTest("js/js.translator/testData/box/jsExport/recursiveExport.kt");
+        }
+    }
+
     @TestMetadata("js/js.translator/testData/box/jsModule")
     @TestDataPath("$PROJECT_ROOT")
     @RunWith(JUnit3RunnerWithInners.class)
@@ -5389,6 +5417,11 @@ public class IrBoxJsTestGenerated extends AbstractIrBoxJsTest {
         @TestMetadata("ignore.kt")
         public void testIgnore() throws Exception {
             runTest("js/js.translator/testData/box/kotlin.test/ignore.kt");
+        }
+
+        @TestMetadata("illegalParameters.kt")
+        public void testIllegalParameters() throws Exception {
+            runTest("js/js.translator/testData/box/kotlin.test/illegalParameters.kt");
         }
 
         @TestMetadata("incremental.kt")
