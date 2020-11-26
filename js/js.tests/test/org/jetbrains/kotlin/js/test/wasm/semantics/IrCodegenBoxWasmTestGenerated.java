@@ -80,6 +80,11 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
             public void testAllFilesPresentInTypeAnnotations() throws Exception {
                 KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/annotations/typeAnnotations"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
             }
+
+            @TestMetadata("checkingNotincorporatedInputTypes.kt")
+            public void testCheckingNotincorporatedInputTypes() throws Exception {
+                runTest("compiler/testData/codegen/box/annotations/typeAnnotations/checkingNotincorporatedInputTypes.kt");
+            }
         }
     }
 
@@ -14298,6 +14303,16 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
         @TestMetadata("iterateOverListOfBoxedUnsignedValues.kt")
         public void testIterateOverListOfBoxedUnsignedValues() throws Exception {
             runTest("compiler/testData/codegen/box/unsignedTypes/iterateOverListOfBoxedUnsignedValues.kt");
+        }
+
+        @TestMetadata("kt43286.kt")
+        public void testKt43286() throws Exception {
+            runTest("compiler/testData/codegen/box/unsignedTypes/kt43286.kt");
+        }
+
+        @TestMetadata("kt43286a.kt")
+        public void testKt43286a() throws Exception {
+            runTest("compiler/testData/codegen/box/unsignedTypes/kt43286a.kt");
         }
 
         @TestMetadata("literalEqualsNullableUnsigned.kt")
