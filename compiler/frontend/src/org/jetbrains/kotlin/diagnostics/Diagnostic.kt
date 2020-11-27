@@ -13,32 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.jetbrains.kotlin.diagnostics
 
-package org.jetbrains.kotlin.diagnostics;
+import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiFile
 
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
-
-public interface Diagnostic {
-
-    @NotNull
-    DiagnosticFactory<?> getFactory();
-
-    @NotNull
-    Severity getSeverity();
-
-    @NotNull
-    PsiElement getPsiElement();
-
-    @NotNull
-    List<TextRange> getTextRanges();
-
-    @NotNull
-    PsiFile getPsiFile();
-
-    boolean isValid();
+interface Diagnostic : UnboundDiagnostic {
+    val psiElement: PsiElement
+    val psiFile: PsiFile
 }
