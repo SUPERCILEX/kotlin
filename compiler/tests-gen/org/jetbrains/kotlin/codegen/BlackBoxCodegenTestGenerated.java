@@ -5088,6 +5088,11 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
             runTest("compiler/testData/codegen/box/collections/javaCollectionWithRemovePrimitiveInt.kt");
         }
 
+        @TestMetadata("kt40305.kt")
+        public void testKt40305() throws Exception {
+            runTest("compiler/testData/codegen/box/collections/kt40305.kt");
+        }
+
         @TestMetadata("kt41123.kt")
         public void testKt41123() throws Exception {
             runTest("compiler/testData/codegen/box/collections/kt41123.kt");
@@ -13587,6 +13592,11 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
         @TestMetadata("multimodule.kt")
         public void testMultimodule() throws Exception {
             runTest("compiler/testData/codegen/box/funInterface/multimodule.kt");
+        }
+
+        @TestMetadata("noOptimizedCallableReferences.kt")
+        public void testNoOptimizedCallableReferences() throws Exception {
+            runTest("compiler/testData/codegen/box/funInterface/noOptimizedCallableReferences.kt");
         }
 
         @TestMetadata("nonAbstractMethod.kt")
