@@ -10787,6 +10787,11 @@ public class IrJsCodegenBoxES6TestGenerated extends AbstractIrJsCodegenBoxES6Tes
                 runTest("compiler/testData/codegen/box/functions/bigArity/invokeMemberCallableReference.kt");
             }
 
+            @TestMetadata("nestedBigArityFunCalls.kt")
+            public void testNestedBigArityFunCalls() throws Exception {
+                runTest("compiler/testData/codegen/box/functions/bigArity/nestedBigArityFunCalls.kt");
+            }
+
             @TestMetadata("subclass.kt")
             public void testSubclass() throws Exception {
                 runTest("compiler/testData/codegen/box/functions/bigArity/subclass.kt");
@@ -12130,6 +12135,11 @@ public class IrJsCodegenBoxES6TestGenerated extends AbstractIrJsCodegenBoxES6Tes
         @TestMetadata("mangledSuperCalls.kt")
         public void testMangledSuperCalls() throws Exception {
             runTest("compiler/testData/codegen/box/inlineClasses/mangledSuperCalls.kt");
+        }
+
+        @TestMetadata("multifileClass.kt")
+        public void testMultifileClass() throws Exception {
+            runTest("compiler/testData/codegen/box/inlineClasses/multifileClass.kt");
         }
 
         @TestMetadata("noAssertionsOnInlineClassBasedOnNullableType.kt")

@@ -12572,6 +12572,11 @@ public class FirBlackBoxCodegenTestGenerated extends AbstractFirBlackBoxCodegenT
                 runTest("compiler/testData/codegen/box/functions/bigArity/javaLambda.kt");
             }
 
+            @TestMetadata("nestedBigArityFunCalls.kt")
+            public void testNestedBigArityFunCalls() throws Exception {
+                runTest("compiler/testData/codegen/box/functions/bigArity/nestedBigArityFunCalls.kt");
+            }
+
             @TestMetadata("subclass.kt")
             public void testSubclass() throws Exception {
                 runTest("compiler/testData/codegen/box/functions/bigArity/subclass.kt");
@@ -14135,6 +14140,11 @@ public class FirBlackBoxCodegenTestGenerated extends AbstractFirBlackBoxCodegenT
         @TestMetadata("mappingOfBoxedFlexibleInlineClassType.kt")
         public void testMappingOfBoxedFlexibleInlineClassType() throws Exception {
             runTest("compiler/testData/codegen/box/inlineClasses/mappingOfBoxedFlexibleInlineClassType.kt");
+        }
+
+        @TestMetadata("multifileClass.kt")
+        public void testMultifileClass() throws Exception {
+            runTest("compiler/testData/codegen/box/inlineClasses/multifileClass.kt");
         }
 
         @TestMetadata("noAssertionsOnInlineClassBasedOnNullableType.kt")
@@ -17967,6 +17977,11 @@ public class FirBlackBoxCodegenTestGenerated extends AbstractFirBlackBoxCodegenT
         @TestMetadata("propertyGetterDelegatesToAnother.kt")
         public void testPropertyGetterDelegatesToAnother() throws Exception {
             runTest("compiler/testData/codegen/box/jvmStatic/propertyGetterDelegatesToAnother.kt");
+        }
+
+        @TestMetadata("propertyReference.kt")
+        public void testPropertyReference() throws Exception {
+            runTest("compiler/testData/codegen/box/jvmStatic/propertyReference.kt");
         }
 
         @TestMetadata("simple.kt")

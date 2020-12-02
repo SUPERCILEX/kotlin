@@ -99,6 +99,16 @@ public class BytecodeListingTestGenerated extends AbstractBytecodeListingTest {
         runTest("compiler/testData/codegen/bytecodeListing/jvmOverloadsAndParametersAnnotations.kt");
     }
 
+    @TestMetadata("jvmOverloadsExternal.kt")
+    public void testJvmOverloadsExternal() throws Exception {
+        runTest("compiler/testData/codegen/bytecodeListing/jvmOverloadsExternal.kt");
+    }
+
+    @TestMetadata("jvmStaticExternal.kt")
+    public void testJvmStaticExternal() throws Exception {
+        runTest("compiler/testData/codegen/bytecodeListing/jvmStaticExternal.kt");
+    }
+
     @TestMetadata("jvmStaticWithDefaultParameters.kt")
     public void testJvmStaticWithDefaultParameters() throws Exception {
         runTest("compiler/testData/codegen/bytecodeListing/jvmStaticWithDefaultParameters.kt");
@@ -122,6 +132,11 @@ public class BytecodeListingTestGenerated extends AbstractBytecodeListingTest {
     @TestMetadata("kt43440.kt")
     public void testKt43440() throws Exception {
         runTest("compiler/testData/codegen/bytecodeListing/kt43440.kt");
+    }
+
+    @TestMetadata("kt43519.kt")
+    public void testKt43519() throws Exception {
+        runTest("compiler/testData/codegen/bytecodeListing/kt43519.kt");
     }
 
     @TestMetadata("localFunctionInInitBlock.kt")
@@ -244,6 +259,11 @@ public class BytecodeListingTestGenerated extends AbstractBytecodeListingTest {
         @TestMetadata("kt43399.kt")
         public void testKt43399() throws Exception {
             runTest("compiler/testData/codegen/bytecodeListing/annotations/kt43399.kt");
+        }
+
+        @TestMetadata("kt43459.kt")
+        public void testKt43459() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeListing/annotations/kt43459.kt");
         }
 
         @TestMetadata("kt9320.kt")
@@ -807,6 +827,11 @@ public class BytecodeListingTestGenerated extends AbstractBytecodeListingTest {
         public void testInlineClassTypesInSignature() throws Exception {
             runTest("compiler/testData/codegen/bytecodeListing/deprecated/inlineClassTypesInSignature.kt");
         }
+
+        @TestMetadata("jvmStaticDeprecatedProperty.kt")
+        public void testJvmStaticDeprecatedProperty() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeListing/deprecated/jvmStaticDeprecatedProperty.kt");
+        }
     }
 
     @TestMetadata("compiler/testData/codegen/bytecodeListing/inline")
@@ -982,6 +1007,11 @@ public class BytecodeListingTestGenerated extends AbstractBytecodeListingTest {
             runTest("compiler/testData/codegen/bytecodeListing/inlineClasses/inlineClassWithManyKindsOfMembers.kt");
         }
 
+        @TestMetadata("javaDefaultInterfaceMember.kt")
+        public void testJavaDefaultInterfaceMember() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeListing/inlineClasses/javaDefaultInterfaceMember.kt");
+        }
+
         @TestMetadata("jvmName.kt")
         public void testJvmName() throws Exception {
             runTest("compiler/testData/codegen/bytecodeListing/inlineClasses/jvmName.kt");
@@ -1122,6 +1152,11 @@ public class BytecodeListingTestGenerated extends AbstractBytecodeListingTest {
             @TestMetadata("set.kt")
             public void testSet() throws Exception {
                 runTest("compiler/testData/codegen/bytecodeListing/inlineClasses/inlineCollection/set.kt");
+            }
+
+            @TestMetadata("UIntArrayWithFullJdk.kt")
+            public void testUIntArrayWithFullJdk() throws Exception {
+                runTest("compiler/testData/codegen/bytecodeListing/inlineClasses/inlineCollection/UIntArrayWithFullJdk.kt");
             }
         }
 

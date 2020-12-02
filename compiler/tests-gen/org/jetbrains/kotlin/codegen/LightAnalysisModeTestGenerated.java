@@ -13972,6 +13972,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
                 runTest("compiler/testData/codegen/box/functions/bigArity/javaLambda.kt");
             }
 
+            @TestMetadata("nestedBigArityFunCalls.kt")
+            public void testNestedBigArityFunCalls() throws Exception {
+                runTest("compiler/testData/codegen/box/functions/bigArity/nestedBigArityFunCalls.kt");
+            }
+
             @TestMetadata("subclass.kt")
             public void testSubclass() throws Exception {
                 runTest("compiler/testData/codegen/box/functions/bigArity/subclass.kt");
@@ -14897,6 +14902,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
         @TestMetadata("inlineClassWithCustomEquals.kt")
         public void ignoreInlineClassWithCustomEquals() throws Exception {
             runTest("compiler/testData/codegen/box/inlineClasses/inlineClassWithCustomEquals.kt");
+        }
+
+        @TestMetadata("multifileClass.kt")
+        public void ignoreMultifileClass() throws Exception {
+            runTest("compiler/testData/codegen/box/inlineClasses/multifileClass.kt");
         }
 
         @TestMetadata("simpleSecondaryConstructor.kt")
@@ -19367,6 +19377,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
         @TestMetadata("propertyGetterDelegatesToAnother.kt")
         public void testPropertyGetterDelegatesToAnother() throws Exception {
             runTest("compiler/testData/codegen/box/jvmStatic/propertyGetterDelegatesToAnother.kt");
+        }
+
+        @TestMetadata("propertyReference.kt")
+        public void testPropertyReference() throws Exception {
+            runTest("compiler/testData/codegen/box/jvmStatic/propertyReference.kt");
         }
 
         @TestMetadata("simple.kt")

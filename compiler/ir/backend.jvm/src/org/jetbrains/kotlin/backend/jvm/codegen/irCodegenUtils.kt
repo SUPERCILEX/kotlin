@@ -24,6 +24,8 @@ import org.jetbrains.kotlin.codegen.signature.BothSignatureWriter
 import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
 import org.jetbrains.kotlin.ir.declarations.*
+import org.jetbrains.kotlin.ir.expressions.IrCall
+import org.jetbrains.kotlin.ir.expressions.IrExpressionBody
 import org.jetbrains.kotlin.ir.expressions.IrMemberAccessExpression
 import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.symbols.IrSymbol
@@ -356,7 +358,8 @@ val IrFunction.isSyntheticMethodForProperty: Boolean
 val IrFunction.isDeprecatedFunction: Boolean
     get() = isSyntheticMethodForProperty || isDeprecatedCallable ||
             (this as? IrSimpleFunction)?.correspondingPropertySymbol?.owner?.isDeprecatedCallable == true ||
-            isAccessorForDeprecatedPropertyImplementedByDelegation
+            isAccessorForDeprecatedPropertyImplementedByDelegation ||
+            isAccessorForDeprecatedJvmStaticProperty
 
 private val IrFunction.isAccessorForDeprecatedPropertyImplementedByDelegation: Boolean
     get() =
@@ -366,6 +369,18 @@ private val IrFunction.isAccessorForDeprecatedPropertyImplementedByDelegation: B
                 overriddenSymbols.any {
                     it.owner.correspondingPropertySymbol?.owner?.isDeprecatedCallable == true
                 }
+
+private val IrFunction.isAccessorForDeprecatedJvmStaticProperty: Boolean
+    get() {
+        if (origin != JvmLoweredDeclarationOrigin.JVM_STATIC_WRAPPER) return false
+        val irExpressionBody = this.body as? IrExpressionBody
+            ?: throw AssertionError("IrExpressionBody expected for JvmStatic wrapper:\n${this.dump()}")
+        val irCall = irExpressionBody.expression as? IrCall
+            ?: throw AssertionError("IrCall expected inside JvmStatic wrapper:\n${this.dump()}")
+        val callee = irCall.symbol.owner
+        val property = callee.correspondingPropertySymbol?.owner ?: return false
+        return property.isDeprecatedCallable
+    }
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 val IrDeclaration.psiElement: PsiElement?
@@ -379,7 +394,7 @@ fun IrSimpleType.isRawType(): Boolean =
     hasAnnotation(JvmGeneratorExtensions.RAW_TYPE_ANNOTATION_FQ_NAME)
 
 internal fun classFileContainsMethod(function: IrFunction, context: JvmBackendContext, name: String): Boolean? {
-    val classId = (function.parent as? IrClass)?.classId ?: (function.containerSource as? JvmPackagePartSource)?.classId ?: return null
+    val classId = (function.containerSource as? JvmPackagePartSource)?.classId ?: (function.parent as? IrClass)?.classId ?: return null
     val originalDescriptor = context.methodSignatureMapper.mapSignatureWithGeneric(function).asmMethod.descriptor
     val descriptor = if (function.isSuspend)
         listOf(*Type.getArgumentTypes(originalDescriptor), Type.getObjectType("kotlin/coroutines/Continuation"))
