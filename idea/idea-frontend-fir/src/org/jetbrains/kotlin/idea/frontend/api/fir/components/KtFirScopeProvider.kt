@@ -6,6 +6,8 @@
 package org.jetbrains.kotlin.idea.frontend.api.fir.components
 
 import com.intellij.openapi.project.Project
+import org.jetbrains.kotlin.fir.declarations.FirAnonymousObject
+import org.jetbrains.kotlin.fir.declarations.FirClass
 import org.jetbrains.kotlin.fir.declarations.FirResolvePhase
 import org.jetbrains.kotlin.fir.resolve.scope
 import org.jetbrains.kotlin.fir.scopes.FakeOverrideTypeCalculator
@@ -24,14 +26,16 @@ import org.jetbrains.kotlin.idea.frontend.api.components.KtScopeProvider
 import org.jetbrains.kotlin.idea.frontend.api.fir.KtFirAnalysisSession
 import org.jetbrains.kotlin.idea.frontend.api.fir.KtSymbolByFirBuilder
 import org.jetbrains.kotlin.idea.frontend.api.fir.scopes.*
+import org.jetbrains.kotlin.idea.frontend.api.fir.symbols.KtFirAnonymousObjectSymbol
 import org.jetbrains.kotlin.idea.frontend.api.fir.symbols.KtFirClassOrObjectSymbol
+import org.jetbrains.kotlin.idea.frontend.api.fir.symbols.KtFirEnumEntrySymbol
 import org.jetbrains.kotlin.idea.frontend.api.fir.types.KtFirType
 import org.jetbrains.kotlin.idea.frontend.api.fir.utils.EnclosingDeclarationContext
 import org.jetbrains.kotlin.idea.frontend.api.fir.utils.buildCompletionContext
 import org.jetbrains.kotlin.idea.frontend.api.fir.utils.weakRef
 import org.jetbrains.kotlin.idea.frontend.api.scopes.*
-import org.jetbrains.kotlin.idea.frontend.api.symbols.KtClassOrObjectSymbol
 import org.jetbrains.kotlin.idea.frontend.api.symbols.KtPackageSymbol
+import org.jetbrains.kotlin.idea.frontend.api.symbols.markers.KtSymbolWithDeclarations
 import org.jetbrains.kotlin.idea.frontend.api.types.KtType
 import org.jetbrains.kotlin.idea.frontend.api.withValidityAssertion
 import org.jetbrains.kotlin.psi.KtElement
@@ -50,31 +54,47 @@ internal class KtFirScopeProvider(
     private val firResolveState by weakRef(firResolveState)
     private val firScopeStorage = FirScopeRegistry()
 
-    private val memberScopeCache = IdentityHashMap<KtClassOrObjectSymbol, KtMemberScope>()
-    private val declaredMemberScopeCache = IdentityHashMap<KtClassOrObjectSymbol, KtDeclaredMemberScope>()
+    private val memberScopeCache = IdentityHashMap<KtSymbolWithDeclarations, KtMemberScope>()
+    private val declaredMemberScopeCache = IdentityHashMap<KtSymbolWithDeclarations, KtDeclaredMemberScope>()
     private val packageMemberScopeCache = IdentityHashMap<KtPackageSymbol, KtPackageScope>()
 
-    override fun getMemberScope(classSymbol: KtClassOrObjectSymbol): KtMemberScope = withValidityAssertion {
+    private inline fun <T> KtSymbolWithDeclarations.withFirForScope(crossinline body: (FirClass<*>) -> T): T? = when (this) {
+        is KtFirClassOrObjectSymbol -> firRef.withFir(FirResolvePhase.SUPER_TYPES, body)
+        is KtFirAnonymousObjectSymbol -> firRef.withFir(FirResolvePhase.SUPER_TYPES, body)
+        is KtFirEnumEntrySymbol -> firRef.withFir(FirResolvePhase.IMPLICIT_TYPES_BODY_RESOLVE) {
+            val initializer = it.initializer
+            check(initializer is FirAnonymousObject)
+            body(initializer)
+        }
+        else -> error { "Unknown KtSymbolWithDeclarations implementation ${this::class.qualifiedName}" }
+    }
+
+    override fun getMemberScope(classSymbol: KtSymbolWithDeclarations): KtMemberScope = withValidityAssertion {
         memberScopeCache.getOrPut(classSymbol) {
-            check(classSymbol is KtFirClassOrObjectSymbol)
-            val firScope =
-                classSymbol.firRef.withFir(FirResolvePhase.SUPER_TYPES) { fir ->
-                    val firSession = fir.session
-                    fir.unsubstitutedScope(
-                        firSession,
-                        firResolveState.firTransformerProvider.getScopeSession(firSession),
-                        withForcedTypeCalculator = false
-                    )
-                }.also(firScopeStorage::register)
+
+            val firScope = classSymbol.withFirForScope { fir ->
+                val firSession = fir.session
+                fir.unsubstitutedScope(
+                    firSession,
+                    firResolveState.firTransformerProvider.getScopeSession(firSession),
+                    withForcedTypeCalculator = false
+                )
+            } ?: return@getOrPut KtFirEmptyMemberScope(classSymbol)
+
+            firScopeStorage.register(firScope)
+
             KtFirMemberScope(classSymbol, firScope, token, builder)
         }
     }
 
-    override fun getDeclaredMemberScope(classSymbol: KtClassOrObjectSymbol): KtDeclaredMemberScope = withValidityAssertion {
+    override fun getDeclaredMemberScope(classSymbol: KtSymbolWithDeclarations): KtDeclaredMemberScope = withValidityAssertion {
         declaredMemberScopeCache.getOrPut(classSymbol) {
-            check(classSymbol is KtFirClassOrObjectSymbol)
-            val firScope = classSymbol.firRef.withFir(FirResolvePhase.SUPER_TYPES) { declaredMemberScope(it) }
-                .also(firScopeStorage::register)
+            val firScope = classSymbol.withFirForScope {
+                declaredMemberScope(it)
+            } ?: return@getOrPut KtFirEmptyMemberScope(classSymbol)
+
+            firScopeStorage.register(firScope)
+
             KtFirDeclaredMemberScope(classSymbol, firScope, token, builder)
         }
     }

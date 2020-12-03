@@ -174,11 +174,6 @@ public class BytecodeListingTestGenerated extends AbstractBytecodeListingTest {
         runTest("compiler/testData/codegen/bytecodeListing/noRemoveAtInReadOnly.kt");
     }
 
-    @TestMetadata("noToArrayInJava.kt")
-    public void testNoToArrayInJava() throws Exception {
-        runTest("compiler/testData/codegen/bytecodeListing/noToArrayInJava.kt");
-    }
-
     @TestMetadata("privateCompanionFields.kt")
     public void testPrivateCompanionFields() throws Exception {
         runTest("compiler/testData/codegen/bytecodeListing/privateCompanionFields.kt");
@@ -241,9 +236,9 @@ public class BytecodeListingTestGenerated extends AbstractBytecodeListingTest {
             runTest("compiler/testData/codegen/bytecodeListing/annotations/deprecatedJvmOverloads.kt");
         }
 
-        @TestMetadata("internalProperty.kt")
-        public void testInternalProperty() throws Exception {
-            runTest("compiler/testData/codegen/bytecodeListing/annotations/internalProperty.kt");
+        @TestMetadata("internalPropertyOrTypealias.kt")
+        public void testInternalPropertyOrTypealias() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeListing/annotations/internalPropertyOrTypealias.kt");
         }
 
         @TestMetadata("JvmSynthetic.kt")
@@ -616,6 +611,29 @@ public class BytecodeListingTestGenerated extends AbstractBytecodeListingTest {
                 runTest("compiler/testData/codegen/bytecodeListing/collectionStubs/abstractStubSignatures/stringGenericMutableMap.kt");
             }
         }
+
+        @TestMetadata("compiler/testData/codegen/bytecodeListing/collectionStubs/toArray")
+        @TestDataPath("$PROJECT_ROOT")
+        @RunWith(JUnit3RunnerWithInners.class)
+        public static class ToArray extends AbstractBytecodeListingTest {
+            private void runTest(String testDataFilePath) throws Exception {
+                KotlinTestUtils.runTest(this::doTest, TargetBackend.JVM, testDataFilePath);
+            }
+
+            public void testAllFilesPresentInToArray() throws Exception {
+                KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/bytecodeListing/collectionStubs/toArray"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JVM, true);
+            }
+
+            @TestMetadata("customNonGenericToArray.kt")
+            public void testCustomNonGenericToArray() throws Exception {
+                runTest("compiler/testData/codegen/bytecodeListing/collectionStubs/toArray/customNonGenericToArray.kt");
+            }
+
+            @TestMetadata("noToArrayInJava.kt")
+            public void testNoToArrayInJava() throws Exception {
+                runTest("compiler/testData/codegen/bytecodeListing/collectionStubs/toArray/noToArrayInJava.kt");
+            }
+        }
     }
 
     @TestMetadata("compiler/testData/codegen/bytecodeListing/coroutines")
@@ -677,6 +695,11 @@ public class BytecodeListingTestGenerated extends AbstractBytecodeListingTest {
         @TestMetadata("privateSuspendFun.kt")
         public void testPrivateSuspendFun() throws Exception {
             runTest("compiler/testData/codegen/bytecodeListing/coroutines/privateSuspendFun.kt");
+        }
+
+        @TestMetadata("suspendImpl.kt")
+        public void testSuspendImpl() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeListing/coroutines/suspendImpl.kt");
         }
 
         @TestMetadata("suspendReifiedFun.kt")
@@ -1007,11 +1030,6 @@ public class BytecodeListingTestGenerated extends AbstractBytecodeListingTest {
             runTest("compiler/testData/codegen/bytecodeListing/inlineClasses/inlineClassWithManyKindsOfMembers.kt");
         }
 
-        @TestMetadata("javaDefaultInterfaceMember.kt")
-        public void testJavaDefaultInterfaceMember() throws Exception {
-            runTest("compiler/testData/codegen/bytecodeListing/inlineClasses/javaDefaultInterfaceMember.kt");
-        }
-
         @TestMetadata("jvmName.kt")
         public void testJvmName() throws Exception {
             runTest("compiler/testData/codegen/bytecodeListing/inlineClasses/jvmName.kt");
@@ -1070,6 +1088,34 @@ public class BytecodeListingTestGenerated extends AbstractBytecodeListingTest {
         @TestMetadata("shapeOfInlineClassWithPrimitive.kt")
         public void testShapeOfInlineClassWithPrimitive() throws Exception {
             runTest("compiler/testData/codegen/bytecodeListing/inlineClasses/shapeOfInlineClassWithPrimitive.kt");
+        }
+
+        @TestMetadata("compiler/testData/codegen/bytecodeListing/inlineClasses/defaultInterfaceMembers")
+        @TestDataPath("$PROJECT_ROOT")
+        @RunWith(JUnit3RunnerWithInners.class)
+        public static class DefaultInterfaceMembers extends AbstractBytecodeListingTest {
+            private void runTest(String testDataFilePath) throws Exception {
+                KotlinTestUtils.runTest(this::doTest, TargetBackend.JVM, testDataFilePath);
+            }
+
+            public void testAllFilesPresentInDefaultInterfaceMembers() throws Exception {
+                KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/bytecodeListing/inlineClasses/defaultInterfaceMembers"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JVM, true);
+            }
+
+            @TestMetadata("javaDefaultInterfaceMember.kt")
+            public void testJavaDefaultInterfaceMember() throws Exception {
+                runTest("compiler/testData/codegen/bytecodeListing/inlineClasses/defaultInterfaceMembers/javaDefaultInterfaceMember.kt");
+            }
+
+            @TestMetadata("jvmDefaultAll.kt")
+            public void testJvmDefaultAll() throws Exception {
+                runTest("compiler/testData/codegen/bytecodeListing/inlineClasses/defaultInterfaceMembers/jvmDefaultAll.kt");
+            }
+
+            @TestMetadata("jvmDefaultEnable.kt")
+            public void testJvmDefaultEnable() throws Exception {
+                runTest("compiler/testData/codegen/bytecodeListing/inlineClasses/defaultInterfaceMembers/jvmDefaultEnable.kt");
+            }
         }
 
         @TestMetadata("compiler/testData/codegen/bytecodeListing/inlineClasses/inlineCollection")

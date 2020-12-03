@@ -5167,6 +5167,16 @@ public class IrBoxJsES6TestGenerated extends AbstractIrBoxJsES6Test {
             KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("js/js.translator/testData/box/jsExport"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.JS_IR_ES6, true);
         }
 
+        @TestMetadata("dataClass.kt")
+        public void testDataClass() throws Exception {
+            runTest("js/js.translator/testData/box/jsExport/dataClass.kt");
+        }
+
+        @TestMetadata("jsExportInClass.kt")
+        public void testJsExportInClass() throws Exception {
+            runTest("js/js.translator/testData/box/jsExport/jsExportInClass.kt");
+        }
+
         @TestMetadata("recursiveExport.kt")
         public void testRecursiveExport() throws Exception {
             runTest("js/js.translator/testData/box/jsExport/recursiveExport.kt");
@@ -6784,26 +6794,6 @@ public class IrBoxJsES6TestGenerated extends AbstractIrBoxJsES6Test {
         @TestMetadata("initValInConstructor.kt")
         public void testInitValInConstructor() throws Exception {
             runTest("js/js.translator/testData/box/propertyAccess/initValInConstructor.kt");
-        }
-
-        @TestMetadata("lazyInitialization.kt")
-        public void testLazyInitialization() throws Exception {
-            runTest("js/js.translator/testData/box/propertyAccess/lazyInitialization.kt");
-        }
-
-        @TestMetadata("lazyInitializationOrder.kt")
-        public void testLazyInitializationOrder() throws Exception {
-            runTest("js/js.translator/testData/box/propertyAccess/lazyInitializationOrder.kt");
-        }
-
-        @TestMetadata("lazyInitializationPure.kt")
-        public void testLazyInitializationPure() throws Exception {
-            runTest("js/js.translator/testData/box/propertyAccess/lazyInitializationPure.kt");
-        }
-
-        @TestMetadata("lazyInitializationSplitPerModule.kt")
-        public void testLazyInitializationSplitPerModule() throws Exception {
-            runTest("js/js.translator/testData/box/propertyAccess/lazyInitializationSplitPerModule.kt");
         }
 
         @TestMetadata("overloadedOverriddenFunctionPropertyName.kt")

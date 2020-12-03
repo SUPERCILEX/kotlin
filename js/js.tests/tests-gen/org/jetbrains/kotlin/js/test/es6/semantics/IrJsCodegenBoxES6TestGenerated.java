@@ -3015,6 +3015,11 @@ public class IrJsCodegenBoxES6TestGenerated extends AbstractIrJsCodegenBoxES6Tes
             runTest("compiler/testData/codegen/box/classes/exceptionConstructor.kt");
         }
 
+        @TestMetadata("extensionFunWithDefaultParam.kt")
+        public void testExtensionFunWithDefaultParam() throws Exception {
+            runTest("compiler/testData/codegen/box/classes/extensionFunWithDefaultParam.kt");
+        }
+
         @TestMetadata("extensionOnNamedClassObject.kt")
         public void testExtensionOnNamedClassObject() throws Exception {
             runTest("compiler/testData/codegen/box/classes/extensionOnNamedClassObject.kt");
@@ -13129,6 +13134,19 @@ public class IrJsCodegenBoxES6TestGenerated extends AbstractIrJsCodegenBoxES6Tes
             }
         }
 
+        @TestMetadata("compiler/testData/codegen/box/inlineClasses/jvm8DefaultInterfaceMethods")
+        @TestDataPath("$PROJECT_ROOT")
+        @RunWith(JUnit3RunnerWithInners.class)
+        public static class Jvm8DefaultInterfaceMethods extends AbstractIrJsCodegenBoxES6Test {
+            private void runTest(String testDataFilePath) throws Exception {
+                KotlinTestUtils.runTest0(this::doTest, TargetBackend.JS_IR_ES6, testDataFilePath);
+            }
+
+            public void testAllFilesPresentInJvm8DefaultInterfaceMethods() throws Exception {
+                KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/inlineClasses/jvm8DefaultInterfaceMethods"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JS_IR_ES6, true);
+            }
+        }
+
         @TestMetadata("compiler/testData/codegen/box/inlineClasses/propertyDelegation")
         @TestDataPath("$PROJECT_ROOT")
         @RunWith(JUnit3RunnerWithInners.class)
@@ -17707,6 +17725,46 @@ public class IrJsCodegenBoxES6TestGenerated extends AbstractIrJsCodegenBoxES6Tes
         @TestMetadata("kt9603.kt")
         public void testKt9603() throws Exception {
             runTest("compiler/testData/codegen/box/properties/kt9603.kt");
+        }
+
+        @TestMetadata("lazyInitialization.kt")
+        public void testLazyInitialization() throws Exception {
+            runTest("compiler/testData/codegen/box/properties/lazyInitialization.kt");
+        }
+
+        @TestMetadata("lazyInitializationCyclicImports.kt")
+        public void testLazyInitializationCyclicImports() throws Exception {
+            runTest("compiler/testData/codegen/box/properties/lazyInitializationCyclicImports.kt");
+        }
+
+        @TestMetadata("lazyInitializationMultiModule.kt")
+        public void testLazyInitializationMultiModule() throws Exception {
+            runTest("compiler/testData/codegen/box/properties/lazyInitializationMultiModule.kt");
+        }
+
+        @TestMetadata("lazyInitializationOrder.kt")
+        public void testLazyInitializationOrder() throws Exception {
+            runTest("compiler/testData/codegen/box/properties/lazyInitializationOrder.kt");
+        }
+
+        @TestMetadata("lazyInitializationPure.kt")
+        public void testLazyInitializationPure() throws Exception {
+            runTest("compiler/testData/codegen/box/properties/lazyInitializationPure.kt");
+        }
+
+        @TestMetadata("lazyInitializationSplitPerModule.kt")
+        public void testLazyInitializationSplitPerModule() throws Exception {
+            runTest("compiler/testData/codegen/box/properties/lazyInitializationSplitPerModule.kt");
+        }
+
+        @TestMetadata("lazyInitializationThroughTopFun.kt")
+        public void testLazyInitializationThroughTopFun() throws Exception {
+            runTest("compiler/testData/codegen/box/properties/lazyInitializationThroughTopFun.kt");
+        }
+
+        @TestMetadata("noInitializationLazilyOnNonPropertiesCall.kt")
+        public void testNoInitializationLazilyOnNonPropertiesCall() throws Exception {
+            runTest("compiler/testData/codegen/box/properties/noInitializationLazilyOnNonPropertiesCall.kt");
         }
 
         @TestMetadata("primitiveOverrideDefaultAccessor.kt")

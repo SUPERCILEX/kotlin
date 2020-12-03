@@ -2024,6 +2024,11 @@ public class LazyBodyIsNotTouchedTilContractsPhaseTestGenerated extends Abstract
             KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/fir/analysis-tests/testData/resolve/problems"), Pattern.compile("^([^.]+)\\.kt$"), null, true);
         }
 
+        @TestMetadata("compilerPhase.kt")
+        public void testCompilerPhase() throws Exception {
+            runTest("compiler/fir/analysis-tests/testData/resolve/problems/compilerPhase.kt");
+        }
+
         @TestMetadata("complexLambdaWithTypeVariableAsExpectedType.kt")
         public void testComplexLambdaWithTypeVariableAsExpectedType() throws Exception {
             runTest("compiler/fir/analysis-tests/testData/resolve/problems/complexLambdaWithTypeVariableAsExpectedType.kt");
@@ -2077,6 +2082,11 @@ public class LazyBodyIsNotTouchedTilContractsPhaseTestGenerated extends Abstract
         @TestMetadata("questionableSmartCast.kt")
         public void testQuestionableSmartCast() throws Exception {
             runTest("compiler/fir/analysis-tests/testData/resolve/problems/questionableSmartCast.kt");
+        }
+
+        @TestMetadata("recursiveNamedAnnotation.kt")
+        public void testRecursiveNamedAnnotation() throws Exception {
+            runTest("compiler/fir/analysis-tests/testData/resolve/problems/recursiveNamedAnnotation.kt");
         }
 
         @TestMetadata("safeCallInvoke.kt")

@@ -30,6 +30,7 @@ internal class KtFirEnumEntrySymbol(
     private val builder: KtSymbolByFirBuilder
 ) : KtEnumEntrySymbol(), KtFirSymbol<FirEnumEntry> {
     override val firRef = firRef(fir, resolveState)
+
     override val psi: PsiElement? by firRef.withFirAndCache { fir -> fir.findPsi(fir.session) }
 
     override val name: Name get() = firRef.withFir { it.name }

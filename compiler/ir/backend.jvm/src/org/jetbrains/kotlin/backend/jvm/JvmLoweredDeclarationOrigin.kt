@@ -11,13 +11,7 @@ import org.jetbrains.kotlin.ir.declarations.IrDeclarationOriginImpl
 interface JvmLoweredDeclarationOrigin : IrDeclarationOrigin {
     object CLASS_STATIC_INITIALIZER : IrDeclarationOriginImpl("CLASS_STATIC_INITIALIZER")
     object DEFAULT_IMPLS : IrDeclarationOriginImpl("DEFAULT_IMPLS")
-    object DEFAULT_IMPLS_WITH_MOVED_RECEIVERS : IrDeclarationOriginImpl("STATIC_WITH_MOVED_RECEIVERS")
-    object DEFAULT_IMPLS_WITH_MOVED_RECEIVERS_SYNTHETIC :
-        IrDeclarationOriginImpl("STATIC_WITH_MOVED_RECEIVERS_SYNTHETIC", isSynthetic = true)
-    object DEFAULT_IMPLS_BRIDGE : IrDeclarationOriginImpl("DEFAULT_IMPLS_BRIDGE")
-    object DEFAULT_IMPLS_BRIDGE_FOR_COMPATIBILITY : IrDeclarationOriginImpl("DEFAULT_IMPLS_BRIDGE_FOR_COMPATIBILITY")
-    object DEFAULT_IMPLS_BRIDGE_TO_SYNTHETIC : IrDeclarationOriginImpl("DEFAULT_IMPLS_BRIDGE_TO_SYNTHETIC", isSynthetic = true)
-    object DEFAULT_IMPLS_BRIDGE_FOR_COMPATIBILITY_SYNTHETIC : IrDeclarationOriginImpl("DEFAULT_IMPLS_BRIDGE_FOR_COMPATIBILITY_SYNTHETIC", isSynthetic = true)
+    object SUPER_INTERFACE_METHOD_BRIDGE : IrDeclarationOriginImpl("SUPER_INTERFACE_METHOD_BRIDGE")
     object FIELD_FOR_OUTER_THIS : IrDeclarationOriginImpl("FIELD_FOR_OUTER_THIS")
     object LAMBDA_IMPL : IrDeclarationOriginImpl("LAMBDA_IMPL")
     object FUNCTION_REFERENCE_IMPL : IrDeclarationOriginImpl("FUNCTION_REFERENCE_IMPL", isSynthetic = true)
@@ -28,10 +22,8 @@ interface JvmLoweredDeclarationOrigin : IrDeclarationOrigin {
     object TO_ARRAY : IrDeclarationOriginImpl("TO_ARRAY")
     object JVM_STATIC_WRAPPER : IrDeclarationOriginImpl("JVM_STATIC_WRAPPER")
     object JVM_OVERLOADS_WRAPPER : IrDeclarationOriginImpl("JVM_OVERLOADS_WRAPPER")
-    object SYNTHETIC_METHOD_FOR_PROPERTY_ANNOTATIONS :
-        IrDeclarationOriginImpl("SYNTHETIC_METHOD_FOR_PROPERTY_ANNOTATIONS", isSynthetic = true)
-    object SYNTHETIC_METHOD_FOR_TYPEALIAS_ANNOTATIONS :
-        IrDeclarationOriginImpl("SYNTHETIC_METHOD_FOR_TYPEALIAS_ANNOTATIONS", isSynthetic = true)
+    object SYNTHETIC_METHOD_FOR_PROPERTY_OR_TYPEALIAS_ANNOTATIONS :
+        IrDeclarationOriginImpl("SYNTHETIC_METHOD_FOR_PROPERTY_OR_TYPEALIAS_ANNOTATIONS", isSynthetic = true)
     object GENERATED_PROPERTY_REFERENCE : IrDeclarationOriginImpl("GENERATED_PROPERTY_REFERENCE", isSynthetic = true)
     object GENERATED_MEMBER_IN_CALLABLE_REFERENCE : IrDeclarationOriginImpl("GENERATED_MEMBER_IN_CALLABLE_REFERENCE", isSynthetic = false)
     object ENUM_MAPPINGS_FOR_WHEN : IrDeclarationOriginImpl("ENUM_MAPPINGS_FOR_WHEN", isSynthetic = true)

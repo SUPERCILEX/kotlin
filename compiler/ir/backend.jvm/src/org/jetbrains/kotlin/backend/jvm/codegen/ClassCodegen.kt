@@ -365,7 +365,7 @@ class ClassCodegen private constructor(
 
         when (val metadata = method.metadata) {
             is MetadataSource.Property -> {
-                assert(method.isSyntheticMethodForProperty) {
+                assert(method.origin == JvmLoweredDeclarationOrigin.SYNTHETIC_METHOD_FOR_PROPERTY_OR_TYPEALIAS_ANNOTATIONS) {
                     "MetadataSource.Property on IrFunction should only be used for synthetic \$annotations methods: ${method.render()}"
                 }
                 metadataSerializer.bindMethodMetadata(metadata, Method(node.name, node.desc))
@@ -457,9 +457,8 @@ private val IrClass.flags: Int
 
 private fun IrField.computeFieldFlags(context: JvmBackendContext, languageVersionSettings: LanguageVersionSettings): Int =
     origin.flags or visibility.flags or
-            (if (isDeprecatedCallable ||
-                correspondingPropertySymbol?.owner?.isDeprecatedCallable == true ||
-                shouldHaveSpecialDeprecationFlag(context)
+            (if (isDeprecatedCallable(context) ||
+                correspondingPropertySymbol?.owner?.isDeprecatedCallable(context) == true
             ) Opcodes.ACC_DEPRECATED else 0) or
             (if (isFinal) Opcodes.ACC_FINAL else 0) or
             (if (isStatic) Opcodes.ACC_STATIC else 0) or
@@ -474,10 +473,6 @@ private fun IrField.isPrivateCompanionFieldInInterface(languageVersionSettings: 
             languageVersionSettings.supportsFeature(LanguageFeature.ProperVisibilityForCompanionObjectInstanceField) &&
             parentAsClass.isJvmInterface &&
             DescriptorVisibilities.isPrivate(parentAsClass.companionObject()!!.visibility)
-
-fun IrField.shouldHaveSpecialDeprecationFlag(context: JvmBackendContext): Boolean {
-    return annotations.any { it.symbol == context.ir.symbols.javaLangDeprecatedConstructorWithDeprecatedFlag }
-}
 
 private val IrDeclarationOrigin.flags: Int
     get() = (if (isSynthetic) Opcodes.ACC_SYNTHETIC else 0) or
