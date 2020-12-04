@@ -8353,6 +8353,11 @@ public class JsCodegenBoxTestGenerated extends AbstractJsCodegenBoxTest {
                 runTest("compiler/testData/codegen/box/defaultArguments/function/covariantOverrideGeneric.kt");
             }
 
+            @TestMetadata("defaultLambdaInline.kt")
+            public void testDefaultLambdaInline() throws Exception {
+                runTest("compiler/testData/codegen/box/defaultArguments/function/defaultLambdaInline.kt");
+            }
+
             @TestMetadata("extensionFunctionManyArgs.kt")
             public void testExtensionFunctionManyArgs() throws Exception {
                 runTest("compiler/testData/codegen/box/defaultArguments/function/extensionFunctionManyArgs.kt");
@@ -26233,6 +26238,19 @@ public class JsCodegenBoxTestGenerated extends AbstractJsCodegenBoxTest {
         @TestMetadata("whenByUnsigned.kt")
         public void testWhenByUnsigned() throws Exception {
             runTest("compiler/testData/codegen/box/unsignedTypes/whenByUnsigned.kt");
+        }
+
+        @TestMetadata("compiler/testData/codegen/box/unsignedTypes/jvm8Intrinsics")
+        @TestDataPath("$PROJECT_ROOT")
+        @RunWith(JUnit3RunnerWithInners.class)
+        public static class Jvm8Intrinsics extends AbstractJsCodegenBoxTest {
+            private void runTest(String testDataFilePath) throws Exception {
+                KotlinTestUtils.runTest0(this::doTest, TargetBackend.JS, testDataFilePath);
+            }
+
+            public void testAllFilesPresentInJvm8Intrinsics() throws Exception {
+                KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/unsignedTypes/jvm8Intrinsics"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JS, true);
+            }
         }
     }
 
