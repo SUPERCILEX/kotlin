@@ -12924,6 +12924,11 @@ public class DiagnosticsTestGenerated extends AbstractDiagnosticsTestWithFirVali
                 runTest("compiler/testData/diagnostics/tests/inlineClasses/inlineClassesInsideAnnotations.kt");
             }
 
+            @TestMetadata("innerClassInsideInlineClass.kt")
+            public void testInnerClassInsideInlineClass() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/inlineClasses/innerClassInsideInlineClass.kt");
+            }
+
             @TestMetadata("lateinitInlineClasses.kt")
             public void testLateinitInlineClasses() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/inlineClasses/lateinitInlineClasses.kt");
@@ -12957,6 +12962,11 @@ public class DiagnosticsTestGenerated extends AbstractDiagnosticsTestWithFirVali
             @TestMetadata("unsignedLiteralsWithoutArtifactOnClasspath.kt")
             public void testUnsignedLiteralsWithoutArtifactOnClasspath() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/inlineClasses/unsignedLiteralsWithoutArtifactOnClasspath.kt");
+            }
+
+            @TestMetadata("varPropertyWithInlineClassReceiver.kt")
+            public void testVarPropertyWithInlineClassReceiver() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/inlineClasses/varPropertyWithInlineClassReceiver.kt");
             }
 
             @TestMetadata("varargsOnParametersOfInlineClassType.kt")
