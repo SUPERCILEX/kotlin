@@ -67,22 +67,6 @@ dependencies {
 
     val currentOs = OperatingSystem.current()
 
-    val j2v8idString = when {
-        currentOs.isWindows -> {
-            val suffix = if (currentOs.toString().endsWith("64")) "_64" else ""
-            "com.eclipsesource.j2v8:j2v8_win32_x86$suffix:4.6.0"
-        }
-        currentOs.isMacOsX -> "com.eclipsesource.j2v8:j2v8_macosx_x86_64:4.6.0"
-        currentOs.run { isLinux || isUnix } -> "com.eclipsesource.j2v8:j2v8_linux_x86_64:4.8.0"
-        else -> {
-            logger.error("unsupported platform $currentOs - can not compile com.eclipsesource.j2v8 dependency")
-            "j2v8:$currentOs"
-        }
-    }
-
-    testCompileOnly("com.eclipsesource.j2v8:j2v8_linux_x86_64:4.8.0")
-    testRuntimeOnly(j2v8idString)
-
     testRuntime(kotlinStdlib())
     testJsRuntime(kotlinStdlib("js"))
     if (!kotlinBuildProperties.isInJpsBuildIdeaSync) {
@@ -114,7 +98,95 @@ if (kotlinBuildProperties.isInJpsBuildIdeaSync) {
     }
 }
 
+enum class OsName { WINDOWS, MAC, LINUX, UNKNOWN }
+enum class OsArch { X86_32, X86_64, UNKNOWN }
+data class OsType(val name: OsName, val arch: OsArch)
+val currentOsType = run {
+    val gradleOs = OperatingSystem.current()
+    val osName = when {
+        gradleOs.isMacOsX -> OsName.MAC
+        gradleOs.isWindows -> OsName.WINDOWS
+        gradleOs.isLinux -> OsName.LINUX
+        else -> OsName.UNKNOWN
+    }
+
+    val osArch = when (System.getProperty("sun.arch.data.model")) {
+        "32" -> OsArch.X86_32
+        "64" -> OsArch.X86_64
+        else -> OsArch.UNKNOWN
+    }
+
+    OsType(osName, osArch)
+}
+
+val jsShellDirectory = "https://archive.mozilla.org/pub/firefox/nightly/2020/06/2020-06-29-15-46-04-mozilla-central"
+val jsShellSuffix = when (currentOsType) {
+    OsType(OsName.LINUX, OsArch.X86_32) -> "linux-i686"
+    OsType(OsName.LINUX, OsArch.X86_64) -> "linux-x86_64"
+    OsType(OsName.MAC, OsArch.X86_64) -> "mac"
+    OsType(OsName.WINDOWS, OsArch.X86_32) -> "win32"
+    OsType(OsName.WINDOWS, OsArch.X86_64) -> "win64"
+    else -> error("unsupported os type $currentOsType")
+}
+val jsShellLocation = "$jsShellDirectory/jsshell-$jsShellSuffix.zip"
+
+val downloadedTools = File(buildDir, "tools")
+
+val downloadJsShell by task<Download> {
+    src(jsShellLocation)
+    dest(File(downloadedTools, "jsshell-$jsShellSuffix.zip"))
+    overwrite(false)
+}
+
+val unzipJsShell by task<Copy> {
+    dependsOn(downloadJsShell)
+    from(zipTree(downloadJsShell.get().dest))
+    val unpackedDir = File(downloadedTools, "jsshell-$jsShellSuffix")
+    into(unpackedDir)
+}
+
+val v8osString = when (currentOsType) {
+    OsType(OsName.LINUX, OsArch.X86_32) -> "linux32"
+    OsType(OsName.LINUX, OsArch.X86_64) -> "linux64"
+    OsType(OsName.MAC, OsArch.X86_64) -> "mac64"
+    OsType(OsName.WINDOWS, OsArch.X86_32) -> "win32"
+    OsType(OsName.WINDOWS, OsArch.X86_64) -> "win64"
+    else -> error("unsupported os type $currentOsType")
+}
+
+val v8edition = "rel" // rel or dbg
+val v8version = "8.8.104"
+val v8fileName = "v8-${v8osString}-${v8edition}-${v8version}"
+val v8url = "https://storage.googleapis.com/chromium-v8/official/canary/$v8fileName.zip"
+
+val downloadV8 by task<Download> {
+    src(v8url)
+    dest(File(downloadedTools, "$v8fileName.zip"))
+    overwrite(false)
+}
+
+val unzipV8 by task<Copy> {
+    dependsOn(downloadV8)
+    from(zipTree(downloadV8.get().dest))
+    val unpackedDir = File(downloadedTools, v8fileName)
+    into(unpackedDir)
+}
+
+fun Test.setupV8() {
+    dependsOn(unzipV8)
+    val v8ExecutablePath = File(unzipV8.get().destinationDir, "d8").absolutePath
+    systemProperty("javascript.engine.path.V8", v8ExecutablePath)
+}
+
+fun Test.setupSpiderMonkey() {
+    dependsOn(unzipJsShell)
+    val jsShellExecutablePath = File(unzipJsShell.get().destinationDir, "js").absolutePath
+    systemProperty("javascript.engine.path.SpiderMonkey", jsShellExecutablePath)
+}
+
 fun Test.setUpJsBoxTests(jsEnabled: Boolean, jsIrEnabled: Boolean) {
+    setupV8()
+
     dependsOn(":dist")
     if (jsEnabled) dependsOn(testJsRuntime)
     if (jsIrEnabled) {
@@ -223,89 +295,11 @@ val runMocha by task<NpmTask> {
     check.dependsOn(this)
 }
 
-enum class OsName { WINDOWS, MAC, LINUX, UNKNOWN }
-enum class OsArch { X86_32, X86_64, UNKNOWN }
-data class OsType(val name: OsName, val arch: OsArch)
-val currentOsType = run {
-    val gradleOs = OperatingSystem.current()
-    val osName = when {
-        gradleOs.isMacOsX -> OsName.MAC
-        gradleOs.isWindows -> OsName.WINDOWS
-        gradleOs.isLinux -> OsName.LINUX
-        else -> OsName.UNKNOWN
-    }
-
-    val osArch = when (System.getProperty("sun.arch.data.model")) {
-        "32" -> OsArch.X86_32
-        "64" -> OsArch.X86_64
-        else -> OsArch.UNKNOWN
-    }
-
-    OsType(osName, osArch)
-}
-
-val jsShellDirectory = "https://archive.mozilla.org/pub/firefox/nightly/2020/06/2020-06-29-15-46-04-mozilla-central"
-val jsShellSuffix = when (currentOsType) {
-    OsType(OsName.LINUX, OsArch.X86_32) -> "linux-i686"
-    OsType(OsName.LINUX, OsArch.X86_64) -> "linux-x86_64"
-    OsType(OsName.MAC, OsArch.X86_64) -> "mac"
-    OsType(OsName.WINDOWS, OsArch.X86_32) -> "win32"
-    OsType(OsName.WINDOWS, OsArch.X86_64) -> "win64"
-    else -> error("unsupported os type $currentOsType")
-}
-val jsShellLocation = "$jsShellDirectory/jsshell-$jsShellSuffix.zip"
-
-val downloadedTools = File(buildDir, "tools")
-
-val downloadJsShell by task<Download> {
-    src(jsShellLocation)
-    dest(File(downloadedTools, "jsshell-$jsShellSuffix.zip"))
-    overwrite(false)
-}
-
-val unzipJsShell by task<Copy> {
-    dependsOn(downloadJsShell)
-    from(zipTree(downloadJsShell.get().dest))
-    val unpackedDir = File(downloadedTools, "jsshell-$jsShellSuffix")
-    into(unpackedDir)
-}
-
-val v8osString = when (currentOsType) {
-    OsType(OsName.LINUX, OsArch.X86_32) -> "linux32"
-    OsType(OsName.LINUX, OsArch.X86_64) -> "linux64"
-    OsType(OsName.MAC, OsArch.X86_64) -> "mac64"
-    OsType(OsName.WINDOWS, OsArch.X86_32) -> "win32"
-    OsType(OsName.WINDOWS, OsArch.X86_64) -> "win64"
-    else -> error("unsupported os type $currentOsType")
-}
-
-val v8edition = "rel" // rel or dbg
-val v8version = "8.8.104"
-val v8fileName = "v8-${v8osString}-${v8edition}-${v8version}"
-val v8url = "https://storage.googleapis.com/chromium-v8/official/canary/$v8fileName.zip"
-
-val downloadV8 by task<Download> {
-    src(v8url)
-    dest(File(downloadedTools, "$v8fileName.zip"))
-    overwrite(false)
-}
-
-val unzipV8 by task<Copy> {
-    dependsOn(downloadV8)
-    from(zipTree(downloadV8.get().dest))
-    val unpackedDir = File(downloadedTools, v8fileName)
-    into(unpackedDir)
-}
-
 projectTest("wasmTest", true) {
-    dependsOn(unzipJsShell)
-    dependsOn(unzipV8)
-    include("org/jetbrains/kotlin/js/test/wasm/semantics/*")
-    val jsShellExecutablePath = File(unzipJsShell.get().destinationDir, "js").absolutePath
-    val v8ExecutablePath = File(unzipV8.get().destinationDir, "d8").absolutePath
+    setupV8()
+    setupSpiderMonkey()
 
-    systemProperty("javascript.engine.path.SpiderMonkey", jsShellExecutablePath)
-    systemProperty("javascript.engine.path.V8", v8ExecutablePath)
+    include("org/jetbrains/kotlin/js/test/wasm/semantics/*")
 
     dependsOn(":kotlin-stdlib-wasm:compileKotlinJs")
     systemProperty("kotlin.wasm.stdlib.path", "libraries/stdlib/wasm/build/classes/kotlin/js/main")
