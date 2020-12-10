@@ -220,6 +220,11 @@ public class IrTextTestCaseGenerated extends AbstractIrTextTestCase {
             runTest("compiler/testData/ir/irText/classes/objectWithInitializers.kt");
         }
 
+        @TestMetadata("openDataClass.kt")
+        public void testOpenDataClass() throws Exception {
+            runTest("compiler/testData/ir/irText/classes/openDataClass.kt");
+        }
+
         @TestMetadata("outerClassAccess.kt")
         public void testOuterClassAccess() throws Exception {
             runTest("compiler/testData/ir/irText/classes/outerClassAccess.kt");
@@ -1804,6 +1809,11 @@ public class IrTextTestCaseGenerated extends AbstractIrTextTestCase {
         @TestMetadata("FirBuilder.kt")
         public void testFirBuilder() throws Exception {
             runTest("compiler/testData/ir/irText/firProblems/FirBuilder.kt");
+        }
+
+        @TestMetadata("ImplicitReceiverStack.kt")
+        public void testImplicitReceiverStack() throws Exception {
+            runTest("compiler/testData/ir/irText/firProblems/ImplicitReceiverStack.kt");
         }
 
         @TestMetadata("inapplicableCollectionSet.kt")

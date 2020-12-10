@@ -20770,6 +20770,16 @@ public class DiagnosticsUsingJavacTestGenerated extends AbstractDiagnosticsUsing
                 runTest("compiler/testData/diagnostics/tests/sealed/ExhaustiveWhenWithElse.kt");
             }
 
+            @TestMetadata("ExhaustiveWithFreedom.kt")
+            public void testExhaustiveWithFreedom() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/sealed/ExhaustiveWithFreedom.kt");
+            }
+
+            @TestMetadata("inheritorInDifferentModule.kt")
+            public void testInheritorInDifferentModule() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/sealed/inheritorInDifferentModule.kt");
+            }
+
             @TestMetadata("Local.kt")
             public void testLocal() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/sealed/Local.kt");
@@ -20780,9 +20790,19 @@ public class DiagnosticsUsingJavacTestGenerated extends AbstractDiagnosticsUsing
                 runTest("compiler/testData/diagnostics/tests/sealed/LocalSealed.kt");
             }
 
+            @TestMetadata("MultipleFiles_enabled.kt")
+            public void testMultipleFiles_enabled() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/sealed/MultipleFiles_enabled.kt");
+            }
+
             @TestMetadata("NestedSealed.kt")
             public void testNestedSealed() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/sealed/NestedSealed.kt");
+            }
+
+            @TestMetadata("NestedSealedWithoutRestrictions.kt")
+            public void testNestedSealedWithoutRestrictions() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/sealed/NestedSealedWithoutRestrictions.kt");
             }
 
             @TestMetadata("NeverConstructed.kt")
@@ -20883,6 +20903,34 @@ public class DiagnosticsUsingJavacTestGenerated extends AbstractDiagnosticsUsing
             @TestMetadata("WithInterface.kt")
             public void testWithInterface() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/sealed/WithInterface.kt");
+            }
+
+            @TestMetadata("compiler/testData/diagnostics/tests/sealed/interfaces")
+            @TestDataPath("$PROJECT_ROOT")
+            @RunWith(JUnit3RunnerWithInners.class)
+            public static class Interfaces extends AbstractDiagnosticsUsingJavacTest {
+                private void runTest(String testDataFilePath) throws Exception {
+                    KotlinTestUtils.runTest(this::doTest, this, testDataFilePath);
+                }
+
+                public void testAllFilesPresentInInterfaces() throws Exception {
+                    KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/tests/sealed/interfaces"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.fir\\.kts?$"), true);
+                }
+
+                @TestMetadata("inheritorInDifferentModule.kt")
+                public void testInheritorInDifferentModule() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/sealed/interfaces/inheritorInDifferentModule.kt");
+                }
+
+                @TestMetadata("sealedInterfacesDisabled.kt")
+                public void testSealedInterfacesDisabled() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/sealed/interfaces/sealedInterfacesDisabled.kt");
+                }
+
+                @TestMetadata("simpleSealedInterface.kt")
+                public void testSimpleSealedInterface() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/sealed/interfaces/simpleSealedInterface.kt");
+                }
             }
         }
 

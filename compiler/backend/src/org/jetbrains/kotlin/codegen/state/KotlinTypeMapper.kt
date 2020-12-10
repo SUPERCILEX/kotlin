@@ -50,6 +50,7 @@ import org.jetbrains.kotlin.resolve.*
 import org.jetbrains.kotlin.resolve.BindingContextUtils.getDelegationConstructorCall
 import org.jetbrains.kotlin.resolve.BindingContextUtils.isBoxedLocalCapturedInClosure
 import org.jetbrains.kotlin.resolve.DescriptorUtils.*
+import org.jetbrains.kotlin.resolve.annotations.hasJvmStaticAnnotation
 import org.jetbrains.kotlin.resolve.bindingContextUtil.isUsedAsExpression
 import org.jetbrains.kotlin.resolve.calls.model.DefaultValueArgument
 import org.jetbrains.kotlin.resolve.calls.model.ResolvedCall
@@ -60,6 +61,7 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.isPublishedApi
 import org.jetbrains.kotlin.resolve.descriptorUtil.module
 import org.jetbrains.kotlin.resolve.jvm.AsmTypes.DEFAULT_CONSTRUCTOR_MARKER
 import org.jetbrains.kotlin.resolve.jvm.AsmTypes.OBJECT_TYPE
+import org.jetbrains.kotlin.resolve.jvm.JAVA_LANG_RECORD_FQ_NAME
 import org.jetbrains.kotlin.resolve.jvm.JvmClassName
 import org.jetbrains.kotlin.resolve.jvm.annotations.isCompiledToJvmDefault
 import org.jetbrains.kotlin.resolve.jvm.jvmSignature.JvmMethodGenericSignature
@@ -582,9 +584,15 @@ class KotlinTypeMapper @JvmOverloads constructor(
         return when {
             descriptor is PropertyAccessorDescriptor -> {
                 val property = descriptor.correspondingProperty
-                if (isAnnotationClass(property.containingDeclaration)) {
+                val containingDeclaration = property.containingDeclaration
+
+                if (isAnnotationClass(containingDeclaration) &&
+                    (!property.hasJvmStaticAnnotation() && !descriptor.hasJvmStaticAnnotation())
+                ) {
                     return property.name.asString()
                 }
+
+                if ((containingDeclaration as? ClassDescriptor)?.hasJavaLangRecordSupertype() == true) return property.name.asString()
 
                 val isAccessor = property is AccessorForPropertyDescriptor
                 val propertyName = if (isAccessor)
@@ -619,6 +627,9 @@ class KotlinTypeMapper @JvmOverloads constructor(
                 mangleMemberNameIfRequired(descriptor.name.asString(), descriptor, kind)
         }
     }
+
+    private fun ClassDescriptor.hasJavaLangRecordSupertype() =
+        typeConstructor.supertypes.any { KotlinBuiltIns.isConstructedFromGivenClass(it, JAVA_LANG_RECORD_FQ_NAME) }
 
     private val shouldMangleByReturnType =
         languageVersionSettings.supportsFeature(LanguageFeature.MangleClassMembersReturningInlineClasses)

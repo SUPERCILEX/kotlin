@@ -40,7 +40,10 @@ private val DEFAULT_DECLARATION_CHECKERS = listOf(
     FunInterfaceDeclarationChecker(),
     DeprecatedSinceKotlinAnnotationChecker,
     ContractDescriptionBlockChecker,
-    PrivateInlineFunctionsReturningAnonymousObjectsChecker
+    PrivateInlineFunctionsReturningAnonymousObjectsChecker,
+    SealedInheritorInSamePackageChecker,
+    SealedInheritorInSameModuleChecker,
+    SealedInterfaceAllowedChecker,
 )
 
 private val DEFAULT_CALL_CHECKERS = listOf(

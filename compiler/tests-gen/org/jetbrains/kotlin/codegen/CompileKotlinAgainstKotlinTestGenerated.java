@@ -8,7 +8,6 @@ package org.jetbrains.kotlin.codegen;
 import com.intellij.testFramework.TestDataPath;
 import org.jetbrains.kotlin.test.JUnit3RunnerWithInners;
 import org.jetbrains.kotlin.test.KotlinTestUtils;
-import org.jetbrains.kotlin.test.TargetBackend;
 import org.jetbrains.kotlin.test.TestMetadata;
 import org.junit.runner.RunWith;
 
@@ -23,10 +22,6 @@ import java.util.regex.Pattern;
 public class CompileKotlinAgainstKotlinTestGenerated extends AbstractCompileKotlinAgainstKotlinTest {
     private void runTest(String testDataFilePath) throws Exception {
         KotlinTestUtils.runTest(this::doTest, this, testDataFilePath);
-    }
-
-    private void runTestWithPackageReplacement(String testDataFilePath, String packageName) throws Exception {
-        KotlinTestUtils.runTest(filePath -> doTestWithCoroutinesPackageReplacement(filePath, packageName), TargetBackend.ANY, testDataFilePath);
     }
 
     public void testAllFilesPresentInCompileKotlinAgainstKotlin() throws Exception {
@@ -99,13 +94,8 @@ public class CompileKotlinAgainstKotlinTestGenerated extends AbstractCompileKotl
     }
 
     @TestMetadata("coroutinesBinary.kt")
-    public void testCoroutinesBinary_1_2() throws Exception {
-        runTestWithPackageReplacement("compiler/testData/compileKotlinAgainstKotlin/coroutinesBinary.kt", "kotlin.coroutines.experimental");
-    }
-
-    @TestMetadata("coroutinesBinary.kt")
-    public void testCoroutinesBinary_1_3() throws Exception {
-        runTestWithPackageReplacement("compiler/testData/compileKotlinAgainstKotlin/coroutinesBinary.kt", "kotlin.coroutines");
+    public void testCoroutinesBinary() throws Exception {
+        runTest("compiler/testData/compileKotlinAgainstKotlin/coroutinesBinary.kt");
     }
 
     @TestMetadata("defaultConstructor.kt")
@@ -156,6 +146,11 @@ public class CompileKotlinAgainstKotlinTestGenerated extends AbstractCompileKotl
     @TestMetadata("importCompanion.kt")
     public void testImportCompanion() throws Exception {
         runTest("compiler/testData/compileKotlinAgainstKotlin/importCompanion.kt");
+    }
+
+    @TestMetadata("inlineClassFakeOverrideMangling.kt")
+    public void testInlineClassFakeOverrideMangling() throws Exception {
+        runTest("compiler/testData/compileKotlinAgainstKotlin/inlineClassFakeOverrideMangling.kt");
     }
 
     @TestMetadata("inlineClassFromBinaryDependencies.kt")
@@ -433,6 +428,16 @@ public class CompileKotlinAgainstKotlinTestGenerated extends AbstractCompileKotl
         @TestMetadata("ExistingSymbolInFakeOverride.kt")
         public void testExistingSymbolInFakeOverride() throws Exception {
             runTest("compiler/testData/compileKotlinAgainstKotlin/fir/ExistingSymbolInFakeOverride.kt");
+        }
+
+        @TestMetadata("IncrementalCompilerRunner.kt")
+        public void testIncrementalCompilerRunner() throws Exception {
+            runTest("compiler/testData/compileKotlinAgainstKotlin/fir/IncrementalCompilerRunner.kt");
+        }
+
+        @TestMetadata("IrConstAcceptMultiModule.kt")
+        public void testIrConstAcceptMultiModule() throws Exception {
+            runTest("compiler/testData/compileKotlinAgainstKotlin/fir/IrConstAcceptMultiModule.kt");
         }
 
         @TestMetadata("LibraryProperty.kt")

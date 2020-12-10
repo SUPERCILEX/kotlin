@@ -123,6 +123,10 @@ fun main(args: Array<String>) {
                 model("diagnostics/testsWithJava9")
             }
 
+            testClass<AbstractDiagnosticsWithJdk15Test> {
+                model("diagnostics/testsWithJava15")
+            }
+
             testClass<AbstractDiagnosticsWithUnsignedTypes> {
                 model("diagnostics/testsWithUnsignedTypes")
             }
@@ -205,6 +209,18 @@ fun main(args: Array<String>) {
 
             testClass<AbstractBlackBoxAgainstJavaCodegenTest> {
                 model("codegen/boxAgainstJava")
+            }
+
+            testClass<AbstractJdk15BlackBoxCodegenTest> {
+                model("codegen/java15/box")
+            }
+
+            testClass<AbstractJdk15IrBlackBoxCodegenTest> {
+                model("codegen/java15/box", targetBackend = TargetBackend.JVM_IR)
+            }
+
+            testClass<AbstractJdk9BlackBoxCodegenTest> {
+                model("codegen/java9/box")
             }
 
             testClass<AbstractScriptCodegenTest> {
@@ -309,6 +325,15 @@ fun main(args: Array<String>) {
                 model("loadJava/compiledJava", extension = "java", testMethod = "doTestCompiledJava")
             }
 
+            testClass<AbstractLoadJava15Test> {
+                model("loadJava15", extension = "java", testMethod = "doTestCompiledJava", testClassName = "CompiledJava")
+                model("loadJava15", extension = "java", testMethod = "doTestSourceJava", testClassName = "SourceJava")
+            }
+
+            testClass<AbstractLoadJava15WithPsiClassReadingTest> {
+                model("loadJava15", extension = "java", testMethod = "doTestCompiledJava")
+            }
+
             testClass<AbstractCompileJavaAgainstKotlinTest> {
                 model(
                     "compileJavaAgainstKotlin",
@@ -341,6 +366,14 @@ fun main(args: Array<String>) {
 
             testClass<AbstractCompileKotlinAgainstKotlinTest> {
                 model("compileKotlinAgainstKotlin")
+            }
+
+            testClass<AbstractCompileKotlinAgainstKotlinJdk15Test> {
+                model("compileKotlinAgainstKotlinJdk15")
+            }
+
+            testClass<AbstractIrCompileKotlinAgainstKotlinJdk15Test> {
+                model("compileKotlinAgainstKotlinJdk15", targetBackend = TargetBackend.JVM_IR)
             }
 
             testClass<AbstractDescriptorRendererTest> {
@@ -476,8 +509,7 @@ fun main(args: Array<String>) {
             testClass<AbstractJvmOldAgainstIrBoxTest> {
                 model(
                     "compileKotlinAgainstKotlin",
-                    targetBackend = TargetBackend.JVM_MULTI_MODULE_OLD_AGAINST_IR,
-                    skipTestsForExperimentalCoroutines = true
+                    targetBackend = TargetBackend.JVM_MULTI_MODULE_OLD_AGAINST_IR
                 )
             }
 
@@ -601,8 +633,7 @@ fun main(args: Array<String>) {
             testClass<AbstractJvmOldAgainstIrBoxInlineTest> {
                 model(
                     "codegen/boxInline",
-                    targetBackend = TargetBackend.JVM_MULTI_MODULE_OLD_AGAINST_IR,
-                    skipTestsForExperimentalCoroutines = true
+                    targetBackend = TargetBackend.JVM_MULTI_MODULE_OLD_AGAINST_IR
                 )
             }
         }
@@ -680,8 +711,7 @@ fun main(args: Array<String>) {
             testClass<AbstractFirOldFrontendDiagnosticsTestWithStdlib> {
                 model(
                     "diagnostics/testsWithStdLib",
-                    excludedPattern = excludedFirTestdataPattern,
-                    skipTestsForExperimentalCoroutines = true
+                    excludedPattern = excludedFirTestdataPattern
                 )
             }
         }

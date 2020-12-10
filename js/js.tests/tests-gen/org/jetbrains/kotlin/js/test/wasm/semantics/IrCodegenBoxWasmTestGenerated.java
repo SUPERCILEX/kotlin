@@ -594,10 +594,6 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
                 KotlinTestUtils.runTest0(this::doTest, TargetBackend.WASM, testDataFilePath);
             }
 
-            private void runTestWithPackageReplacement(String testDataFilePath, String packageName) throws Exception {
-                KotlinTestUtils.runTest0(filePath -> doTestWithCoroutinesPackageReplacement(filePath, packageName), TargetBackend.WASM, testDataFilePath);
-            }
-
             public void testAllFilesPresentInJvm() throws Exception {
                 KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/assert/jvm"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
             }
@@ -2859,10 +2855,6 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
         public static class CapturedVarsOptimization extends AbstractIrCodegenBoxWasmTest {
             private void runTest(String testDataFilePath) throws Exception {
                 KotlinTestUtils.runTest0(this::doTest, TargetBackend.WASM, testDataFilePath);
-            }
-
-            private void runTestWithPackageReplacement(String testDataFilePath, String packageName) throws Exception {
-                KotlinTestUtils.runTest0(filePath -> doTestWithCoroutinesPackageReplacement(filePath, packageName), TargetBackend.WASM, testDataFilePath);
             }
 
             public void testAllFilesPresentInCapturedVarsOptimization() throws Exception {
@@ -12997,6 +12989,11 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
             KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/sealed"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
         }
 
+        @TestMetadata("multipleFiles_enabled.kt")
+        public void testMultipleFiles_enabled() throws Exception {
+            runTest("compiler/testData/codegen/box/sealed/multipleFiles_enabled.kt");
+        }
+
         @TestMetadata("objects.kt")
         public void testObjects() throws Exception {
             runTest("compiler/testData/codegen/box/sealed/objects.kt");
@@ -13888,6 +13885,11 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
         @TestMetadata("doubleDiamond.kt")
         public void testDoubleDiamond() throws Exception {
             runTest("compiler/testData/codegen/box/traits/doubleDiamond.kt");
+        }
+
+        @TestMetadata("doubleGenericDiamond.kt")
+        public void testDoubleGenericDiamond() throws Exception {
+            runTest("compiler/testData/codegen/box/traits/doubleGenericDiamond.kt");
         }
 
         @TestMetadata("genericMethod.kt")

@@ -42,6 +42,7 @@ object JvmPlatformConfigurator : PlatformConfiguratorBase(
         SynchronizedOnInlineMethodChecker,
         DefaultCheckerInTailrec,
         FunctionDelegateMemberNameClashChecker,
+        ClassInheritsJavaSealedClassChecker
     ),
 
     additionalCallCheckers = listOf(
@@ -109,6 +110,8 @@ object JvmPlatformConfigurator : PlatformConfiguratorBase(
         container.useImpl<JvmPlatformOverloadsSpecificityComparator>()
         container.useImpl<JvmDefaultSuperCallChecker>()
         container.useImpl<JvmSamConversionOracle>()
+        container.useImpl<JvmAdditionalClassPartsProvider>()
+        container.useImpl<JvmRecordApplicabilityChecker>()
         container.useInstance(FunctionWithBigAritySupport.LanguageVersionDependent)
         container.useInstance(GenericArrayClassLiteralSupport.Enabled)
         container.useInstance(JavaActualAnnotationArgumentExtractor())
