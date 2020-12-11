@@ -121,6 +121,11 @@ public class FirBlackBoxCodegenTestGenerated extends AbstractFirBlackBoxCodegenT
             runTest("compiler/testData/codegen/box/annotations/fileClassWithFileAnnotation.kt");
         }
 
+        @TestMetadata("javaAnnotationOnProperty.kt")
+        public void testJavaAnnotationOnProperty() throws Exception {
+            runTest("compiler/testData/codegen/box/annotations/javaAnnotationOnProperty.kt");
+        }
+
         @TestMetadata("jvmAnnotationFlags.kt")
         public void testJvmAnnotationFlags() throws Exception {
             runTest("compiler/testData/codegen/box/annotations/jvmAnnotationFlags.kt");
@@ -21575,6 +21580,16 @@ public class FirBlackBoxCodegenTestGenerated extends AbstractFirBlackBoxCodegenT
                 runTest("compiler/testData/codegen/box/properties/const/constFlags.kt");
             }
 
+            @TestMetadata("constInObjectWithInit.kt")
+            public void testConstInObjectWithInit() throws Exception {
+                runTest("compiler/testData/codegen/box/properties/const/constInObjectWithInit.kt");
+            }
+
+            @TestMetadata("constPropertyAccessor.kt")
+            public void testConstPropertyAccessor() throws Exception {
+                runTest("compiler/testData/codegen/box/properties/const/constPropertyAccessor.kt");
+            }
+
             @TestMetadata("constValInAnnotationDefault.kt")
             public void testConstValInAnnotationDefault() throws Exception {
                 runTest("compiler/testData/codegen/box/properties/const/constValInAnnotationDefault.kt");
@@ -28448,6 +28463,11 @@ public class FirBlackBoxCodegenTestGenerated extends AbstractFirBlackBoxCodegenT
             @TestMetadata("simpleGetProperties.kt")
             public void testSimpleGetProperties() throws Exception {
                 runTest("compiler/testData/codegen/box/reflection/properties/simpleGetProperties.kt");
+            }
+
+            @TestMetadata("withLocalType.kt")
+            public void testWithLocalType() throws Exception {
+                runTest("compiler/testData/codegen/box/reflection/properties/withLocalType.kt");
             }
 
             @TestMetadata("compiler/testData/codegen/box/reflection/properties/accessors")

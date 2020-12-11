@@ -11,6 +11,7 @@ plugins {
     id("jps-compatible")
     id("com.github.node-gradle.node") version "2.2.0"
     id("de.undercouch.download")
+    id("com.gradle.enterprise.test-distribution")
 }
 
 node {
@@ -37,9 +38,6 @@ dependencies {
     testCompileOnly(project(":compiler:cli-js-klib"))
     testCompileOnly(project(":compiler:util"))
     testCompileOnly(intellijCoreDep()) { includeJars("intellij-core") }
-    Platform[193].orLower {
-        testCompileOnly(intellijDep()) { includeJars("openapi", rootProject = rootProject) }
-    }
     testCompileOnly(intellijDep()) { includeJars("idea", "idea_rt", "util") }
     testCompile(project(":compiler:backend.js"))
     testCompile(project(":compiler:backend.wasm"))
@@ -59,13 +57,7 @@ dependencies {
 
     testRuntime(project(":kotlin-reflect"))
 
-    if (Platform[193].orLower()) {
-        testRuntime(intellijDep()) { includeJars("picocontainer", rootProject = rootProject) }
-    }
     testRuntime(intellijDep()) { includeJars("trove4j", "guava", "jdom", rootProject = rootProject) }
-
-
-    val currentOs = OperatingSystem.current()
 
     testRuntime(kotlinStdlib())
     testJsRuntime(kotlinStdlib("js"))
@@ -79,6 +71,8 @@ dependencies {
     
     antLauncherJar(commonDep("org.apache.ant", "ant"))
     antLauncherJar(toolsJar())
+
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.6.2")
 }
 
 val generationRoot = projectDir.resolve("tests-gen")
@@ -174,8 +168,10 @@ val unzipV8 by task<Copy> {
 
 fun Test.setupV8() {
     dependsOn(unzipV8)
-    val v8ExecutablePath = File(unzipV8.get().destinationDir, "d8").absolutePath
+    val v8Path = unzipV8.get().destinationDir
+    val v8ExecutablePath = File(v8Path, "d8")
     systemProperty("javascript.engine.path.V8", v8ExecutablePath)
+    inputs.dir(v8Path)
 }
 
 fun Test.setupSpiderMonkey() {
@@ -187,11 +183,14 @@ fun Test.setupSpiderMonkey() {
 fun Test.setUpJsBoxTests(jsEnabled: Boolean, jsIrEnabled: Boolean) {
     setupV8()
 
+    inputs.files(rootDir.resolve("js/js.engines/src/org/jetbrains/kotlin/js/engine/repl.js"))
+
     dependsOn(":dist")
     if (jsEnabled) {
         dependsOn(testJsRuntime)
         inputs.files(testJsRuntime)
     }
+
     if (jsIrEnabled) {
         dependsOn(":kotlin-stdlib-js-ir:compileKotlinJs")
         systemProperty("kotlin.js.full.stdlib.path", "libraries/stdlib/js-ir/build/classes/kotlin/js/main")
@@ -252,6 +251,8 @@ projectTest(parallel = true) {
     outputs.dir("$buildDir/out")
     outputs.dir("$buildDir/out-min")
     outputs.dir("$buildDir/out-pir")
+
+    configureTestDistribution()
 }
 
 projectTest("jsTest", true) {
