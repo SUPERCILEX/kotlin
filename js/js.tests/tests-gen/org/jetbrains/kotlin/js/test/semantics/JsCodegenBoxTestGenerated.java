@@ -4131,6 +4131,29 @@ public class JsCodegenBoxTestGenerated extends AbstractJsCodegenBoxTest {
         }
     }
 
+    @TestMetadata("compiler/testData/codegen/box/companion")
+    @TestDataPath("$PROJECT_ROOT")
+    @RunWith(JUnit3RunnerWithInners.class)
+    public static class Companion extends AbstractJsCodegenBoxTest {
+        private void runTest(String testDataFilePath) throws Exception {
+            KotlinTestUtils.runTest0(this::doTest, TargetBackend.JS, testDataFilePath);
+        }
+
+        public void testAllFilesPresentInCompanion() throws Exception {
+            KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/companion"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JS, true);
+        }
+
+        @TestMetadata("delegatedPropertyOnCompanion.kt")
+        public void testDelegatedPropertyOnCompanion() throws Exception {
+            runTest("compiler/testData/codegen/box/companion/delegatedPropertyOnCompanion.kt");
+        }
+
+        @TestMetadata("inlineFunctionCompanionPropertyAccess.kt")
+        public void testInlineFunctionCompanionPropertyAccess() throws Exception {
+            runTest("compiler/testData/codegen/box/companion/inlineFunctionCompanionPropertyAccess.kt");
+        }
+    }
+
     @TestMetadata("compiler/testData/codegen/box/compatibility")
     @TestDataPath("$PROJECT_ROOT")
     @RunWith(JUnit3RunnerWithInners.class)
@@ -10385,6 +10408,11 @@ public class JsCodegenBoxTestGenerated extends AbstractJsCodegenBoxTest {
             runTest("compiler/testData/codegen/box/funInterface/samConstructorExplicitInvocation.kt");
         }
 
+        @TestMetadata("samConversionToGenericInterfaceInGenericFun.kt")
+        public void testSamConversionToGenericInterfaceInGenericFun() throws Exception {
+            runTest("compiler/testData/codegen/box/funInterface/samConversionToGenericInterfaceInGenericFun.kt");
+        }
+
         @TestMetadata("subtypeOfFunctionalTypeToFunInterfaceConversion.kt")
         public void testSubtypeOfFunctionalTypeToFunInterfaceConversion() throws Exception {
             runTest("compiler/testData/codegen/box/funInterface/subtypeOfFunctionalTypeToFunInterfaceConversion.kt");
@@ -13115,6 +13143,19 @@ public class JsCodegenBoxTestGenerated extends AbstractJsCodegenBoxTest {
             }
         }
 
+        @TestMetadata("compiler/testData/codegen/box/inlineClasses/javaInterop")
+        @TestDataPath("$PROJECT_ROOT")
+        @RunWith(JUnit3RunnerWithInners.class)
+        public static class JavaInterop extends AbstractJsCodegenBoxTest {
+            private void runTest(String testDataFilePath) throws Exception {
+                KotlinTestUtils.runTest0(this::doTest, TargetBackend.JS, testDataFilePath);
+            }
+
+            public void testAllFilesPresentInJavaInterop() throws Exception {
+                KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/inlineClasses/javaInterop"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JS, true);
+            }
+        }
+
         @TestMetadata("compiler/testData/codegen/box/inlineClasses/jvm8DefaultInterfaceMethods")
         @TestDataPath("$PROJECT_ROOT")
         @RunWith(JUnit3RunnerWithInners.class)
@@ -13779,6 +13820,11 @@ public class JsCodegenBoxTestGenerated extends AbstractJsCodegenBoxTest {
         @TestMetadata("anonymousObjectInForLoopIteratorAndBody.kt")
         public void testAnonymousObjectInForLoopIteratorAndBody() throws Exception {
             runTest("compiler/testData/codegen/box/ir/anonymousObjectInForLoopIteratorAndBody.kt");
+        }
+
+        @TestMetadata("anonymousObjectInGenericFun.kt")
+        public void testAnonymousObjectInGenericFun() throws Exception {
+            runTest("compiler/testData/codegen/box/ir/anonymousObjectInGenericFun.kt");
         }
 
         @TestMetadata("anonymousObjectInsideElvis.kt")

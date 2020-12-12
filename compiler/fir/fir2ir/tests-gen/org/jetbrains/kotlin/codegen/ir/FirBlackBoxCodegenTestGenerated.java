@@ -5161,6 +5161,29 @@ public class FirBlackBoxCodegenTestGenerated extends AbstractFirBlackBoxCodegenT
         }
     }
 
+    @TestMetadata("compiler/testData/codegen/box/companion")
+    @TestDataPath("$PROJECT_ROOT")
+    @RunWith(JUnit3RunnerWithInners.class)
+    public static class Companion extends AbstractFirBlackBoxCodegenTest {
+        private void runTest(String testDataFilePath) throws Exception {
+            KotlinTestUtils.runTestWithCustomIgnoreDirective(this::doTest, TargetBackend.JVM_IR, testDataFilePath, "// IGNORE_BACKEND_FIR: ");
+        }
+
+        public void testAllFilesPresentInCompanion() throws Exception {
+            KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/companion"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JVM_IR, true);
+        }
+
+        @TestMetadata("delegatedPropertyOnCompanion.kt")
+        public void testDelegatedPropertyOnCompanion() throws Exception {
+            runTest("compiler/testData/codegen/box/companion/delegatedPropertyOnCompanion.kt");
+        }
+
+        @TestMetadata("inlineFunctionCompanionPropertyAccess.kt")
+        public void testInlineFunctionCompanionPropertyAccess() throws Exception {
+            runTest("compiler/testData/codegen/box/companion/inlineFunctionCompanionPropertyAccess.kt");
+        }
+    }
+
     @TestMetadata("compiler/testData/codegen/box/compatibility")
     @TestDataPath("$PROJECT_ROOT")
     @RunWith(JUnit3RunnerWithInners.class)
@@ -12155,6 +12178,11 @@ public class FirBlackBoxCodegenTestGenerated extends AbstractFirBlackBoxCodegenT
             runTest("compiler/testData/codegen/box/funInterface/samConstructorExplicitInvocation.kt");
         }
 
+        @TestMetadata("samConversionToGenericInterfaceInGenericFun.kt")
+        public void testSamConversionToGenericInterfaceInGenericFun() throws Exception {
+            runTest("compiler/testData/codegen/box/funInterface/samConversionToGenericInterfaceInGenericFun.kt");
+        }
+
         @TestMetadata("subtypeOfFunctionalTypeToFunInterfaceConversion.kt")
         public void testSubtypeOfFunctionalTypeToFunInterfaceConversion() throws Exception {
             runTest("compiler/testData/codegen/box/funInterface/subtypeOfFunctionalTypeToFunInterfaceConversion.kt");
@@ -15090,6 +15118,34 @@ public class FirBlackBoxCodegenTestGenerated extends AbstractFirBlackBoxCodegenT
             }
         }
 
+        @TestMetadata("compiler/testData/codegen/box/inlineClasses/javaInterop")
+        @TestDataPath("$PROJECT_ROOT")
+        @RunWith(JUnit3RunnerWithInners.class)
+        public static class JavaInterop extends AbstractFirBlackBoxCodegenTest {
+            private void runTest(String testDataFilePath) throws Exception {
+                KotlinTestUtils.runTestWithCustomIgnoreDirective(this::doTest, TargetBackend.JVM_IR, testDataFilePath, "// IGNORE_BACKEND_FIR: ");
+            }
+
+            public void testAllFilesPresentInJavaInterop() throws Exception {
+                KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/inlineClasses/javaInterop"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JVM_IR, true);
+            }
+
+            @TestMetadata("inlineClasInSignature.kt")
+            public void testInlineClasInSignature() throws Exception {
+                runTest("compiler/testData/codegen/box/inlineClasses/javaInterop/inlineClasInSignature.kt");
+            }
+
+            @TestMetadata("inlineClasInSignatureNonNull.kt")
+            public void testInlineClasInSignatureNonNull() throws Exception {
+                runTest("compiler/testData/codegen/box/inlineClasses/javaInterop/inlineClasInSignatureNonNull.kt");
+            }
+
+            @TestMetadata("inlineClasInSignatureNullable.kt")
+            public void testInlineClasInSignatureNullable() throws Exception {
+                runTest("compiler/testData/codegen/box/inlineClasses/javaInterop/inlineClasInSignatureNullable.kt");
+            }
+        }
+
         @TestMetadata("compiler/testData/codegen/box/inlineClasses/jvm8DefaultInterfaceMethods")
         @TestDataPath("$PROJECT_ROOT")
         @RunWith(JUnit3RunnerWithInners.class)
@@ -15869,6 +15925,11 @@ public class FirBlackBoxCodegenTestGenerated extends AbstractFirBlackBoxCodegenT
         @TestMetadata("anonymousObjectInForLoopIteratorAndBody.kt")
         public void testAnonymousObjectInForLoopIteratorAndBody() throws Exception {
             runTest("compiler/testData/codegen/box/ir/anonymousObjectInForLoopIteratorAndBody.kt");
+        }
+
+        @TestMetadata("anonymousObjectInGenericFun.kt")
+        public void testAnonymousObjectInGenericFun() throws Exception {
+            runTest("compiler/testData/codegen/box/ir/anonymousObjectInGenericFun.kt");
         }
 
         @TestMetadata("anonymousObjectInsideElvis.kt")
