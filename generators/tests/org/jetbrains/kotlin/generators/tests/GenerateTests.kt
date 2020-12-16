@@ -51,6 +51,7 @@ import org.jetbrains.kotlin.idea.completion.test.*
 import org.jetbrains.kotlin.idea.completion.test.handlers.*
 import org.jetbrains.kotlin.idea.completion.test.weighers.AbstractBasicCompletionWeigherTest
 import org.jetbrains.kotlin.idea.completion.test.weighers.AbstractSmartCompletionWeigherTest
+import org.jetbrains.kotlin.idea.completion.wheigher.AbstractHighLevelWeigherTest
 import org.jetbrains.kotlin.idea.configuration.AbstractGradleConfigureProjectByChangingFileTest
 import org.jetbrains.kotlin.idea.conversion.copy.AbstractJavaToKotlinCopyPasteConversionTest
 import org.jetbrains.kotlin.idea.conversion.copy.AbstractLiteralKotlinToKotlinCopyPasteTest
@@ -88,6 +89,8 @@ import org.jetbrains.kotlin.idea.fir.low.level.api.file.structure.AbstractFileSt
 import org.jetbrains.kotlin.idea.fir.low.level.api.sessions.AbstractSessionsInvalidationTest
 import org.jetbrains.kotlin.idea.fir.low.level.api.trackers.AbstractProjectWideOutOfBlockKotlinModificationTrackerTest
 import org.jetbrains.kotlin.idea.folding.AbstractKotlinFoldingTest
+import org.jetbrains.kotlin.idea.frontend.api.components.AbstractExpectedExpressionTypeTest
+import org.jetbrains.kotlin.idea.frontend.api.components.AbstractReturnExpressionTargetTest
 import org.jetbrains.kotlin.idea.frontend.api.fir.AbstractResolveCallTest
 import org.jetbrains.kotlin.idea.frontend.api.scopes.AbstractMemberScopeByFqNameTest
 import org.jetbrains.kotlin.idea.frontend.api.symbols.*
@@ -1021,6 +1024,14 @@ fun main(args: Array<String>) {
             testClass<AbstractMemoryLeakInSymbolsTest> {
                 model("symbolMemoryLeak")
             }
+
+            testClass<AbstractReturnExpressionTargetTest> {
+                model("components/returnExpressionTarget")
+            }
+
+            testClass<AbstractExpectedExpressionTypeTest> {
+                model("components/expectedExpressionType")
+            }
         }
 
         testGroup("idea/idea-frontend-fir/idea-fir-low-level-api/tests", "idea/testData") {
@@ -1096,6 +1107,10 @@ fun main(args: Array<String>) {
 
             testClass<AbstractHighLevelBasicCompletionHandlerTest> {
                 model("handlers/basic", pattern = KT_WITHOUT_DOTS_IN_NAME)
+            }
+
+            testClass<AbstractHighLevelWeigherTest> {
+                model("weighers/basic", pattern = KT_OR_KTS_WITHOUT_DOTS_IN_NAME)
             }
         }
 
