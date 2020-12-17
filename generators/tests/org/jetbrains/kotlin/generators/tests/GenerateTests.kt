@@ -24,12 +24,11 @@ import org.jetbrains.kotlin.findUsages.*
 import org.jetbrains.kotlin.fir.plugin.AbstractFirAllOpenDiagnosticTest
 import org.jetbrains.kotlin.formatter.AbstractFormatterTest
 import org.jetbrains.kotlin.formatter.AbstractTypingIndentationTestBase
-import org.jetbrains.kotlin.generators.tests.generator.TestGroup
-import org.jetbrains.kotlin.generators.tests.generator.muteExtraSuffix
-import org.jetbrains.kotlin.generators.tests.generator.testGroupSuite
-import org.jetbrains.kotlin.generators.util.KT_OR_KTS
-import org.jetbrains.kotlin.generators.util.KT_OR_KTS_WITHOUT_DOTS_IN_NAME
-import org.jetbrains.kotlin.generators.util.KT_WITHOUT_DOTS_IN_NAME
+import org.jetbrains.kotlin.generators.TestGroup
+import org.jetbrains.kotlin.generators.impl.generateTestGroupSuite
+import org.jetbrains.kotlin.generators.util.TestGeneratorUtil.KT_OR_KTS
+import org.jetbrains.kotlin.generators.util.TestGeneratorUtil.KT_OR_KTS_WITHOUT_DOTS_IN_NAME
+import org.jetbrains.kotlin.generators.util.TestGeneratorUtil.KT_WITHOUT_DOTS_IN_NAME
 import org.jetbrains.kotlin.idea.AbstractExpressionSelectionTest
 import org.jetbrains.kotlin.idea.AbstractSmartSelectionTest
 import org.jetbrains.kotlin.idea.actions.AbstractGotoTestOrCodeActionTest
@@ -92,6 +91,7 @@ import org.jetbrains.kotlin.idea.folding.AbstractKotlinFoldingTest
 import org.jetbrains.kotlin.idea.frontend.api.components.AbstractExpectedExpressionTypeTest
 import org.jetbrains.kotlin.idea.frontend.api.components.AbstractReturnExpressionTargetTest
 import org.jetbrains.kotlin.idea.frontend.api.fir.AbstractResolveCallTest
+import org.jetbrains.kotlin.idea.frontend.api.scopes.AbstractFileScopeTest
 import org.jetbrains.kotlin.idea.frontend.api.scopes.AbstractMemberScopeByFqNameTest
 import org.jetbrains.kotlin.idea.frontend.api.symbols.*
 import org.jetbrains.kotlin.idea.hierarchy.AbstractHierarchyTest
@@ -193,8 +193,7 @@ import org.jetbrains.kotlinx.serialization.AbstractSerializationPluginDiagnostic
 
 fun main(args: Array<String>) {
     System.setProperty("java.awt.headless", "true")
-
-    testGroupSuite(args) {
+    generateTestGroupSuite(args) {
         testGroup("idea/jvm-debugger/jvm-debugger-test/test", "idea/jvm-debugger/jvm-debugger-test/testData") {
             testClass<AbstractKotlinSteppingTest> {
                 model(
@@ -384,15 +383,15 @@ fun main(args: Array<String>) {
                 model("navigation/gotoSymbol", testMethod = "doSymbolTest")
             }
 
-            testClass<AbstractNavigateToLibrarySourceTest>(annotations = listOf(muteExtraSuffix(".libsrc"))) {
+            testClass<AbstractNavigateToLibrarySourceTest>() {
                 model("decompiler/navigation/usercode")
             }
 
-            testClass<AbstractNavigateJavaToLibrarySourceTest>(annotations = listOf(muteExtraSuffix(".libsrc"))) {
+            testClass<AbstractNavigateJavaToLibrarySourceTest>() {
                 model("decompiler/navigation/userJavaCode", pattern = "^(.+)\\.java$")
             }
 
-            testClass<AbstractNavigateToLibrarySourceTestWithJS>(annotations = listOf(muteExtraSuffix(".libsrcjs"))) {
+            testClass<AbstractNavigateToLibrarySourceTestWithJS>() {
                 model("decompiler/navigation/usercode", testClassName = "UsercodeWithJSModule")
             }
 
@@ -1013,6 +1012,10 @@ fun main(args: Array<String>) {
                 model("memberScopeByFqName", extension = "txt")
             }
 
+            testClass<AbstractFileScopeTest> {
+                model("fileScopeTest", extension = "kt")
+            }
+
             testClass<AbstractSymbolFromSourcePointerRestoreTest> {
                 model("symbolPointer", extension = "kt")
             }
@@ -1524,8 +1527,9 @@ fun main(args: Array<String>) {
                 model("incremental/js", extension = null, excludeParentDirs = true)
             }
 
-            testClass<AbstractIncrementalJsKlibCompilerRunnerTest>(annotations = listOf(muteExtraSuffix(".jsklib"))) {
-                model("incremental/pureKotlin", extension = null, recursive = false)
+            testClass<AbstractIncrementalJsKlibCompilerRunnerTest>() {
+                // IC of sealed interfaces are not supported in JS
+                model("incremental/pureKotlin", extension = null, recursive = false, excludedPattern = "^sealed.*")
                 model("incremental/classHierarchyAffected", extension = null, recursive = false)
                 model("incremental/js", extension = null, excludeParentDirs = true)
             }
@@ -1537,7 +1541,8 @@ fun main(args: Array<String>) {
             }
 
             testClass<AbstractIncrementalJsKlibCompilerWithScopeExpansionRunnerTest> {
-                model("incremental/pureKotlin", extension = null, recursive = false)
+                // IC of sealed interfaces are not supported in JS
+                model("incremental/pureKotlin", extension = null, recursive = false, excludedPattern = "^sealed.*")
                 model("incremental/classHierarchyAffected", extension = null, recursive = false)
                 model("incremental/js", extension = null, excludeParentDirs = true)
                 model("incremental/scopeExpansion", extension = null, excludeParentDirs = true)

@@ -36,6 +36,7 @@ import org.jetbrains.kotlin.test.ConfigurationKind
 import org.jetbrains.kotlin.test.KotlinTestUtils
 import org.jetbrains.kotlin.test.KotlinTestWithEnvironment
 import org.jetbrains.kotlin.test.TestJdkKind
+import org.jetbrains.kotlin.test.util.KtTestUtil
 import java.io.File
 
 class KotlinCliJavaFileManagerTest : KotlinTestWithEnvironment() {
@@ -182,10 +183,10 @@ class KotlinCliJavaFileManagerTest : KotlinTestWithEnvironment() {
     }
 
     override fun createEnvironment(): KotlinCoreEnvironment {
-        javaFilesDir = KotlinTestUtils.tmpDir("java-file-manager-test")
+        javaFilesDir = KtTestUtil.tmpDir("java-file-manager-test")
 
         val configuration = KotlinTestUtils.newConfiguration(
-                ConfigurationKind.JDK_ONLY, TestJdkKind.MOCK_JDK, emptyList(), listOf(javaFilesDir)
+            ConfigurationKind.JDK_ONLY, TestJdkKind.MOCK_JDK, emptyList(), listOf(javaFilesDir)
         )
 
         return KotlinCoreEnvironment.createForTests(testRootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)

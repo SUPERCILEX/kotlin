@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.incremental;
 import com.intellij.testFramework.TestDataPath;
 import org.jetbrains.kotlin.test.JUnit3RunnerWithInners;
 import org.jetbrains.kotlin.test.KotlinTestUtils;
-import org.jetbrains.kotlin.test.MuteExtraSuffix;
+import org.jetbrains.kotlin.test.util.KtTestUtil;
 import org.jetbrains.kotlin.test.TestMetadata;
 import org.junit.runner.RunWith;
 
@@ -21,7 +21,6 @@ import java.util.regex.Pattern;
 public class IncrementalJsKlibCompilerRunnerTestGenerated extends AbstractIncrementalJsKlibCompilerRunnerTest {
     @TestMetadata("jps-plugin/testData/incremental/pureKotlin")
     @TestDataPath("$PROJECT_ROOT")
-    @MuteExtraSuffix(".jsklib")
     @RunWith(JUnit3RunnerWithInners.class)
     public static class PureKotlin extends AbstractIncrementalJsKlibCompilerRunnerTest {
         private void runTest(String testDataFilePath) throws Exception {
@@ -64,7 +63,7 @@ public class IncrementalJsKlibCompilerRunnerTestGenerated extends AbstractIncrem
         }
 
         public void testAllFilesPresentInPureKotlin() throws Exception {
-            KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("jps-plugin/testData/incremental/pureKotlin"), Pattern.compile("^([^\\.]+)$"), null, false);
+            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("jps-plugin/testData/incremental/pureKotlin"), Pattern.compile("^([^\\.]+)$"), Pattern.compile("^sealed.*"), false);
         }
 
         @TestMetadata("annotations")
@@ -572,31 +571,6 @@ public class IncrementalJsKlibCompilerRunnerTestGenerated extends AbstractIncrem
             runTest("jps-plugin/testData/incremental/pureKotlin/returnTypeChanged/");
         }
 
-        @TestMetadata("sealedClassesAddImplements")
-        public void testSealedClassesAddImplements() throws Exception {
-            runTest("jps-plugin/testData/incremental/pureKotlin/sealedClassesAddImplements/");
-        }
-
-        @TestMetadata("sealedClassesAddInheritor")
-        public void testSealedClassesAddInheritor() throws Exception {
-            runTest("jps-plugin/testData/incremental/pureKotlin/sealedClassesAddInheritor/");
-        }
-
-        @TestMetadata("sealedClassesRemoveImplements")
-        public void testSealedClassesRemoveImplements() throws Exception {
-            runTest("jps-plugin/testData/incremental/pureKotlin/sealedClassesRemoveImplements/");
-        }
-
-        @TestMetadata("sealedClassesRemoveInheritor")
-        public void testSealedClassesRemoveInheritor() throws Exception {
-            runTest("jps-plugin/testData/incremental/pureKotlin/sealedClassesRemoveInheritor/");
-        }
-
-        @TestMetadata("sealedClassesUseSwitch")
-        public void testSealedClassesUseSwitch() throws Exception {
-            runTest("jps-plugin/testData/incremental/pureKotlin/sealedClassesUseSwitch/");
-        }
-
         @TestMetadata("secondaryConstructorInlined")
         public void testSecondaryConstructorInlined() throws Exception {
             runTest("jps-plugin/testData/incremental/pureKotlin/secondaryConstructorInlined/");
@@ -655,7 +629,6 @@ public class IncrementalJsKlibCompilerRunnerTestGenerated extends AbstractIncrem
 
     @TestMetadata("jps-plugin/testData/incremental/classHierarchyAffected")
     @TestDataPath("$PROJECT_ROOT")
-    @MuteExtraSuffix(".jsklib")
     @RunWith(JUnit3RunnerWithInners.class)
     public static class ClassHierarchyAffected extends AbstractIncrementalJsKlibCompilerRunnerTest {
         private void runTest(String testDataFilePath) throws Exception {
@@ -663,7 +636,7 @@ public class IncrementalJsKlibCompilerRunnerTestGenerated extends AbstractIncrem
         }
 
         public void testAllFilesPresentInClassHierarchyAffected() throws Exception {
-            KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("jps-plugin/testData/incremental/classHierarchyAffected"), Pattern.compile("^([^\\.]+)$"), null, false);
+            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("jps-plugin/testData/incremental/classHierarchyAffected"), Pattern.compile("^([^\\.]+)$"), null, false);
         }
 
         @TestMetadata("annotationFlagRemoved")
@@ -869,7 +842,6 @@ public class IncrementalJsKlibCompilerRunnerTestGenerated extends AbstractIncrem
 
     @TestMetadata("jps-plugin/testData/incremental/js")
     @TestDataPath("$PROJECT_ROOT")
-    @MuteExtraSuffix(".jsklib")
     @RunWith(JUnit3RunnerWithInners.class)
     public static class Js extends AbstractIncrementalJsKlibCompilerRunnerTest {
         private void runTest(String testDataFilePath) throws Exception {
@@ -877,7 +849,7 @@ public class IncrementalJsKlibCompilerRunnerTestGenerated extends AbstractIncrem
         }
 
         public void testAllFilesPresentInJs() throws Exception {
-            KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("jps-plugin/testData/incremental/js"), Pattern.compile("^([^\\.]+)$"), null, true);
+            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("jps-plugin/testData/incremental/js"), Pattern.compile("^([^\\.]+)$"), null, true);
         }
 
         @TestMetadata("inlineFunctionLocalDeclarationChanges")
@@ -887,7 +859,6 @@ public class IncrementalJsKlibCompilerRunnerTestGenerated extends AbstractIncrem
 
         @TestMetadata("jps-plugin/testData/incremental/js/friendsModuleDisabled")
         @TestDataPath("$PROJECT_ROOT")
-        @MuteExtraSuffix(".jsklib")
         @RunWith(JUnit3RunnerWithInners.class)
         public static class FriendsModuleDisabled extends AbstractIncrementalJsKlibCompilerRunnerTest {
             private void runTest(String testDataFilePath) throws Exception {
@@ -895,7 +866,7 @@ public class IncrementalJsKlibCompilerRunnerTestGenerated extends AbstractIncrem
             }
 
             public void testAllFilesPresentInFriendsModuleDisabled() throws Exception {
-                KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("jps-plugin/testData/incremental/js/friendsModuleDisabled"), Pattern.compile("^([^\\.]+)$"), null, true);
+                KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("jps-plugin/testData/incremental/js/friendsModuleDisabled"), Pattern.compile("^([^\\.]+)$"), null, true);
             }
 
             @TestMetadata("internalInlineFunctionIsChanged")
@@ -905,7 +876,6 @@ public class IncrementalJsKlibCompilerRunnerTestGenerated extends AbstractIncrem
 
             @TestMetadata("jps-plugin/testData/incremental/js/friendsModuleDisabled/internalInlineFunctionIsChanged")
             @TestDataPath("$PROJECT_ROOT")
-            @MuteExtraSuffix(".jsklib")
             @RunWith(JUnit3RunnerWithInners.class)
             public static class InternalInlineFunctionIsChanged extends AbstractIncrementalJsKlibCompilerRunnerTest {
                 private void runTest(String testDataFilePath) throws Exception {
@@ -913,14 +883,13 @@ public class IncrementalJsKlibCompilerRunnerTestGenerated extends AbstractIncrem
                 }
 
                 public void testAllFilesPresentInInternalInlineFunctionIsChanged() throws Exception {
-                    KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("jps-plugin/testData/incremental/js/friendsModuleDisabled/internalInlineFunctionIsChanged"), Pattern.compile("^([^\\.]+)$"), null, true);
+                    KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("jps-plugin/testData/incremental/js/friendsModuleDisabled/internalInlineFunctionIsChanged"), Pattern.compile("^([^\\.]+)$"), null, true);
                 }
             }
         }
 
         @TestMetadata("jps-plugin/testData/incremental/js/inlineFunctionLocalDeclarationChanges")
         @TestDataPath("$PROJECT_ROOT")
-        @MuteExtraSuffix(".jsklib")
         @RunWith(JUnit3RunnerWithInners.class)
         public static class InlineFunctionLocalDeclarationChanges extends AbstractIncrementalJsKlibCompilerRunnerTest {
             private void runTest(String testDataFilePath) throws Exception {
@@ -928,7 +897,7 @@ public class IncrementalJsKlibCompilerRunnerTestGenerated extends AbstractIncrem
             }
 
             public void testAllFilesPresentInInlineFunctionLocalDeclarationChanges() throws Exception {
-                KotlinTestUtils.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("jps-plugin/testData/incremental/js/inlineFunctionLocalDeclarationChanges"), Pattern.compile("^([^\\.]+)$"), null, true);
+                KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("jps-plugin/testData/incremental/js/inlineFunctionLocalDeclarationChanges"), Pattern.compile("^([^\\.]+)$"), null, true);
             }
         }
     }
