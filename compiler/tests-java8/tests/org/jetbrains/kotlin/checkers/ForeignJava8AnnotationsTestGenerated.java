@@ -26,7 +26,7 @@ public class ForeignJava8AnnotationsTestGenerated extends AbstractForeignJava8An
     }
 
     public void testAllFilesPresentInTests() throws Exception {
-        KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/foreignAnnotationsJava8/tests"), Pattern.compile("^(.+)\\.kt$"), null, true, "jspecify");
+        KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/foreignAnnotationsJava8/tests"), Pattern.compile("^(.+)\\.kt$"), null, true, "jspecify", "typeEnhancementOnCompiledJava");
     }
 
     @TestMetadata("checkerFramework.kt")

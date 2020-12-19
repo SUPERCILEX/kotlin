@@ -95,17 +95,17 @@ private fun KtCall.stringRepresentation(): String {
         is KtFunctionLikeSymbol -> buildString {
             append(if (this@stringValue is KtFunctionSymbol) callableIdIfNonLocal ?: name else "<constructor>")
             append("(")
-            (this@stringValue as? KtFunctionSymbol)?.receiverTypeAndAnnotations?.let { receiver ->
+            (this@stringValue as? KtFunctionSymbol)?.receiverType?.let { receiver ->
                 append("<receiver>: ${receiver.type.render()}")
                 if (valueParameters.isNotEmpty()) append(", ")
             }
             valueParameters.joinTo(this) { parameter ->
-                "${parameter.name}: ${parameter.type.render()}"
+                "${parameter.name}: ${parameter.annotatedType.type.render()}"
             }
             append(")")
-            append(": ${type.render()}")
+            append(": ${annotatedType.type.render()}")
         }
-        is KtParameterSymbol -> "$name: ${type.render()}"
+        is KtParameterSymbol -> "$name: ${annotatedType.type.render()}"
         is KtSuccessCallTarget -> symbol.stringValue()
         is KtErrorCallTarget -> "ERR<${this.diagnostic.message}, [${candidates.joinToString { it.stringValue() }}]>"
         is Boolean -> toString()

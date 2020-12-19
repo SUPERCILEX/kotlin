@@ -8,12 +8,11 @@ package org.jetbrains.kotlin.idea.frontend.api.fir.symbols
 import com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.fir.declarations.*
 import org.jetbrains.kotlin.fir.declarations.impl.FirDefaultPropertyAccessor
-import org.jetbrains.kotlin.fir.declarations.impl.FirValueParameterImpl
 import org.jetbrains.kotlin.idea.fir.findPsi
 import org.jetbrains.kotlin.idea.fir.low.level.api.api.FirModuleResolveState
 import org.jetbrains.kotlin.idea.frontend.api.ValidityToken
 import org.jetbrains.kotlin.idea.frontend.api.fir.KtSymbolByFirBuilder
-import org.jetbrains.kotlin.idea.frontend.api.fir.utils.convertAnnotation
+import org.jetbrains.kotlin.idea.frontend.api.fir.utils.cached
 import org.jetbrains.kotlin.idea.frontend.api.fir.utils.firRef
 import org.jetbrains.kotlin.idea.frontend.api.symbols.KtPropertySetterSymbol
 import org.jetbrains.kotlin.idea.frontend.api.symbols.KtSetterParameterSymbol
@@ -23,7 +22,6 @@ import org.jetbrains.kotlin.idea.frontend.api.symbols.markers.KtSymbolKind
 import org.jetbrains.kotlin.idea.frontend.api.symbols.markers.KtSymbolVisibility
 import org.jetbrains.kotlin.idea.frontend.api.symbols.pointers.KtPsiBasedSymbolPointer
 import org.jetbrains.kotlin.idea.frontend.api.symbols.pointers.KtSymbolPointer
-import org.jetbrains.kotlin.idea.frontend.api.types.KtType
 
 internal class KtFirPropertySetterSymbol(
     fir: FirPropertyAccessor,
@@ -45,8 +43,8 @@ internal class KtFirPropertySetterSymbol(
 
     override val modality: KtCommonSymbolModality get() = firRef.withFir(FirResolvePhase.STATUS) { it.modality.getSymbolModality() }
     override val visibility: KtSymbolVisibility get() = firRef.withFir(FirResolvePhase.STATUS) { it.visibility.getSymbolVisibility() }
-    override val annotations: List<KtAnnotationCall> by firRef.withFirAndCache(FirResolvePhase.TYPES) {
-        convertAnnotation(it)
+    override val annotations: List<KtAnnotationCall> by cached {
+        firRef.toAnnotationsList()
     }
     override val parameter: KtSetterParameterSymbol by firRef.withFirAndCache { fir ->
         builder.buildFirSetterParameter(fir.valueParameters.single())

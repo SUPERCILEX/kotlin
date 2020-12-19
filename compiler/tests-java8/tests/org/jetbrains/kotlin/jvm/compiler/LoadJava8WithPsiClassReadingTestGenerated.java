@@ -26,7 +26,7 @@ public class LoadJava8WithPsiClassReadingTestGenerated extends AbstractLoadJava8
     }
 
     public void testAllFilesPresentInCompiledJava() throws Exception {
-        KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/loadJava8/compiledJava"), Pattern.compile("^(.+)\\.java$"), null, true);
+        KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/loadJava8/compiledJava"), Pattern.compile("^(.+)\\.java$"), null, true, "typeUseAnnotations", "typeParameterAnnotations");
     }
 
     @TestMetadata("InnerClassTypeAnnotation.java")
@@ -42,15 +42,5 @@ public class LoadJava8WithPsiClassReadingTestGenerated extends AbstractLoadJava8
     @TestMetadata("ParameterNames.java")
     public void testParameterNames() throws Exception {
         runTest("compiler/testData/loadJava8/compiledJava/ParameterNames.java");
-    }
-
-    @TestMetadata("TypeAnnotations.java")
-    public void testTypeAnnotations() throws Exception {
-        runTest("compiler/testData/loadJava8/compiledJava/TypeAnnotations.java");
-    }
-
-    @TestMetadata("TypeParameterAnnotations.java")
-    public void testTypeParameterAnnotations() throws Exception {
-        runTest("compiler/testData/loadJava8/compiledJava/TypeParameterAnnotations.java");
     }
 }
