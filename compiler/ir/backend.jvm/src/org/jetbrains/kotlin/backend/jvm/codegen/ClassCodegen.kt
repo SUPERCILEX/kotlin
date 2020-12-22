@@ -190,14 +190,13 @@ class ClassCodegen private constructor(
     }
 
     private val metadataSerializer: MetadataSerializer =
-        context.serializerFactory(context, irClass, type, visitor.serializationBindings, parentClassCodegen?.metadataSerializer)
+        context.backendExtension.createSerializer(
+            context, irClass, type, visitor.serializationBindings, parentClassCodegen?.metadataSerializer
+        )
 
     private fun generateKotlinMetadataAnnotation() {
         // TODO: if `-Xmultifile-parts-inherit` is enabled, write the corresponding flag for parts and facades to [Metadata.extraInt].
-        var extraFlags = JvmAnnotationNames.METADATA_JVM_IR_FLAG
-        if (state.isIrWithStableAbi) {
-            extraFlags += JvmAnnotationNames.METADATA_JVM_IR_STABLE_ABI_FLAG
-        }
+        val extraFlags = context.backendExtension.generateMetadataExtraFlags(state.abiStability)
 
         val facadeClassName = context.multifileFacadeForPart[irClass.attributeOwnerId]
         val metadata = irClass.metadata
