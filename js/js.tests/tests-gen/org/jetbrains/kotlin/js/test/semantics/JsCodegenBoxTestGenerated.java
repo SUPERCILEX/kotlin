@@ -1470,6 +1470,16 @@ public class JsCodegenBoxTestGenerated extends AbstractJsCodegenBoxTest {
             runTest("compiler/testData/codegen/box/callableReference/genericLocalClassConstructorReference.kt");
         }
 
+        @TestMetadata("kt21014.kt")
+        public void testKt21014() throws Exception {
+            runTest("compiler/testData/codegen/box/callableReference/kt21014.kt");
+        }
+
+        @TestMetadata("kt21092a.kt")
+        public void testKt21092a() throws Exception {
+            runTest("compiler/testData/codegen/box/callableReference/kt21092a.kt");
+        }
+
         @TestMetadata("kt37604.kt")
         public void testKt37604() throws Exception {
             runTest("compiler/testData/codegen/box/callableReference/kt37604.kt");
@@ -15984,6 +15994,11 @@ public class JsCodegenBoxTestGenerated extends AbstractJsCodegenBoxTest {
             runTest("compiler/testData/codegen/box/objects/simpleObject.kt");
         }
 
+        @TestMetadata("substitutionFunctionFromSuper.kt")
+        public void testSubstitutionFunctionFromSuper() throws Exception {
+            runTest("compiler/testData/codegen/box/objects/substitutionFunctionFromSuper.kt");
+        }
+
         @TestMetadata("thisInConstructor.kt")
         public void testThisInConstructor() throws Exception {
             runTest("compiler/testData/codegen/box/objects/thisInConstructor.kt");
@@ -15997,6 +16012,11 @@ public class JsCodegenBoxTestGenerated extends AbstractJsCodegenBoxTest {
         @TestMetadata("useAnonymousObjectAsIterator.kt")
         public void testUseAnonymousObjectAsIterator() throws Exception {
             runTest("compiler/testData/codegen/box/objects/useAnonymousObjectAsIterator.kt");
+        }
+
+        @TestMetadata("useAnonymousObjectFunction.kt")
+        public void testUseAnonymousObjectFunction() throws Exception {
+            runTest("compiler/testData/codegen/box/objects/useAnonymousObjectFunction.kt");
         }
 
         @TestMetadata("useImportedMember.kt")

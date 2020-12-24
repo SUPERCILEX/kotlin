@@ -1371,6 +1371,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
     @TestDataPath("$PROJECT_ROOT")
     @RunWith(JUnit3RunnerWithInners.class)
     public static class Bridges extends AbstractLightAnalysisModeTest {
+        @TestMetadata("kt24193.kt")
+        public void ignoreKt24193() throws Exception {
+            runTest("compiler/testData/codegen/box/bridges/kt24193.kt");
+        }
+
         private void runTest(String testDataFilePath) throws Exception {
             KotlinTestUtils.runTest(this::doTest, TargetBackend.JVM, testDataFilePath);
         }
@@ -2017,6 +2022,26 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
     @TestDataPath("$PROJECT_ROOT")
     @RunWith(JUnit3RunnerWithInners.class)
     public static class CallableReference extends AbstractLightAnalysisModeTest {
+        @TestMetadata("kt16752.kt")
+        public void ignoreKt16752() throws Exception {
+            runTest("compiler/testData/codegen/box/callableReference/kt16752.kt");
+        }
+
+        @TestMetadata("kt21014.kt")
+        public void ignoreKt21014() throws Exception {
+            runTest("compiler/testData/codegen/box/callableReference/kt21014.kt");
+        }
+
+        @TestMetadata("kt21092a.kt")
+        public void ignoreKt21092a() throws Exception {
+            runTest("compiler/testData/codegen/box/callableReference/kt21092a.kt");
+        }
+
+        @TestMetadata("kt21092b.kt")
+        public void ignoreKt21092b() throws Exception {
+            runTest("compiler/testData/codegen/box/callableReference/kt21092b.kt");
+        }
+
         private void runTest(String testDataFilePath) throws Exception {
             KotlinTestUtils.runTest(this::doTest, TargetBackend.JVM, testDataFilePath);
         }
@@ -16262,6 +16287,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
         @TestDataPath("$PROJECT_ROOT")
         @RunWith(JUnit3RunnerWithInners.class)
         public static class NotNullAssertions extends AbstractLightAnalysisModeTest {
+            @TestMetadata("kt24258.kt")
+            public void ignoreKt24258() throws Exception {
+                runTest("compiler/testData/codegen/box/javaInterop/notNullAssertions/kt24258.kt");
+            }
+
             private void runTest(String testDataFilePath) throws Exception {
                 KotlinTestUtils.runTest(this::doTest, TargetBackend.JVM, testDataFilePath);
             }
@@ -16308,6 +16338,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
             @TestMetadata("kt18911.kt")
             public void testKt18911() throws Exception {
                 runTest("compiler/testData/codegen/box/javaInterop/notNullAssertions/kt18911.kt");
+            }
+
+            @TestMetadata("kt24258nn.kt")
+            public void testKt24258nn() throws Exception {
+                runTest("compiler/testData/codegen/box/javaInterop/notNullAssertions/kt24258nn.kt");
             }
 
             @TestMetadata("localEntities.kt")
@@ -17681,6 +17716,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
         @TestMetadata("functionWithDefault.kt")
         public void testFunctionWithDefault() throws Exception {
             runTest("compiler/testData/codegen/box/jvmName/functionWithDefault.kt");
+        }
+
+        @TestMetadata("kt23974.kt")
+        public void testKt23974() throws Exception {
+            runTest("compiler/testData/codegen/box/jvmName/kt23974.kt");
         }
 
         @TestMetadata("loadJvmName.kt")
@@ -19864,6 +19904,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
             runTest("compiler/testData/codegen/box/objects/simpleObject.kt");
         }
 
+        @TestMetadata("substitutionFunctionFromSuper.kt")
+        public void testSubstitutionFunctionFromSuper() throws Exception {
+            runTest("compiler/testData/codegen/box/objects/substitutionFunctionFromSuper.kt");
+        }
+
         @TestMetadata("thisInConstructor.kt")
         public void testThisInConstructor() throws Exception {
             runTest("compiler/testData/codegen/box/objects/thisInConstructor.kt");
@@ -19877,6 +19922,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
         @TestMetadata("useAnonymousObjectAsIterator.kt")
         public void testUseAnonymousObjectAsIterator() throws Exception {
             runTest("compiler/testData/codegen/box/objects/useAnonymousObjectAsIterator.kt");
+        }
+
+        @TestMetadata("useAnonymousObjectFunction.kt")
+        public void testUseAnonymousObjectFunction() throws Exception {
+            runTest("compiler/testData/codegen/box/objects/useAnonymousObjectFunction.kt");
         }
 
         @TestMetadata("useImportedMember.kt")

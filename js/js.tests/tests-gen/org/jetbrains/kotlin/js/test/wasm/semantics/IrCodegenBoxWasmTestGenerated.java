@@ -9965,6 +9965,11 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
             runTest("compiler/testData/codegen/box/objects/simpleObject.kt");
         }
 
+        @TestMetadata("substitutionFunctionFromSuper.kt")
+        public void testSubstitutionFunctionFromSuper() throws Exception {
+            runTest("compiler/testData/codegen/box/objects/substitutionFunctionFromSuper.kt");
+        }
+
         @TestMetadata("thisInConstructor.kt")
         public void testThisInConstructor() throws Exception {
             runTest("compiler/testData/codegen/box/objects/thisInConstructor.kt");
@@ -9978,6 +9983,11 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
         @TestMetadata("useAnonymousObjectAsIterator.kt")
         public void testUseAnonymousObjectAsIterator() throws Exception {
             runTest("compiler/testData/codegen/box/objects/useAnonymousObjectAsIterator.kt");
+        }
+
+        @TestMetadata("useAnonymousObjectFunction.kt")
+        public void testUseAnonymousObjectFunction() throws Exception {
+            runTest("compiler/testData/codegen/box/objects/useAnonymousObjectFunction.kt");
         }
 
         @TestMetadata("useImportedMember.kt")

@@ -1504,6 +1504,11 @@ public class FirBlackBoxCodegenTestGenerated extends AbstractFirBlackBoxCodegenT
             runTest("compiler/testData/codegen/box/bridges/kt1959.kt");
         }
 
+        @TestMetadata("kt24193.kt")
+        public void testKt24193() throws Exception {
+            runTest("compiler/testData/codegen/box/bridges/kt24193.kt");
+        }
+
         @TestMetadata("kt2498.kt")
         public void testKt2498() throws Exception {
             runTest("compiler/testData/codegen/box/bridges/kt2498.kt");
@@ -2048,6 +2053,26 @@ public class FirBlackBoxCodegenTestGenerated extends AbstractFirBlackBoxCodegenT
         @TestMetadata("javaField.kt")
         public void testJavaField() throws Exception {
             runTest("compiler/testData/codegen/box/callableReference/javaField.kt");
+        }
+
+        @TestMetadata("kt16752.kt")
+        public void testKt16752() throws Exception {
+            runTest("compiler/testData/codegen/box/callableReference/kt16752.kt");
+        }
+
+        @TestMetadata("kt21014.kt")
+        public void testKt21014() throws Exception {
+            runTest("compiler/testData/codegen/box/callableReference/kt21014.kt");
+        }
+
+        @TestMetadata("kt21092a.kt")
+        public void testKt21092a() throws Exception {
+            runTest("compiler/testData/codegen/box/callableReference/kt21092a.kt");
+        }
+
+        @TestMetadata("kt21092b.kt")
+        public void testKt21092b() throws Exception {
+            runTest("compiler/testData/codegen/box/callableReference/kt21092b.kt");
         }
 
         @TestMetadata("kt37604.kt")
@@ -16310,6 +16335,16 @@ public class FirBlackBoxCodegenTestGenerated extends AbstractFirBlackBoxCodegenT
                 runTest("compiler/testData/codegen/box/javaInterop/notNullAssertions/kt18911.kt");
             }
 
+            @TestMetadata("kt24258.kt")
+            public void testKt24258() throws Exception {
+                runTest("compiler/testData/codegen/box/javaInterop/notNullAssertions/kt24258.kt");
+            }
+
+            @TestMetadata("kt24258nn.kt")
+            public void testKt24258nn() throws Exception {
+                runTest("compiler/testData/codegen/box/javaInterop/notNullAssertions/kt24258nn.kt");
+            }
+
             @TestMetadata("localEntities.kt")
             public void testLocalEntities() throws Exception {
                 runTest("compiler/testData/codegen/box/javaInterop/notNullAssertions/localEntities.kt");
@@ -17681,6 +17716,11 @@ public class FirBlackBoxCodegenTestGenerated extends AbstractFirBlackBoxCodegenT
         @TestMetadata("functionWithDefault.kt")
         public void testFunctionWithDefault() throws Exception {
             runTest("compiler/testData/codegen/box/jvmName/functionWithDefault.kt");
+        }
+
+        @TestMetadata("kt23974.kt")
+        public void testKt23974() throws Exception {
+            runTest("compiler/testData/codegen/box/jvmName/kt23974.kt");
         }
 
         @TestMetadata("loadJvmName.kt")
@@ -19864,6 +19904,11 @@ public class FirBlackBoxCodegenTestGenerated extends AbstractFirBlackBoxCodegenT
             runTest("compiler/testData/codegen/box/objects/simpleObject.kt");
         }
 
+        @TestMetadata("substitutionFunctionFromSuper.kt")
+        public void testSubstitutionFunctionFromSuper() throws Exception {
+            runTest("compiler/testData/codegen/box/objects/substitutionFunctionFromSuper.kt");
+        }
+
         @TestMetadata("thisInConstructor.kt")
         public void testThisInConstructor() throws Exception {
             runTest("compiler/testData/codegen/box/objects/thisInConstructor.kt");
@@ -19877,6 +19922,11 @@ public class FirBlackBoxCodegenTestGenerated extends AbstractFirBlackBoxCodegenT
         @TestMetadata("useAnonymousObjectAsIterator.kt")
         public void testUseAnonymousObjectAsIterator() throws Exception {
             runTest("compiler/testData/codegen/box/objects/useAnonymousObjectAsIterator.kt");
+        }
+
+        @TestMetadata("useAnonymousObjectFunction.kt")
+        public void testUseAnonymousObjectFunction() throws Exception {
+            runTest("compiler/testData/codegen/box/objects/useAnonymousObjectFunction.kt");
         }
 
         @TestMetadata("useImportedMember.kt")
