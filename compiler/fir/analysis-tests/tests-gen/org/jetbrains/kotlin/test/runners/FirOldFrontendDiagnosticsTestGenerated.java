@@ -6958,12 +6958,6 @@ public class FirOldFrontendDiagnosticsTestGenerated extends AbstractFirDiagnosti
             }
 
             @Test
-            @TestMetadata("kt37796.kt")
-            public void testKt37796() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/delegatedProperty/kt37796.kt");
-            }
-
-            @Test
             @TestMetadata("kt4640.kt")
             public void testKt4640() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/delegatedProperty/kt4640.kt");
@@ -12424,6 +12418,12 @@ public class FirOldFrontendDiagnosticsTestGenerated extends AbstractFirDiagnosti
                 @TestMetadata("capturedTypeWithTypeVariableSubtyping.kt")
                 public void testCapturedTypeWithTypeVariableSubtyping() throws Exception {
                     runTest("compiler/testData/diagnostics/tests/inference/capturedTypes/capturedTypeWithTypeVariableSubtyping.kt");
+                }
+
+                @Test
+                @TestMetadata("capturedTypesSubstitutionIntoAbbreviation.kt")
+                public void testCapturedTypesSubstitutionIntoAbbreviation() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/inference/capturedTypes/capturedTypesSubstitutionIntoAbbreviation.kt");
                 }
 
                 @Test
