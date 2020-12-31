@@ -9957,6 +9957,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
     @TestDataPath("$PROJECT_ROOT")
     @RunWith(JUnit3RunnerWithInners.class)
     public static class DelegatedProperty extends AbstractLightAnalysisModeTest {
+        @TestMetadata("delegatedPropertyInEnum.kt")
+        public void ignoreDelegatedPropertyInEnum() throws Exception {
+            runTest("compiler/testData/codegen/box/delegatedProperty/delegatedPropertyInEnum.kt");
+        }
+
         @TestMetadata("genericDelegateUncheckedCast2.kt")
         public void ignoreGenericDelegateUncheckedCast2() throws Exception {
             runTest("compiler/testData/codegen/box/delegatedProperty/genericDelegateUncheckedCast2.kt");
@@ -11175,6 +11180,21 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
         @TestMetadata("inclassobj.kt")
         public void testInclassobj() throws Exception {
             runTest("compiler/testData/codegen/box/enum/inclassobj.kt");
+        }
+
+        @TestMetadata("initEntriesInCompanionObject.kt")
+        public void testInitEntriesInCompanionObject() throws Exception {
+            runTest("compiler/testData/codegen/box/enum/initEntriesInCompanionObject.kt");
+        }
+
+        @TestMetadata("initEntriesInValueOf.kt")
+        public void testInitEntriesInValueOf() throws Exception {
+            runTest("compiler/testData/codegen/box/enum/initEntriesInValueOf.kt");
+        }
+
+        @TestMetadata("initEnumAfterObjectAccess.kt")
+        public void testInitEnumAfterObjectAccess() throws Exception {
+            runTest("compiler/testData/codegen/box/enum/initEnumAfterObjectAccess.kt");
         }
 
         @TestMetadata("inner.kt")
@@ -13995,6 +14015,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
         @TestMetadata("jvmStaticVarInInlineClassCompanion.kt")
         public void testJvmStaticVarInInlineClassCompanion() throws Exception {
             runTest("compiler/testData/codegen/box/inlineClasses/jvmStaticVarInInlineClassCompanion.kt");
+        }
+
+        @TestMetadata("kclassInAnnotation.kt")
+        public void testKclassInAnnotation() throws Exception {
+            runTest("compiler/testData/codegen/box/inlineClasses/kclassInAnnotation.kt");
         }
 
         @TestMetadata("kt25246.kt")
@@ -30275,6 +30300,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
     @TestDataPath("$PROJECT_ROOT")
     @RunWith(JUnit3RunnerWithInners.class)
     public static class UnsignedTypes extends AbstractLightAnalysisModeTest {
+        @TestMetadata("kt30402.kt")
+        public void ignoreKt30402() throws Exception {
+            runTest("compiler/testData/codegen/box/unsignedTypes/kt30402.kt");
+        }
+
         private void runTest(String testDataFilePath) throws Exception {
             KotlinTestUtils.runTest(this::doTest, TargetBackend.JVM, testDataFilePath);
         }

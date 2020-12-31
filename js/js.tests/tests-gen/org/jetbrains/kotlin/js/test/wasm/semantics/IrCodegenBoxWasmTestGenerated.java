@@ -1631,11 +1631,6 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
                     runTest("compiler/testData/codegen/box/callableReference/function/local/constructorWithInitializer.kt");
                 }
 
-                @TestMetadata("enumExtendsTrait.kt")
-                public void testEnumExtendsTrait() throws Exception {
-                    runTest("compiler/testData/codegen/box/callableReference/function/local/enumExtendsTrait.kt");
-                }
-
                 @TestMetadata("extension.kt")
                 public void testExtension() throws Exception {
                     runTest("compiler/testData/codegen/box/callableReference/function/local/extension.kt");
@@ -4651,6 +4646,21 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
             runTest("compiler/testData/codegen/box/enum/inclassobj.kt");
         }
 
+        @TestMetadata("initEntriesInCompanionObject.kt")
+        public void testInitEntriesInCompanionObject() throws Exception {
+            runTest("compiler/testData/codegen/box/enum/initEntriesInCompanionObject.kt");
+        }
+
+        @TestMetadata("initEntriesInValueOf.kt")
+        public void testInitEntriesInValueOf() throws Exception {
+            runTest("compiler/testData/codegen/box/enum/initEntriesInValueOf.kt");
+        }
+
+        @TestMetadata("initEnumAfterObjectAccess.kt")
+        public void testInitEnumAfterObjectAccess() throws Exception {
+            runTest("compiler/testData/codegen/box/enum/initEnumAfterObjectAccess.kt");
+        }
+
         @TestMetadata("inner.kt")
         public void testInner() throws Exception {
             runTest("compiler/testData/codegen/box/enum/inner.kt");
@@ -5200,46 +5210,6 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
         @TestMetadata("basicFunInterface.kt")
         public void testBasicFunInterface() throws Exception {
             runTest("compiler/testData/codegen/box/funInterface/basicFunInterface.kt");
-        }
-
-        @TestMetadata("basicFunInterfaceConversion.kt")
-        public void testBasicFunInterfaceConversion() throws Exception {
-            runTest("compiler/testData/codegen/box/funInterface/basicFunInterfaceConversion.kt");
-        }
-
-        @TestMetadata("funConversionInVararg.kt")
-        public void testFunConversionInVararg() throws Exception {
-            runTest("compiler/testData/codegen/box/funInterface/funConversionInVararg.kt");
-        }
-
-        @TestMetadata("noOptimizedCallableReferences.kt")
-        public void testNoOptimizedCallableReferences() throws Exception {
-            runTest("compiler/testData/codegen/box/funInterface/noOptimizedCallableReferences.kt");
-        }
-
-        @TestMetadata("partialSam.kt")
-        public void testPartialSam() throws Exception {
-            runTest("compiler/testData/codegen/box/funInterface/partialSam.kt");
-        }
-
-        @TestMetadata("primitiveConversions.kt")
-        public void testPrimitiveConversions() throws Exception {
-            runTest("compiler/testData/codegen/box/funInterface/primitiveConversions.kt");
-        }
-
-        @TestMetadata("receiverEvaluatedOnce.kt")
-        public void testReceiverEvaluatedOnce() throws Exception {
-            runTest("compiler/testData/codegen/box/funInterface/receiverEvaluatedOnce.kt");
-        }
-
-        @TestMetadata("samConstructorExplicitInvocation.kt")
-        public void testSamConstructorExplicitInvocation() throws Exception {
-            runTest("compiler/testData/codegen/box/funInterface/samConstructorExplicitInvocation.kt");
-        }
-
-        @TestMetadata("samConversionToGenericInterfaceInGenericFun.kt")
-        public void testSamConversionToGenericInterfaceInGenericFun() throws Exception {
-            runTest("compiler/testData/codegen/box/funInterface/samConversionToGenericInterfaceInGenericFun.kt");
         }
 
         @TestMetadata("compiler/testData/codegen/box/funInterface/equality")
@@ -7546,41 +7516,6 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
 
                 public void testAllFilesPresentInFunInterface() throws Exception {
                     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/inlineClasses/unboxGenericParameter/funInterface"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
-                }
-
-                @TestMetadata("any.kt")
-                public void testAny() throws Exception {
-                    runTest("compiler/testData/codegen/box/inlineClasses/unboxGenericParameter/funInterface/any.kt");
-                }
-
-                @TestMetadata("anyN.kt")
-                public void testAnyN() throws Exception {
-                    runTest("compiler/testData/codegen/box/inlineClasses/unboxGenericParameter/funInterface/anyN.kt");
-                }
-
-                @TestMetadata("iface.kt")
-                public void testIface() throws Exception {
-                    runTest("compiler/testData/codegen/box/inlineClasses/unboxGenericParameter/funInterface/iface.kt");
-                }
-
-                @TestMetadata("ifaceChild.kt")
-                public void testIfaceChild() throws Exception {
-                    runTest("compiler/testData/codegen/box/inlineClasses/unboxGenericParameter/funInterface/ifaceChild.kt");
-                }
-
-                @TestMetadata("primitive.kt")
-                public void testPrimitive() throws Exception {
-                    runTest("compiler/testData/codegen/box/inlineClasses/unboxGenericParameter/funInterface/primitive.kt");
-                }
-
-                @TestMetadata("result.kt")
-                public void testResult() throws Exception {
-                    runTest("compiler/testData/codegen/box/inlineClasses/unboxGenericParameter/funInterface/result.kt");
-                }
-
-                @TestMetadata("string.kt")
-                public void testString() throws Exception {
-                    runTest("compiler/testData/codegen/box/inlineClasses/unboxGenericParameter/funInterface/string.kt");
                 }
             }
 
@@ -12800,11 +12735,6 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
             runTest("compiler/testData/codegen/box/regressions/kt39088.kt");
         }
 
-        @TestMetadata("kt4142.kt")
-        public void testKt4142() throws Exception {
-            runTest("compiler/testData/codegen/box/regressions/kt4142.kt");
-        }
-
         @TestMetadata("kt4281.kt")
         public void testKt4281() throws Exception {
             runTest("compiler/testData/codegen/box/regressions/kt4281.kt");
@@ -14440,6 +14370,11 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
         @TestMetadata("iterateOverListOfBoxedUnsignedValues.kt")
         public void testIterateOverListOfBoxedUnsignedValues() throws Exception {
             runTest("compiler/testData/codegen/box/unsignedTypes/iterateOverListOfBoxedUnsignedValues.kt");
+        }
+
+        @TestMetadata("kt30402.kt")
+        public void testKt30402() throws Exception {
+            runTest("compiler/testData/codegen/box/unsignedTypes/kt30402.kt");
         }
 
         @TestMetadata("kt43286.kt")
