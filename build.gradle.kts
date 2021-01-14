@@ -195,6 +195,7 @@ val intellijUltimateEnabled by extra(project.kotlinBuildProperties.intellijUltim
 val effectSystemEnabled by extra(project.getBooleanProperty("kotlin.compiler.effectSystemEnabled") ?: false)
 val newInferenceEnabled by extra(project.getBooleanProperty("kotlin.compiler.newInferenceEnabled") ?: false)
 val useJvmIrBackend by extra(project.kotlinBuildProperties.useIR)
+val useJvmFir by extra(project.kotlinBuildProperties.useFir)
 
 val intellijSeparateSdks = project.getBooleanProperty("intellijSeparateSdks") ?: false
 
@@ -319,6 +320,23 @@ extra["compilerModulesForJps"] = listOf(
     ":core:util.runtime",
     ":compiler:compiler.version"
 )
+
+// TODO: fix remaining warnings and remove this property.
+extra["tasksWithWarnings"] = listOf(
+    ":kotlin-stdlib:compileTestKotlin",
+    ":kotlin-stdlib-jdk7:compileTestKotlin",
+    ":kotlin-stdlib-jdk8:compileTestKotlin",
+    ":compiler:frontend:compileKotlin",
+    ":compiler:fir:tree:compileKotlin",
+    ":compiler:fir:resolve:compileKotlin",
+    ":compiler:fir:checkers:compileKotlin",
+    ":compiler:fir:java:compileKotlin",
+    ":plugins:uast-kotlin:compileKotlin",
+    ":plugins:uast-kotlin:compileTestKotlin",
+    ":plugins:uast-kotlin-idea:compileKotlin"
+)
+
+val tasksWithWarnings: List<String> by extra
 
 val coreLibProjects = listOfNotNull(
     ":kotlin-stdlib",
@@ -446,6 +464,25 @@ allprojects {
             if (useJvmIrBackend) {
                 useIR = true
             }
+
+            if (useJvmFir) {
+                freeCompilerArgs += "-Xuse-fir"
+            }
+        }
+    }
+
+    if (!kotlinBuildProperties.isInJpsBuildIdeaSync) {
+        // For compiler and stdlib, allWarningsAsErrors is configured in the corresponding "root" projects
+        // (compiler/build.gradle.kts and libraries/commonConfiguration.gradle).
+        val projectsWithWarningsAsErrors = listOf("core", "plugins").map { File(it).absoluteFile }
+        if (projectsWithWarningsAsErrors.any(projectDir::startsWith)) {
+            tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile> {
+                if (path !in tasksWithWarnings) {
+                    kotlinOptions {
+                        allWarningsAsErrors = true
+                    }
+                }
+            }
         }
     }
 
@@ -551,10 +588,11 @@ gradle.taskGraph.whenReady {
 
     val proguardMessage = "proguard is ${kotlinBuildProperties.proguard.toOnOff()}"
     val jarCompressionMessage = "jar compression is ${kotlinBuildProperties.jarCompression.toOnOff()}"
-                val profileMessage = "$profile build profile is active ($proguardMessage, $jarCompressionMessage). " +
-            "Use -Pteamcity=<true|false> to reproduce CI/local build"
 
-    logger.warn("\n\n$profileMessage")
+    logger.warn(
+        "$profile build profile is active ($proguardMessage, $jarCompressionMessage). " +
+                "Use -Pteamcity=<true|false> to reproduce CI/local build"
+    )
 
     allTasks.filterIsInstance<org.gradle.jvm.tasks.Jar>().forEach { task ->
         task.entryCompression = if (kotlinBuildProperties.jarCompression)
