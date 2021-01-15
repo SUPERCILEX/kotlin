@@ -22,11 +22,14 @@ KtFirClassOrObjectSymbol:
   classIdIfNonLocal: Anno1
   classKind: ANNOTATION_CLASS
   companionObject: null
+  isData: false
+  isExternal: false
+  isFun: false
+  isInline: false
   isInner: false
   modality: FINAL
   name: Anno1
   origin: SOURCE
-  primaryConstructor: KtFirConstructorSymbol(<constructor>)
   superTypes: [[] kotlin/Annotation]
   symbolKind: TOP_LEVEL
   typeParameters: []
@@ -37,11 +40,14 @@ KtFirClassOrObjectSymbol:
   classIdIfNonLocal: Anno2
   classKind: ANNOTATION_CLASS
   companionObject: null
+  isData: false
+  isExternal: false
+  isFun: false
+  isInline: false
   isInner: false
   modality: FINAL
   name: Anno2
   origin: SOURCE
-  primaryConstructor: KtFirConstructorSymbol(<constructor>)
   superTypes: [[] kotlin/Annotation]
   symbolKind: TOP_LEVEL
   typeParameters: []
@@ -52,11 +58,14 @@ KtFirClassOrObjectSymbol:
   classIdIfNonLocal: Anno3
   classKind: ANNOTATION_CLASS
   companionObject: null
+  isData: false
+  isExternal: false
+  isFun: false
+  isInline: false
   isInner: false
   modality: FINAL
   name: Anno3
   origin: SOURCE
-  primaryConstructor: KtFirConstructorSymbol(<constructor>)
   superTypes: [[] kotlin/Annotation]
   symbolKind: TOP_LEVEL
   typeParameters: []
@@ -67,11 +76,14 @@ KtFirClassOrObjectSymbol:
   classIdIfNonLocal: Anno4
   classKind: ANNOTATION_CLASS
   companionObject: null
+  isData: false
+  isExternal: false
+  isFun: false
+  isInline: false
   isInner: false
   modality: FINAL
   name: Anno4
   origin: SOURCE
-  primaryConstructor: KtFirConstructorSymbol(<constructor>)
   superTypes: [[] kotlin/Annotation]
   symbolKind: TOP_LEVEL
   typeParameters: []
@@ -82,11 +94,14 @@ KtFirClassOrObjectSymbol:
   classIdIfNonLocal: I
   classKind: INTERFACE
   companionObject: null
+  isData: false
+  isExternal: false
+  isFun: false
+  isInline: false
   isInner: false
   modality: ABSTRACT
   name: I
   origin: SOURCE
-  primaryConstructor: null
   superTypes: [[] kotlin/Any]
   symbolKind: TOP_LEVEL
   typeParameters: []
@@ -105,6 +120,7 @@ KtFirFunctionSymbol:
   annotatedType: [Anno3()] I
   annotations: []
   callableIdIfNonLocal: X.f
+  dispatchType: X
   isExtension: false
   isExternal: false
   isInline: false
@@ -124,6 +140,7 @@ KtFirKotlinPropertySymbol:
   annotatedType: [Anno4()] I
   annotations: []
   callableIdIfNonLocal: X.x
+  dispatchType: X
   getter: KtFirPropertyGetterSymbol(<getter>)
   hasBackingField: true
   hasGetter: true
@@ -147,11 +164,14 @@ KtFirClassOrObjectSymbol:
   classIdIfNonLocal: X
   classKind: CLASS
   companionObject: null
+  isData: false
+  isExternal: false
+  isFun: false
+  isInline: false
   isInner: false
   modality: FINAL
   name: X
   origin: SOURCE
-  primaryConstructor: KtFirConstructorSymbol(<constructor>)
   superTypes: [[Anno1()] I]
   symbolKind: TOP_LEVEL
   typeParameters: []

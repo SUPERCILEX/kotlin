@@ -8,6 +8,7 @@ KtFirFunctionSymbol:
   annotatedType: [] kotlin/Int
   annotations: []
   callableIdIfNonLocal: A.x
+  dispatchType: A
   isExtension: false
   isExternal: false
   isInline: false
@@ -27,6 +28,7 @@ KtFirFunctionSymbol:
   annotatedType: [] kotlin/Unit
   annotations: []
   callableIdIfNonLocal: A.y
+  dispatchType: A
   isExtension: false
   isExternal: false
   isInline: false
@@ -47,11 +49,14 @@ KtFirClassOrObjectSymbol:
   classIdIfNonLocal: A
   classKind: CLASS
   companionObject: null
+  isData: false
+  isExternal: false
+  isFun: false
+  isInline: false
   isInner: false
   modality: FINAL
   name: A
   origin: SOURCE
-  primaryConstructor: KtFirConstructorSymbol(<constructor>)
   superTypes: [[] kotlin/Any]
   symbolKind: TOP_LEVEL
   typeParameters: []

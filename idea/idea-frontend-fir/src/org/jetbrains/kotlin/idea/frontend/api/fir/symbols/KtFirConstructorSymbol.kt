@@ -26,6 +26,7 @@ import org.jetbrains.kotlin.idea.frontend.api.symbols.markers.KtTypeAndAnnotatio
 import org.jetbrains.kotlin.idea.frontend.api.symbols.pointers.CanNotCreateSymbolPointerForLocalLibraryDeclarationException
 import org.jetbrains.kotlin.idea.frontend.api.symbols.pointers.KtPsiBasedSymbolPointer
 import org.jetbrains.kotlin.idea.frontend.api.symbols.pointers.KtSymbolPointer
+import org.jetbrains.kotlin.idea.frontend.api.types.KtType
 import org.jetbrains.kotlin.idea.frontend.api.withValidityAssertion
 import org.jetbrains.kotlin.name.ClassId
 
@@ -58,6 +59,16 @@ internal class KtFirConstructorSymbol(
         get() = firRef.withFir { fir -> fir.containingClass()?.classId /* TODO check if local */ }
 
     override val isPrimary: Boolean get() = firRef.withFir { it.isPrimary }
+
+    override val typeParameters by firRef.withFirAndCache { fir ->
+        fir.typeParameters.map { typeParameter ->
+            builder.buildTypeParameterSymbol(typeParameter.symbol.fir)
+        }
+    }
+
+    override val dispatchType: KtType? by cached {
+        firRef.dispatchReceiverTypeAndAnnotations(builder)
+    }
 
     override fun createPointer(): KtSymbolPointer<KtConstructorSymbol> = withValidityAssertion {
         KtPsiBasedSymbolPointer.createForSymbolFromSource(this)?.let { return it }

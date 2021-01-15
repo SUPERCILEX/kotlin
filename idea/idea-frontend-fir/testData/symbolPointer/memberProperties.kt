@@ -8,6 +8,7 @@ KtFirKotlinPropertySymbol:
   annotatedType: [] kotlin/Int
   annotations: []
   callableIdIfNonLocal: A.x
+  dispatchType: A
   getter: KtFirPropertyGetterSymbol(<getter>)
   hasBackingField: true
   hasGetter: true
@@ -29,6 +30,7 @@ KtFirKotlinPropertySymbol:
 KtFirPropertyGetterSymbol:
   annotatedType: [] kotlin/Int
   annotations: []
+  dispatchType: null
   hasBody: true
   isDefault: false
   isInline: false
@@ -42,6 +44,7 @@ KtFirKotlinPropertySymbol:
   annotatedType: [] kotlin/Int
   annotations: []
   callableIdIfNonLocal: A.y
+  dispatchType: A
   getter: KtFirPropertyGetterSymbol(<getter>)
   hasBackingField: false
   hasGetter: true
@@ -65,11 +68,14 @@ KtFirClassOrObjectSymbol:
   classIdIfNonLocal: A
   classKind: CLASS
   companionObject: null
+  isData: false
+  isExternal: false
+  isFun: false
+  isInline: false
   isInner: false
   modality: FINAL
   name: A
   origin: SOURCE
-  primaryConstructor: KtFirConstructorSymbol(<constructor>)
   superTypes: [[] kotlin/Any]
   symbolKind: TOP_LEVEL
   typeParameters: []

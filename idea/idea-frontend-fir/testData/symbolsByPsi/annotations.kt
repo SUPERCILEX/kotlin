@@ -33,9 +33,11 @@ KtFirConstructorSymbol:
   annotatedType: [] Anno
   annotations: []
   containingClassIdIfNonLocal: Anno
+  dispatchType: null
   isPrimary: true
   origin: SOURCE
   symbolKind: MEMBER
+  typeParameters: []
   valueParameters: Could not render due to java.lang.ClassCastException: org.jetbrains.kotlin.idea.frontend.api.fir.symbols.KtFirFunctionValueParameterSymbol cannot be cast to org.jetbrains.kotlin.idea.frontend.api.fir.symbols.KtFirConstructorValueParameterSymbol
   visibility: PUBLIC
 
@@ -44,11 +46,14 @@ KtFirClassOrObjectSymbol:
   classIdIfNonLocal: Anno
   classKind: ANNOTATION_CLASS
   companionObject: null
+  isData: false
+  isExternal: false
+  isFun: false
+  isInline: false
   isInner: false
   modality: FINAL
   name: Anno
   origin: SOURCE
-  primaryConstructor: KtFirConstructorSymbol(<constructor>)
   superTypes: [[] kotlin/Annotation]
   symbolKind: TOP_LEVEL
   typeParameters: []
@@ -58,6 +63,7 @@ KtFirFunctionSymbol:
   annotatedType: [] kotlin/Unit
   annotations: [Anno(param1 = funparam, param2 = 3)]
   callableIdIfNonLocal: X.x
+  dispatchType: X
   isExtension: false
   isExternal: false
   isInline: false
@@ -78,11 +84,14 @@ KtFirClassOrObjectSymbol:
   classIdIfNonLocal: X
   classKind: CLASS
   companionObject: null
+  isData: false
+  isExternal: false
+  isFun: false
+  isInline: false
   isInner: false
   modality: FINAL
   name: X
   origin: SOURCE
-  primaryConstructor: KtFirConstructorSymbol(<constructor>)
   superTypes: [[] kotlin/Any]
   symbolKind: TOP_LEVEL
   typeParameters: []

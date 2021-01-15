@@ -11,6 +11,7 @@ KtFirFunctionSymbol:
   annotatedType: [] kotlin/Int
   annotations: []
   callableIdIfNonLocal: test
+  dispatchType: null
   isExtension: false
   isExternal: false
   isInline: false
@@ -30,6 +31,7 @@ KtFirKotlinPropertySymbol:
   annotatedType: [] kotlin/Int
   annotations: []
   callableIdIfNonLocal: testVal
+  dispatchType: null
   getter: KtFirPropertyGetterSymbol(<getter>)
   hasBackingField: true
   hasGetter: true
@@ -57,11 +59,14 @@ KtFirClassOrObjectSymbol:
   classIdIfNonLocal: C
   classKind: CLASS
   companionObject: null
+  isData: false
+  isExternal: false
+  isFun: false
+  isInline: false
   isInner: false
   modality: FINAL
   name: C
   origin: SOURCE
-  primaryConstructor: KtFirConstructorSymbol(<constructor>)
   superTypes: [[] kotlin/Any]
   symbolKind: TOP_LEVEL
   typeParameters: []
@@ -72,11 +77,14 @@ KtFirClassOrObjectSymbol:
   classIdIfNonLocal: I
   classKind: INTERFACE
   companionObject: null
+  isData: false
+  isExternal: false
+  isFun: false
+  isInline: false
   isInner: false
   modality: ABSTRACT
   name: I
   origin: SOURCE
-  primaryConstructor: null
   superTypes: [[] kotlin/Any]
   symbolKind: TOP_LEVEL
   typeParameters: []
