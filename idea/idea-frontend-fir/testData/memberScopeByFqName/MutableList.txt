@@ -3,6 +3,7 @@ class: kotlin/collections/MutableList
 // SYMBOLS:
 KtFirFunctionSymbol:
   annotatedType: [] kotlin/Boolean
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.add
   dispatchType: kotlin/collections/MutableList<E>
@@ -23,6 +24,7 @@ KtFirFunctionSymbol:
 
 KtFirFunctionSymbol:
   annotatedType: [] kotlin/Unit
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.add
   dispatchType: kotlin/collections/MutableList<E>
@@ -43,6 +45,7 @@ KtFirFunctionSymbol:
 
 KtFirFunctionSymbol:
   annotatedType: [] kotlin/Boolean
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.addAll
   dispatchType: kotlin/collections/MutableList<E>
@@ -63,6 +66,7 @@ KtFirFunctionSymbol:
 
 KtFirFunctionSymbol:
   annotatedType: [] kotlin/Boolean
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.addAll
   dispatchType: kotlin/collections/MutableList<E>
@@ -83,6 +87,7 @@ KtFirFunctionSymbol:
 
 KtFirFunctionSymbol:
   annotatedType: [] kotlin/Unit
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.clear
   dispatchType: kotlin/collections/MutableList<E>
@@ -103,6 +108,7 @@ KtFirFunctionSymbol:
 
 KtFirFunctionSymbol:
   annotatedType: [] kotlin/collections/MutableListIterator<E>
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.listIterator
   dispatchType: kotlin/collections/MutableList<E>
@@ -123,6 +129,7 @@ KtFirFunctionSymbol:
 
 KtFirFunctionSymbol:
   annotatedType: [] kotlin/collections/MutableListIterator<E>
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.listIterator
   dispatchType: kotlin/collections/MutableList<E>
@@ -143,6 +150,7 @@ KtFirFunctionSymbol:
 
 KtFirFunctionSymbol:
   annotatedType: [] kotlin/Boolean
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.remove
   dispatchType: kotlin/collections/MutableList<E>
@@ -163,6 +171,7 @@ KtFirFunctionSymbol:
 
 KtFirFunctionSymbol:
   annotatedType: [] kotlin/Boolean
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.removeAll
   dispatchType: kotlin/collections/MutableList<E>
@@ -183,6 +192,7 @@ KtFirFunctionSymbol:
 
 KtFirFunctionSymbol:
   annotatedType: [] E
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.removeAt
   dispatchType: kotlin/collections/MutableList<E>
@@ -203,6 +213,7 @@ KtFirFunctionSymbol:
 
 KtFirFunctionSymbol:
   annotatedType: [] kotlin/Boolean
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.retainAll
   dispatchType: kotlin/collections/MutableList<E>
@@ -223,6 +234,7 @@ KtFirFunctionSymbol:
 
 KtFirFunctionSymbol:
   annotatedType: [] E
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.set
   dispatchType: kotlin/collections/MutableList<E>
@@ -243,6 +255,7 @@ KtFirFunctionSymbol:
 
 KtFirFunctionSymbol:
   annotatedType: [] kotlin/collections/MutableList<E>
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.subList
   dispatchType: kotlin/collections/MutableList<E>
@@ -263,6 +276,7 @@ KtFirFunctionSymbol:
 
 KtFirFunctionSymbol:
   annotatedType: [] kotlin/Boolean
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.contains
   dispatchType: kotlin/collections/MutableList<E>
@@ -274,7 +288,7 @@ KtFirFunctionSymbol:
   isSuspend: false
   modality: ABSTRACT
   name: contains
-  origin: LIBRARY
+  origin: INTERSECTION_OVERRIDE
   receiverType: null
   symbolKind: MEMBER
   typeParameters: []
@@ -283,6 +297,7 @@ KtFirFunctionSymbol:
 
 KtFirFunctionSymbol:
   annotatedType: [] kotlin/Boolean
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.containsAll
   dispatchType: kotlin/collections/MutableList<E>
@@ -294,7 +309,7 @@ KtFirFunctionSymbol:
   isSuspend: false
   modality: ABSTRACT
   name: containsAll
-  origin: LIBRARY
+  origin: INTERSECTION_OVERRIDE
   receiverType: null
   symbolKind: MEMBER
   typeParameters: []
@@ -303,6 +318,7 @@ KtFirFunctionSymbol:
 
 KtFirFunctionSymbol:
   annotatedType: [] E
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.get
   dispatchType: kotlin/collections/MutableList<E>
@@ -323,6 +339,7 @@ KtFirFunctionSymbol:
 
 KtFirFunctionSymbol:
   annotatedType: [] kotlin/Int
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.indexOf
   dispatchType: kotlin/collections/MutableList<E>
@@ -343,6 +360,7 @@ KtFirFunctionSymbol:
 
 KtFirFunctionSymbol:
   annotatedType: [] kotlin/Boolean
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.isEmpty
   dispatchType: kotlin/collections/MutableList<E>
@@ -354,7 +372,7 @@ KtFirFunctionSymbol:
   isSuspend: false
   modality: ABSTRACT
   name: isEmpty
-  origin: LIBRARY
+  origin: INTERSECTION_OVERRIDE
   receiverType: null
   symbolKind: MEMBER
   typeParameters: []
@@ -363,6 +381,7 @@ KtFirFunctionSymbol:
 
 KtFirFunctionSymbol:
   annotatedType: [] kotlin/collections/MutableIterator<E>
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.iterator
   dispatchType: kotlin/collections/MutableList<E>
@@ -374,7 +393,7 @@ KtFirFunctionSymbol:
   isSuspend: false
   modality: ABSTRACT
   name: iterator
-  origin: LIBRARY
+  origin: INTERSECTION_OVERRIDE
   receiverType: null
   symbolKind: MEMBER
   typeParameters: []
@@ -383,6 +402,7 @@ KtFirFunctionSymbol:
 
 KtFirFunctionSymbol:
   annotatedType: [] kotlin/Int
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.lastIndexOf
   dispatchType: kotlin/collections/MutableList<E>
@@ -403,6 +423,7 @@ KtFirFunctionSymbol:
 
 KtFirKotlinPropertySymbol:
   annotatedType: [] kotlin/Int
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.List.size
   dispatchType: kotlin/collections/MutableList<E>
@@ -418,7 +439,7 @@ KtFirKotlinPropertySymbol:
   isVal: true
   modality: ABSTRACT
   name: size
-  origin: LIBRARY
+  origin: INTERSECTION_OVERRIDE
   receiverType: null
   setter: null
   symbolKind: MEMBER
@@ -426,6 +447,7 @@ KtFirKotlinPropertySymbol:
 
 KtFirFunctionSymbol:
   annotatedType: [] kotlin/Boolean
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.equals
   dispatchType: kotlin/collections/MutableList<E>
@@ -437,7 +459,7 @@ KtFirFunctionSymbol:
   isSuspend: false
   modality: OPEN
   name: equals
-  origin: LIBRARY
+  origin: INTERSECTION_OVERRIDE
   receiverType: null
   symbolKind: MEMBER
   typeParameters: []
@@ -446,6 +468,7 @@ KtFirFunctionSymbol:
 
 KtFirFunctionSymbol:
   annotatedType: [] kotlin/Int
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.hashCode
   dispatchType: kotlin/collections/MutableList<E>
@@ -457,7 +480,7 @@ KtFirFunctionSymbol:
   isSuspend: false
   modality: OPEN
   name: hashCode
-  origin: LIBRARY
+  origin: INTERSECTION_OVERRIDE
   receiverType: null
   symbolKind: MEMBER
   typeParameters: []
@@ -466,6 +489,7 @@ KtFirFunctionSymbol:
 
 KtFirFunctionSymbol:
   annotatedType: [] kotlin/String
+  annotationClassIds: []
   annotations: []
   callableIdIfNonLocal: kotlin.collections.MutableList.toString
   dispatchType: kotlin/collections/MutableList<E>
@@ -477,7 +501,7 @@ KtFirFunctionSymbol:
   isSuspend: false
   modality: OPEN
   name: toString
-  origin: LIBRARY
+  origin: INTERSECTION_OVERRIDE
   receiverType: null
   symbolKind: MEMBER
   typeParameters: []
