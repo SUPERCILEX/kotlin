@@ -1,3 +1,11 @@
+abstract class Base(val fn: () -> String)
+
+class Host {
+    companion object : Base(run { { Host.ok() } }) {
+        fun ok() = "OK"
+    }
+}
+
 enum class Test(val x: String, val closure1: () -> String) {
     FOO("O", run { { FOO.x } }) {
         override val y: String = "K"
@@ -7,8 +15,6 @@ enum class Test(val x: String, val closure1: () -> String) {
 
     abstract val y: String
     abstract val z: String
-
-    fun test() = closure1() + z
 }
 
-fun box() = Test.FOO.test()
+fun box() = Host.Companion.fn()
