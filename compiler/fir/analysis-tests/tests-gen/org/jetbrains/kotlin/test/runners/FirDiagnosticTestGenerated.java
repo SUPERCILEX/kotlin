@@ -39,6 +39,18 @@ public class FirDiagnosticTestGenerated extends AbstractFirDiagnosticTest {
         }
 
         @Test
+        @TestMetadata("bareTypes2.kt")
+        public void testBareTypes2() throws Exception {
+            runTest("compiler/fir/analysis-tests/testData/resolve/bareTypes2.kt");
+        }
+
+        @Test
+        @TestMetadata("bareTypesWithFlexibleArguments.kt")
+        public void testBareTypesWithFlexibleArguments() throws Exception {
+            runTest("compiler/fir/analysis-tests/testData/resolve/bareTypesWithFlexibleArguments.kt");
+        }
+
+        @Test
         @TestMetadata("cast.kt")
         public void testCast() throws Exception {
             runTest("compiler/fir/analysis-tests/testData/resolve/cast.kt");
@@ -2533,6 +2545,12 @@ public class FirDiagnosticTestGenerated extends AbstractFirDiagnosticTest {
             @TestMetadata("lambdaInElvis.kt")
             public void testLambdaInElvis() throws Exception {
                 runTest("compiler/fir/analysis-tests/testData/resolve/inference/lambdaInElvis.kt");
+            }
+
+            @Test
+            @TestMetadata("lambdasReturns.kt")
+            public void testLambdasReturns() throws Exception {
+                runTest("compiler/fir/analysis-tests/testData/resolve/inference/lambdasReturns.kt");
             }
 
             @Test
