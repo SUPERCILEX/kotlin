@@ -2075,6 +2075,12 @@ public class Fir2IrTextTestGenerated extends AbstractFir2IrTextTest {
         }
 
         @Test
+        @TestMetadata("AnnotationLoader.kt")
+        public void testAnnotationLoader() throws Exception {
+            runTest("compiler/testData/ir/irText/firProblems/AnnotationLoader.kt");
+        }
+
+        @Test
         @TestMetadata("candidateSymbol.kt")
         public void testCandidateSymbol() throws Exception {
             runTest("compiler/testData/ir/irText/firProblems/candidateSymbol.kt");
@@ -2174,6 +2180,12 @@ public class Fir2IrTextTestGenerated extends AbstractFir2IrTextTest {
         @TestMetadata("SignatureClash.kt")
         public void testSignatureClash() throws Exception {
             runTest("compiler/testData/ir/irText/firProblems/SignatureClash.kt");
+        }
+
+        @Test
+        @TestMetadata("SimpleTypeMarker.kt")
+        public void testSimpleTypeMarker() throws Exception {
+            runTest("compiler/testData/ir/irText/firProblems/SimpleTypeMarker.kt");
         }
 
         @Test
