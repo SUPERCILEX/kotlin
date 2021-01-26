@@ -14009,6 +14009,12 @@ public class DiagnosticTestGenerated extends AbstractDiagnosticTest {
                 }
 
                 @Test
+                @TestMetadata("kt44440.kt")
+                public void testKt44440() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/inference/regressions/kt44440.kt");
+                }
+
+                @Test
                 @TestMetadata("kt702.kt")
                 public void testKt702() throws Exception {
                     runTest("compiler/testData/diagnostics/tests/inference/regressions/kt702.kt");
@@ -14194,6 +14200,12 @@ public class DiagnosticTestGenerated extends AbstractDiagnosticTest {
                 @TestMetadata("substitutionIntoInnerClass.kt")
                 public void testSubstitutionIntoInnerClass() throws Exception {
                     runTest("compiler/testData/diagnostics/tests/inference/substitutions/substitutionIntoInnerClass.kt");
+                }
+
+                @Test
+                @TestMetadata("substitutionOfTypeEnhancement.kt")
+                public void testSubstitutionOfTypeEnhancement() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/inference/substitutions/substitutionOfTypeEnhancement.kt");
                 }
             }
 
@@ -20856,6 +20868,12 @@ public class DiagnosticTestGenerated extends AbstractDiagnosticTest {
                 @Test
                 public void testAllFilesPresentInTypeEnhancement() throws Exception {
                     KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/tests/platformTypes/typeEnhancement"), Pattern.compile("^(.*)\\.kts?$"), Pattern.compile("^(.+)\\.fir\\.kts?$"), true);
+                }
+
+                @Test
+                @TestMetadata("buildFlexibleEnhancement.kt")
+                public void testBuildFlexibleEnhancement() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/platformTypes/typeEnhancement/buildFlexibleEnhancement.kt");
                 }
 
                 @Test
