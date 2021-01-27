@@ -16,13 +16,13 @@ import org.jetbrains.kotlin.fir.expressions.impl.FirUnitExpression
 import org.jetbrains.kotlin.fir.references.FirReference
 import org.jetbrains.kotlin.fir.references.FirResolvedNamedReference
 import org.jetbrains.kotlin.fir.render
+import org.jetbrains.kotlin.fir.resolve.calls.FirSyntheticPropertiesScope
+import org.jetbrains.kotlin.fir.resolve.calls.SyntheticPropertySymbol
 import org.jetbrains.kotlin.fir.resolve.scope
 import org.jetbrains.kotlin.fir.scopes.FakeOverrideTypeCalculator
+import org.jetbrains.kotlin.fir.scopes.FirTypeScope
 import org.jetbrains.kotlin.fir.symbols.AbstractFirBasedSymbol
-import org.jetbrains.kotlin.fir.symbols.impl.FirAnonymousFunctionSymbol
-import org.jetbrains.kotlin.fir.symbols.impl.FirCallableSymbol
-import org.jetbrains.kotlin.fir.symbols.impl.FirFunctionSymbol
-import org.jetbrains.kotlin.fir.symbols.impl.FirPropertySymbol
+import org.jetbrains.kotlin.fir.symbols.impl.*
 import org.jetbrains.kotlin.fir.types.*
 import org.jetbrains.kotlin.fir.visitors.FirDefaultVisitor
 import org.jetbrains.kotlin.ir.IrElement
@@ -295,7 +295,7 @@ class Fir2IrImplicitCastInserter(
             return implicitCastOrExpression(value, castTypeRef)
         }
         val referencedSymbol = calleeReference.resolvedSymbol
-        if (referencedSymbol !is FirPropertySymbol && referencedSymbol !is FirFunctionSymbol) {
+        if (referencedSymbol !is FirPropertySymbol && referencedSymbol !is FirFunctionSymbol && referencedSymbol !is FirFieldSymbol) {
             return implicitCastOrExpression(value, castTypeRef)
         }
 
@@ -326,6 +326,9 @@ class Fir2IrImplicitCastInserter(
         referencedSymbol: AbstractFirBasedSymbol<*>, name: Name
     ): Boolean {
         val scope = scope(session, components.scopeSession, FakeOverrideTypeCalculator.Forced) ?: return false
+        if (referencedSymbol is SyntheticPropertySymbol) {
+            return doesContainReferencedSyntheticSymbolInScope(referencedSymbol, name, scope)
+        }
         var result = false
         val processor = { it: FirCallableSymbol<*> ->
             if (!result && it == referencedSymbol) {
@@ -333,9 +336,23 @@ class Fir2IrImplicitCastInserter(
             }
         }
         when (referencedSymbol) {
-            is FirPropertySymbol -> scope.processPropertiesByName(name, processor)
+            is FirPropertySymbol, is FirFieldSymbol -> scope.processPropertiesByName(name, processor)
             is FirFunctionSymbol -> scope.processFunctionsByName(name, processor)
         }
+        return result
+    }
+
+    private fun doesContainReferencedSyntheticSymbolInScope(
+        referencedSymbol: SyntheticPropertySymbol, name: Name, baseScope: FirTypeScope
+    ): Boolean {
+        val scope = FirSyntheticPropertiesScope(session, baseScope)
+        var result = false
+        val processor = { it: FirCallableSymbol<*> ->
+            if (!result && it.callableId == referencedSymbol.callableId) {
+                result = true
+            }
+        }
+        scope.processPropertiesByName(name, processor)
         return result
     }
 

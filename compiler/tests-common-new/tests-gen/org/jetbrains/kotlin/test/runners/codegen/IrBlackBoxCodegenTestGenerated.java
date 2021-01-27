@@ -13701,9 +13701,21 @@ public class IrBlackBoxCodegenTestGenerated extends AbstractIrBlackBoxCodegenTes
         }
 
         @Test
+        @TestMetadata("ConstValAccess.kt")
+        public void testConstValAccess() throws Exception {
+            runTest("compiler/testData/codegen/box/fir/ConstValAccess.kt");
+        }
+
+        @Test
         @TestMetadata("ExtensionAlias.kt")
         public void testExtensionAlias() throws Exception {
             runTest("compiler/testData/codegen/box/fir/ExtensionAlias.kt");
+        }
+
+        @Test
+        @TestMetadata("IrBuiltIns.kt")
+        public void testIrBuiltIns() throws Exception {
+            runTest("compiler/testData/codegen/box/fir/IrBuiltIns.kt");
         }
 
         @Test
