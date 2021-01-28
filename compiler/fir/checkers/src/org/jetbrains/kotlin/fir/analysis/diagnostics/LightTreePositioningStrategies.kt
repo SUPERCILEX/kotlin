@@ -247,6 +247,30 @@ object LightTreePositioningStrategies {
             return markElement(tree.operationReference(node) ?: node, startOffset, endOffset, tree, node)
         }
     }
+
+    val PARAMETER_DEFAULT_VALUE: LightTreePositioningStrategy = object : LightTreePositioningStrategy() {
+        override fun mark(
+            node: LighterASTNode,
+            startOffset: Int,
+            endOffset: Int,
+            tree: FlyweightCapableTreeStructure<LighterASTNode>
+        ): List<TextRange> {
+            val defaultValueElement = tree.defaultValue(node) ?: node
+            return markElement(defaultValueElement, startOffset, endOffset, tree, node)
+        }
+    }
+
+    val PARAMETER_VARARG_MODIFIER: LightTreePositioningStrategy = object : LightTreePositioningStrategy() {
+        override fun mark(
+            node: LighterASTNode,
+            startOffset: Int,
+            endOffset: Int,
+            tree: FlyweightCapableTreeStructure<LighterASTNode>
+        ): List<TextRange> {
+            val modifier = tree.modifierList(node)?.let { modifierList -> tree.findChildByType(modifierList, KtTokens.VARARG_KEYWORD) }
+            return markElement(modifier ?: node, startOffset, endOffset, tree, node)
+        }
+    }
 }
 
 fun FirSourceElement.hasValOrVar(): Boolean =
@@ -315,6 +339,19 @@ private fun FlyweightCapableTreeStructure<LighterASTNode>.receiverTypeReference(
         if (it.tokenType == KtTokens.COLON || it.tokenType == KtTokens.LPAR) return null
         it.tokenType == KtNodeTypes.TYPE_REFERENCE
     }
+}
+
+private fun FlyweightCapableTreeStructure<LighterASTNode>.defaultValue(node: LighterASTNode): LighterASTNode? {
+    val childrenRef = Ref<Array<LighterASTNode?>>()
+    getChildren(node, childrenRef)
+    // p : T = v
+    val children = childrenRef.get()?.reversed() ?: return null
+    for (child in children) {
+        if (child == null || child.tokenType == KtTokens.WHITE_SPACE) continue
+        if (child.tokenType == KtNodeTypes.TYPE_REFERENCE || child.tokenType == KtTokens.COLON) return null
+        return child
+    }
+    return null
 }
 
 fun FlyweightCapableTreeStructure<LighterASTNode>.findChildByType(node: LighterASTNode, type: IElementType): LighterASTNode? {
