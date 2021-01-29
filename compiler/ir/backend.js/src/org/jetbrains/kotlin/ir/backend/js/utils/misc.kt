@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.UNDEFINED_OFFSET
 import org.jetbrains.kotlin.ir.backend.js.JsIrBackendContext
 import org.jetbrains.kotlin.ir.backend.js.JsLoweredDeclarationOrigin
+import org.jetbrains.kotlin.ir.backend.js.export.isExported
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.impl.IrCallImpl
@@ -23,7 +24,7 @@ import org.jetbrains.kotlin.name.Name
 
 fun TODO(element: IrElement): Nothing = TODO(element::class.java.simpleName + " is not supported yet here")
 
-fun IrFunction.hasStableJsName(): Boolean {
+fun IrFunction.hasStableJsName(context: JsIrBackendContext?): Boolean {
     if (
         origin == JsLoweredDeclarationOrigin.BRIDGE_WITH_STABLE_NAME ||
         (this as? IrSimpleFunction)?.isMethodOfAny() == true // Handle names for special functions
@@ -51,7 +52,7 @@ fun IrFunction.hasStableJsName(): Boolean {
         else -> true
     }
 
-    return (isEffectivelyExternal() || getJsName() != null || isJsExport() || parentClassOrNull?.isJsExport() == true) && namedOrMissingGetter
+    return (isEffectivelyExternal() || getJsName() != null || isExported(context)) && namedOrMissingGetter
 }
 
 fun IrFunction.isEqualsInheritedFromAny() =

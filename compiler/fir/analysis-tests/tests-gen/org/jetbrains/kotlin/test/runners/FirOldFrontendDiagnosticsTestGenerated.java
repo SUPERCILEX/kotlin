@@ -14318,6 +14318,12 @@ public class FirOldFrontendDiagnosticsTestGenerated extends AbstractFirDiagnosti
             }
 
             @Test
+            @TestMetadata("approximateReturnedAnonymousObjects.kt")
+            public void testApproximateReturnedAnonymousObjects() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/inline/approximateReturnedAnonymousObjects.kt");
+            }
+
+            @Test
             @TestMetadata("assignment.kt")
             public void testAssignment() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/inline/assignment.kt");
@@ -24416,12 +24422,6 @@ public class FirOldFrontendDiagnosticsTestGenerated extends AbstractFirDiagnosti
             }
 
             @Test
-            @TestMetadata("NeverInterface.kt")
-            public void testNeverInterface() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/sealed/NeverInterface.kt");
-            }
-
-            @Test
             @TestMetadata("NeverObject.kt")
             public void testNeverObject() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/sealed/NeverObject.kt");
@@ -27253,12 +27253,6 @@ public class FirOldFrontendDiagnosticsTestGenerated extends AbstractFirDiagnosti
             @TestMetadata("noMultiplatformProjects.kt")
             public void testNoMultiplatformProjects() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/sourceCompatibility/noMultiplatformProjects.kt");
-            }
-
-            @Test
-            @TestMetadata("noTopLevelSealedInheritance.kt")
-            public void testNoTopLevelSealedInheritance() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/sourceCompatibility/noTopLevelSealedInheritance.kt");
             }
 
             @Nested

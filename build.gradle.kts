@@ -74,7 +74,7 @@ val kotlinVersion by extra(
         } ?: buildNumber
 )
 
-val kotlinLanguageVersion by extra("1.4")
+val kotlinLanguageVersion by extra("1.5")
 
 allprojects {
     group = "org.jetbrains.kotlin"
@@ -320,23 +320,6 @@ extra["compilerModulesForJps"] = listOf(
     ":compiler:compiler.version"
 )
 
-// TODO: fix remaining warnings and remove this property.
-extra["tasksWithWarnings"] = listOf(
-    ":kotlin-stdlib:compileTestKotlin",
-    ":kotlin-stdlib-jdk7:compileTestKotlin",
-    ":kotlin-stdlib-jdk8:compileTestKotlin",
-    ":compiler:frontend:compileKotlin",
-    ":compiler:fir:tree:compileKotlin",
-    ":compiler:fir:resolve:compileKotlin",
-    ":compiler:fir:checkers:compileKotlin",
-    ":compiler:fir:java:compileKotlin",
-    ":plugins:uast-kotlin:compileKotlin",
-    ":plugins:uast-kotlin:compileTestKotlin",
-    ":plugins:uast-kotlin-idea:compileKotlin"
-)
-
-val tasksWithWarnings: List<String> by extra
-
 val coreLibProjects = listOfNotNull(
     ":kotlin-stdlib",
     ":kotlin-stdlib-common",
@@ -350,8 +333,7 @@ val coreLibProjects = listOfNotNull(
     ":kotlin-test:kotlin-test-junit5",
     ":kotlin-test:kotlin-test-testng",
     ":kotlin-test:kotlin-test-js".takeIf { !kotlinBuildProperties.isInJpsBuildIdeaSync },
-    ":kotlin-reflect",
-    ":kotlin-coroutines-experimental-compat"
+    ":kotlin-reflect"
 )
 
 val gradlePluginProjects = listOf(
@@ -466,21 +448,6 @@ allprojects {
             if (useJvmFir) {
                 freeCompilerArgs += "-Xuse-fir"
                 freeCompilerArgs += "-Xabi-stability=stable"
-            }
-        }
-    }
-
-    if (!kotlinBuildProperties.isInJpsBuildIdeaSync && !kotlinBuildProperties.useFir) {
-        // For compiler and stdlib, allWarningsAsErrors is configured in the corresponding "root" projects
-        // (compiler/build.gradle.kts and libraries/commonConfiguration.gradle).
-        val projectsWithWarningsAsErrors = listOf("core", "plugins").map { File(it).absoluteFile }
-        if (projectsWithWarningsAsErrors.any(projectDir::startsWith)) {
-            tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile> {
-                if (path !in tasksWithWarnings) {
-                    kotlinOptions {
-                        allWarningsAsErrors = true
-                    }
-                }
             }
         }
     }
@@ -976,8 +943,7 @@ tasks {
                 ":kotlin-reflect:publish",
                 ":kotlin-main-kts:publish",
                 ":kotlin-stdlib-js:publish",
-                ":kotlin-test:kotlin-test-js:publish",
-                ":kotlin-coroutines-experimental-compat:publish"
+                ":kotlin-test:kotlin-test-js:publish"
             )
         }
     }
