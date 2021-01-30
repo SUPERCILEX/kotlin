@@ -245,6 +245,11 @@ public class IrCompileKotlinAgainstKotlinTestGenerated extends AbstractIrCompile
         runTest("compiler/testData/compileKotlinAgainstKotlin/internalWithDefaultArgs.kt");
     }
 
+    @TestMetadata("internalWithInlineClass.kt")
+    public void testInternalWithInlineClass() throws Exception {
+        runTest("compiler/testData/compileKotlinAgainstKotlin/internalWithInlineClass.kt");
+    }
+
     @TestMetadata("internalWithOtherModuleName.kt")
     public void testInternalWithOtherModuleName() throws Exception {
         runTest("compiler/testData/compileKotlinAgainstKotlin/internalWithOtherModuleName.kt");
@@ -373,6 +378,11 @@ public class IrCompileKotlinAgainstKotlinTestGenerated extends AbstractIrCompile
     @TestMetadata("nestedTypeAliasExpansion.kt")
     public void testNestedTypeAliasExpansion() throws Exception {
         runTest("compiler/testData/compileKotlinAgainstKotlin/nestedTypeAliasExpansion.kt");
+    }
+
+    @TestMetadata("noExplicitOverrideForDelegatedFromSupertype.kt")
+    public void testNoExplicitOverrideForDelegatedFromSupertype() throws Exception {
+        runTest("compiler/testData/compileKotlinAgainstKotlin/noExplicitOverrideForDelegatedFromSupertype.kt");
     }
 
     @TestMetadata("optionalAnnotation.kt")

@@ -17,7 +17,6 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.kotlin.TestHelperGeneratorKt;
 import org.jetbrains.kotlin.TestsCompilerError;
 import org.jetbrains.kotlin.TestsCompiletimeError;
-import org.jetbrains.kotlin.backend.common.output.OutputFile;
 import org.jetbrains.kotlin.backend.common.output.SimpleOutputFileCollection;
 import org.jetbrains.kotlin.checkers.utils.CheckerTestUtil;
 import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys;
@@ -40,19 +39,9 @@ import org.jetbrains.kotlin.test.*;
 import org.jetbrains.kotlin.test.clientserver.TestProxy;
 import org.jetbrains.kotlin.test.util.KtTestUtil;
 import org.jetbrains.kotlin.utils.ExceptionUtilsKt;
-import org.jetbrains.org.objectweb.asm.ClassReader;
-import org.jetbrains.org.objectweb.asm.tree.ClassNode;
-import org.jetbrains.org.objectweb.asm.tree.MethodNode;
-import org.jetbrains.org.objectweb.asm.tree.analysis.Analyzer;
-import org.jetbrains.org.objectweb.asm.tree.analysis.AnalyzerException;
-import org.jetbrains.org.objectweb.asm.tree.analysis.BasicValue;
-import org.jetbrains.org.objectweb.asm.tree.analysis.SimpleVerifier;
-import org.jetbrains.org.objectweb.asm.util.Textifier;
-import org.jetbrains.org.objectweb.asm.util.TraceMethodVisitor;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
@@ -326,8 +315,7 @@ public abstract class CodegenTestCase extends KotlinBaseTest<KotlinBaseTest.Test
             boolean ignoreDexing = myFiles.getPsiFiles().stream().anyMatch(
                 it -> InTextDirectivesUtils.isDirectiveDefined(it.getText(), "IGNORE_DEXING")
             );
-            if (verifyWithDex() && DxChecker.RUN_DX_CHECKER && !ignoreDexing) {
-                DxChecker.check(classFileFactory);
+            if (verifyWithDex() && D8Checker.RUN_D8_CHECKER && !ignoreDexing) {
                 D8Checker.check(classFileFactory);
             }
         }
