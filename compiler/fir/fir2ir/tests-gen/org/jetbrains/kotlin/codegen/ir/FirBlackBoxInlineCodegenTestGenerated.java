@@ -242,6 +242,11 @@ public class FirBlackBoxInlineCodegenTestGenerated extends AbstractFirBlackBoxIn
             runTest("compiler/testData/codegen/boxInline/anonymousObject/kt19723.kt");
         }
 
+        @TestMetadata("kt29595.kt")
+        public void testKt29595() throws Exception {
+            runTest("compiler/testData/codegen/boxInline/anonymousObject/kt29595.kt");
+        }
+
         @TestMetadata("kt34656.kt")
         public void testKt34656() throws Exception {
             runTest("compiler/testData/codegen/boxInline/anonymousObject/kt34656.kt");
@@ -260,6 +265,11 @@ public class FirBlackBoxInlineCodegenTestGenerated extends AbstractFirBlackBoxIn
         @TestMetadata("kt42815_delegated.kt")
         public void testKt42815_delegated() throws Exception {
             runTest("compiler/testData/codegen/boxInline/anonymousObject/kt42815_delegated.kt");
+        }
+
+        @TestMetadata("kt6007.kt")
+        public void testKt6007() throws Exception {
+            runTest("compiler/testData/codegen/boxInline/anonymousObject/kt6007.kt");
         }
 
         @TestMetadata("kt6552.kt")
@@ -990,6 +1000,11 @@ public class FirBlackBoxInlineCodegenTestGenerated extends AbstractFirBlackBoxIn
             @TestMetadata("kt18728_4.kt")
             public void testKt18728_4() throws Exception {
                 runTest("compiler/testData/codegen/boxInline/callableReference/bound/kt18728_4.kt");
+            }
+
+            @TestMetadata("lambdaOnLhs.kt")
+            public void testLambdaOnLhs() throws Exception {
+                runTest("compiler/testData/codegen/boxInline/callableReference/bound/lambdaOnLhs.kt");
             }
 
             @TestMetadata("map.kt")
@@ -2418,6 +2433,46 @@ public class FirBlackBoxInlineCodegenTestGenerated extends AbstractFirBlackBoxIn
         @TestMetadata("explicitLocalReturn.kt")
         public void testExplicitLocalReturn() throws Exception {
             runTest("compiler/testData/codegen/boxInline/nonLocalReturns/explicitLocalReturn.kt");
+        }
+
+        @TestMetadata("fromArrayGenerator.kt")
+        public void testFromArrayGenerator() throws Exception {
+            runTest("compiler/testData/codegen/boxInline/nonLocalReturns/fromArrayGenerator.kt");
+        }
+
+        @TestMetadata("fromArrayGeneratorCatch.kt")
+        public void testFromArrayGeneratorCatch() throws Exception {
+            runTest("compiler/testData/codegen/boxInline/nonLocalReturns/fromArrayGeneratorCatch.kt");
+        }
+
+        @TestMetadata("fromArrayGeneratorNested.kt")
+        public void testFromArrayGeneratorNested() throws Exception {
+            runTest("compiler/testData/codegen/boxInline/nonLocalReturns/fromArrayGeneratorNested.kt");
+        }
+
+        @TestMetadata("fromArrayGeneratorWithCapture.kt")
+        public void testFromArrayGeneratorWithCapture() throws Exception {
+            runTest("compiler/testData/codegen/boxInline/nonLocalReturns/fromArrayGeneratorWithCapture.kt");
+        }
+
+        @TestMetadata("fromArrayGeneratorWithCatch.kt")
+        public void testFromArrayGeneratorWithCatch() throws Exception {
+            runTest("compiler/testData/codegen/boxInline/nonLocalReturns/fromArrayGeneratorWithCatch.kt");
+        }
+
+        @TestMetadata("fromArrayGeneratorWithFinally.kt")
+        public void testFromArrayGeneratorWithFinally() throws Exception {
+            runTest("compiler/testData/codegen/boxInline/nonLocalReturns/fromArrayGeneratorWithFinally.kt");
+        }
+
+        @TestMetadata("fromArrayGeneratorWithFinallyX2.kt")
+        public void testFromArrayGeneratorWithFinallyX2() throws Exception {
+            runTest("compiler/testData/codegen/boxInline/nonLocalReturns/fromArrayGeneratorWithFinallyX2.kt");
+        }
+
+        @TestMetadata("fromArrayGeneratorWithFinallyX2_2.kt")
+        public void testFromArrayGeneratorWithFinallyX2_2() throws Exception {
+            runTest("compiler/testData/codegen/boxInline/nonLocalReturns/fromArrayGeneratorWithFinallyX2_2.kt");
         }
 
         @TestMetadata("fromInterfaceDefaultGetter.kt")
@@ -4410,6 +4465,11 @@ public class FirBlackBoxInlineCodegenTestGenerated extends AbstractFirBlackBoxIn
             @TestMetadata("insideObject.kt")
             public void testInsideObject() throws Exception {
                 runTest("compiler/testData/codegen/boxInline/suspend/stateMachine/insideObject.kt");
+            }
+
+            @TestMetadata("kt30708.kt")
+            public void testKt30708() throws Exception {
+                runTest("compiler/testData/codegen/boxInline/suspend/stateMachine/kt30708.kt");
             }
 
             @TestMetadata("lambdaTransformation.kt")

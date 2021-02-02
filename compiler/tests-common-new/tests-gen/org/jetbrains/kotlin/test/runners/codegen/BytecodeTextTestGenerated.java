@@ -641,6 +641,12 @@ public class BytecodeTextTestGenerated extends AbstractBytecodeTextTest {
         }
 
         @Test
+        @TestMetadata("hashCodeOnNonNull.kt")
+        public void testHashCodeOnNonNull() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeText/boxingOptimization/hashCodeOnNonNull.kt");
+        }
+
+        @Test
         @TestMetadata("inlineClassesAndInlinedLambda.kt")
         public void testInlineClassesAndInlinedLambda() throws Exception {
             runTest("compiler/testData/codegen/bytecodeText/boxingOptimization/inlineClassesAndInlinedLambda.kt");
@@ -966,6 +972,12 @@ public class BytecodeTextTestGenerated extends AbstractBytecodeTextTest {
         @TestMetadata("capturedVarsOfSize2.kt")
         public void testCapturedVarsOfSize2() throws Exception {
             runTest("compiler/testData/codegen/bytecodeText/capturedVarsOptimization/capturedVarsOfSize2.kt");
+        }
+
+        @Test
+        @TestMetadata("returnValueOfArrayConstructor.kt")
+        public void testReturnValueOfArrayConstructor() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeText/capturedVarsOptimization/returnValueOfArrayConstructor.kt");
         }
 
         @Test
@@ -2987,9 +2999,9 @@ public class BytecodeTextTestGenerated extends AbstractBytecodeTextTest {
         }
 
         @Test
-        @TestMetadata("hashCode.kt")
-        public void testHashCode() throws Exception {
-            runTest("compiler/testData/codegen/bytecodeText/hashCode/hashCode.kt");
+        @TestMetadata("hashCode_1_6.kt")
+        public void testHashCode_1_6() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeText/hashCode/hashCode_1_6.kt");
         }
 
         @Test
@@ -4392,6 +4404,12 @@ public class BytecodeTextTestGenerated extends AbstractBytecodeTextTest {
         @TestMetadata("multipleExclExcl_1_4.kt")
         public void testMultipleExclExcl_1_4() throws Exception {
             runTest("compiler/testData/codegen/bytecodeText/nullCheckOptimization/multipleExclExcl_1_4.kt");
+        }
+
+        @Test
+        @TestMetadata("noNullCheckAfterCast.kt")
+        public void testNoNullCheckAfterCast() throws Exception {
+            runTest("compiler/testData/codegen/bytecodeText/nullCheckOptimization/noNullCheckAfterCast.kt");
         }
 
         @Test

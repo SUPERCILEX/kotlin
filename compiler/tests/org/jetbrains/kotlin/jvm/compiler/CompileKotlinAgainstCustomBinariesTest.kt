@@ -526,9 +526,9 @@ class CompileKotlinAgainstCustomBinariesTest : AbstractKotlinCompilerIntegration
     }
 
     fun testWrongInlineTarget() {
-        val library = compileLibrary("library", additionalOptions = listOf("-jvm-target", "1.8"))
+        val library = compileLibrary("library", additionalOptions = listOf("-jvm-target", "11"))
 
-        compileKotlin("source.kt", tmpdir, listOf(library))
+        compileKotlin("source.kt", tmpdir, listOf(library), additionalOptions = listOf("-jvm-target", "1.8"))
 
         compileKotlin(
             "warningsOnly_1_3.kt", tmpdir, listOf(library),
@@ -714,7 +714,9 @@ class CompileKotlinAgainstCustomBinariesTest : AbstractKotlinCompilerIntegration
             listOf(library),
             K2MetadataCompiler(),
         )
+    }
 
+    fun testAnonymousObjectTypeMetadataKlib() {
         val klibLibrary = compileCommonLibrary(
             libraryName = "library",
             listOf("-Xexpect-actual-linker"),
