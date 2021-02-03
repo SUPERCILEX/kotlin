@@ -27,7 +27,7 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
     }
 
     public void testAllFilesPresentInBox() throws Exception {
-        KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JVM, true, "ranges/stepped");
+        KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JVM, true, "ranges/stepped", "compileKotlinAgainstKotlin");
     }
 
     @TestMetadata("compiler/testData/codegen/box/annotations")
@@ -12600,11 +12600,6 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
             @TestMetadata("callWithIncorrectNumberOfArguments.kt")
             public void testCallWithIncorrectNumberOfArguments() throws Exception {
                 runTest("compiler/testData/codegen/box/functions/bigArity/callWithIncorrectNumberOfArguments.kt");
-            }
-
-            @TestMetadata("callWithIncorrectNumberOfArguments_1_6.kt")
-            public void testCallWithIncorrectNumberOfArguments_1_6() throws Exception {
-                runTest("compiler/testData/codegen/box/functions/bigArity/callWithIncorrectNumberOfArguments_1_6.kt");
             }
 
             @TestMetadata("function255.kt")
@@ -29569,11 +29564,6 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
         @TestMetadata("interfaceHashCode.kt")
         public void testInterfaceHashCode() throws Exception {
             runTest("compiler/testData/codegen/box/super/interfaceHashCode.kt");
-        }
-
-        @TestMetadata("interfaceHashCode_1_6.kt")
-        public void testInterfaceHashCode_1_6() throws Exception {
-            runTest("compiler/testData/codegen/box/super/interfaceHashCode_1_6.kt");
         }
 
         @TestMetadata("kt14243.kt")

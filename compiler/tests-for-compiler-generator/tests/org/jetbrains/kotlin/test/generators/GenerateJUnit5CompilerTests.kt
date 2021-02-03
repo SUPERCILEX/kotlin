@@ -62,10 +62,20 @@ fun generateJUnit5CompilerTests(args: Array<String>) {
 
             testClass<AbstractBlackBoxCodegenTest> {
                 model("codegen/box")
+                model("codegen/boxAgainstJava", excludeDirs = listOf("oldLanguageVersions"))
             }
 
             testClass<AbstractIrBlackBoxCodegenTest> {
                 model("codegen/box", excludeDirs = listOf("oldLanguageVersions"))
+                model("codegen/boxAgainstJava", excludeDirs = listOf("oldLanguageVersions"))
+            }
+
+            testClass<AbstractJvmIrAgainstOldBoxTest> {
+                model("codegen/box/compileKotlinAgainstKotlin")
+            }
+
+            testClass<AbstractJvmOldAgainstIrBoxTest> {
+                model("codegen/box/compileKotlinAgainstKotlin")
             }
 
             testClass<AbstractIrTextTest> {
@@ -79,6 +89,30 @@ fun generateJUnit5CompilerTests(args: Array<String>) {
             testClass<AbstractIrBytecodeTextTest> {
                 model("codegen/bytecodeText", excludeDirs = listOf("oldLanguageVersions"))
             }
+
+            testClass<AbstractBlackBoxInlineCodegenTest> {
+                model("codegen/boxInline")
+            }
+
+            testClass<AbstractIrBlackBoxInlineCodegenTest> {
+                model("codegen/boxInline")
+            }
+
+            testClass<AbstractCompileKotlinAgainstInlineKotlinTest> {
+                model("codegen/boxInline")
+            }
+
+            testClass<AbstractIrCompileKotlinAgainstInlineKotlinTest> {
+                model("codegen/boxInline")
+            }
+
+            testClass<AbstractJvmIrAgainstOldBoxInlineTest> {
+                model("codegen/boxInline")
+            }
+
+            testClass<AbstractJvmOldAgainstIrBoxInlineTest> {
+                model("codegen/boxInline")
+            }
         }
 
         // ---------------------------------------------- FIR tests ----------------------------------------------
@@ -88,9 +122,16 @@ fun generateJUnit5CompilerTests(args: Array<String>) {
                 model("diagnostics/tests", excludedPattern = excludedFirTestdataPattern)
                 model("diagnostics/testsWithStdLib", excludedPattern = excludedFirTestdataPattern)
             }
+        }
 
+        testGroup(testsRoot = "compiler/fir/fir2ir/tests-gen", testDataRoot = "compiler/testData") {
             testClass<AbstractFirBlackBoxCodegenTest> {
                 model("codegen/box", excludeDirs = listOf("oldLanguageVersions"))
+                model("codegen/boxAgainstJava", excludeDirs = listOf("oldLanguageVersions"))
+            }
+
+            testClass<AbstractFirBlackBoxInlineCodegenTest> {
+                model("codegen/boxInline", excludeDirs = listOf("oldLanguageVersions"))
             }
         }
 
@@ -108,7 +149,7 @@ fun generateJUnit5CompilerTests(args: Array<String>) {
             }
         }
 
-        testGroup(testsRoot = "compiler/fir/analysis-tests/tests-gen", testDataRoot = "compiler/testData") {
+        testGroup(testsRoot = "compiler/fir/fir2ir/tests-gen", testDataRoot = "compiler/testData") {
             testClass<AbstractFir2IrTextTest> {
                 model("ir/irText")
             }
