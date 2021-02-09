@@ -11836,6 +11836,12 @@ public class FirOldFrontendDiagnosticsTestGenerated extends AbstractFirDiagnosti
             }
 
             @Test
+            @TestMetadata("errorsOnImplicitInvokeInSimpleCall.kt")
+            public void testErrorsOnImplicitInvokeInSimpleCall() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/inference/errorsOnImplicitInvokeInSimpleCall.kt");
+            }
+
+            @Test
             @TestMetadata("expectedTypeAdditionalTest.kt")
             public void testExpectedTypeAdditionalTest() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/inference/expectedTypeAdditionalTest.kt");
@@ -30636,6 +30642,12 @@ public class FirOldFrontendDiagnosticsTestGenerated extends AbstractFirDiagnosti
         @TestMetadata("assignedInSynchronized.kt")
         public void testAssignedInSynchronized() throws Exception {
             runTest("compiler/testData/diagnostics/testsWithStdLib/assignedInSynchronized.kt");
+        }
+
+        @Test
+        @TestMetadata("buildLazyValueForMap.kt")
+        public void testBuildLazyValueForMap() throws Exception {
+            runTest("compiler/testData/diagnostics/testsWithStdLib/buildLazyValueForMap.kt");
         }
 
         @Test
