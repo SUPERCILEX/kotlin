@@ -862,9 +862,7 @@ class RawFirBuilder(
                         }
 
                         if (classOrObject.hasModifier(DATA_KEYWORD) && firPrimaryConstructor != null) {
-                            val zippedParameters = classOrObject.primaryConstructorParameters.zip(
-                                declarations.filterIsInstance<FirProperty>(),
-                            )
+                            val zippedParameters = classOrObject.primaryConstructorParameters.filter { it.hasValOrVar() } zip declarations.filterIsInstance<FirProperty>()
                             DataClassMembersGenerator(
                                 baseSession,
                                 classOrObject,
@@ -877,7 +875,7 @@ class RawFirBuilder(
                                     // just making a shallow copy isn't enough type ref may be a function type ref
                                     // and contain value parameters inside
                                     withDefaultSourceElementKind(newKind) {
-                                        (property.returnTypeRef.psi as KtTypeReference).toFirOrImplicitType()
+                                        (property.returnTypeRef.psi as KtTypeReference?).toFirOrImplicitType()
                                     }
                                 },
                             ).generate()
@@ -1548,6 +1546,7 @@ class RawFirBuilder(
                         result = expression.`else`.toFirBlock()
                     }
                 }
+                usedAsExpression = expression.usedAsExpression
             }
         }
 
@@ -1585,6 +1584,7 @@ class RawFirBuilder(
                 source = expression.toFirSourceElement()
                 this.subject = subjectExpression
                 this.subjectVariable = subjectVariable
+                usedAsExpression = expression.usedAsExpression
 
                 for (entry in expression.entries) {
                     val entrySource = entry.toFirSourceElement()
@@ -1622,6 +1622,24 @@ class RawFirBuilder(
                 }
             }
         }
+
+        private val KtExpression.usedAsExpression: Boolean
+            get() {
+                var parent = parent
+                if (parent.elementType == KtNodeTypes.ANNOTATED_EXPRESSION) {
+                    parent = parent.parent
+                }
+                if (parent is KtBlockExpression) return false
+                when (parent.elementType) {
+                    KtNodeTypes.ELSE, KtNodeTypes.WHEN_ENTRY -> {
+                        return (parent.parent as? KtExpression)?.usedAsExpression ?: true
+                    }
+                }
+                // Here we check that when used is a single statement of a loop
+                if (parent !is KtContainerNodeForControlStructureBody) return true
+                val type = parent.parent.elementType
+                return !(type == KtNodeTypes.FOR || type == KtNodeTypes.WHILE || type == KtNodeTypes.DO_WHILE)
+            }
 
         override fun visitDoWhileExpression(expression: KtDoWhileExpression, data: Unit): FirElement {
             return FirDoWhileLoopBuilder().apply {
