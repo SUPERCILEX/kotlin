@@ -35,8 +35,13 @@ class MainKtQuickFixRegistrar : KtQuickFixRegistrar() {
         registerApplicator(ChangeTypeQuickFix.changeVariableReturnTypeOnOverride)
     }
 
+    private val mutability = KtQuickFixesListBuilder.registerPsiQuickFix {
+        registerPsiQuickFix<PsiElement, KtFirDiagnostic.VarOverriddenByVal>(ChangeVariableMutabilityFix.VAR_OVERRIDDEN_BY_VAL_FACTORY)
+    }
+
     override val list: KtQuickFixesList = KtQuickFixesList.createCombined(
         modifiers,
         overrides,
+        mutability,
     )
 }

@@ -126,11 +126,13 @@ object AndroidDependencyResolver {
             if (entry.key == "androidMain") {
                 // this is a terrible hack, but looks like the only way, other than proper support via light-classes
                 val task = project.tasks.findByName("processDebugResources")
-                getClassOrNull("com.android.build.gradle.internal.res.LinkApplicationAndroidResourcesTask")?.let { linkAppClass ->
-                    @Suppress("UNCHECKED_CAST")
-                    val rClassOutputJar =
-                        linkAppClass.getMethodOrNull("getRClassOutputJar")?.invoke(task) as Provider<FileSystemLocation>?
-                    rClassOutputJar?.orNull?.asFile?.let { result += AndroidDependency("R.jar", it) }
+                if (task != null) {
+                    getClassOrNull("com.android.build.gradle.internal.res.LinkApplicationAndroidResourcesTask")?.let { linkAppClass ->
+                        @Suppress("UNCHECKED_CAST")
+                        val rClassOutputJar =
+                            linkAppClass.getMethodOrNull("getRClassOutputJar")?.invoke(task) as Provider<FileSystemLocation>?
+                        rClassOutputJar?.orNull?.asFile?.let { result += AndroidDependency("R.jar", it) }
+                    }
                 }
             }
 
@@ -144,7 +146,7 @@ object AndroidDependencyResolver {
         compileClasspathConf: Configuration
     ): List<AndroidDependency> {
         val viewConfig: (ArtifactView.ViewConfiguration) -> Unit = { config ->
-            config.attributes { it.attribute(AndroidArtifacts.ARTIFACT_TYPE, AndroidArtifacts.ArtifactType.JAR.type) }
+            config.attributes { it.attribute(AndroidArtifacts.ARTIFACT_TYPE, PROCESSED_JAR_ARTIFACT_TYPE.type) }
             config.isLenient = true
         }
 
@@ -187,4 +189,11 @@ object AndroidDependencyResolver {
         result.addAll(configs.flatMap { it.dependencies })
         doFindDependencies(implConfigs, configs.flatMap { it.extendsFrom }.filter { it !in implConfigs && visited.add(it) }, result)
     }
+
+    private val PROCESSED_JAR_ARTIFACT_TYPE: AndroidArtifacts.ArtifactType =
+        try {
+            AndroidArtifacts.ArtifactType.valueOf("PROCESSED_JAR")
+        } catch (e: IllegalArgumentException) {
+            AndroidArtifacts.ArtifactType.JAR
+        }
 }

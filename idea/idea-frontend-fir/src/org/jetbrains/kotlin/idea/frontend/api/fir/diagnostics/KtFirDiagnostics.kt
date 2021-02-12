@@ -21,6 +21,7 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtDestructuringDeclaration
+import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtExpression
 import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtIfExpression
@@ -602,6 +603,18 @@ sealed class KtFirDiagnostic<PSI: PsiElement> : KtDiagnosticWithPsi<PSI> {
         override val diagnosticClass get() = PropertyWithNoTypeNoInitializer::class
     }
 
+    abstract class BackingFieldInInterface : KtFirDiagnostic<KtProperty>() {
+        override val diagnosticClass get() = BackingFieldInInterface::class
+    }
+
+    abstract class ExtensionPropertyWithBackingField : KtFirDiagnostic<KtExpression>() {
+        override val diagnosticClass get() = ExtensionPropertyWithBackingField::class
+    }
+
+    abstract class PropertyInitializerNoBackingField : KtFirDiagnostic<KtExpression>() {
+        override val diagnosticClass get() = PropertyInitializerNoBackingField::class
+    }
+
     abstract class AbstractDelegatedProperty : KtFirDiagnostic<KtPropertyDelegate>() {
         override val diagnosticClass get() = AbstractDelegatedProperty::class
     }
@@ -715,6 +728,11 @@ sealed class KtFirDiagnostic<PSI: PsiElement> : KtDiagnosticWithPsi<PSI> {
 
     abstract class InvalidIfAsExpression : KtFirDiagnostic<KtIfExpression>() {
         override val diagnosticClass get() = InvalidIfAsExpression::class
+    }
+
+    abstract class ErrorInContractDescription : KtFirDiagnostic<KtElement>() {
+        override val diagnosticClass get() = ErrorInContractDescription::class
+        abstract val reason: String
     }
 
     abstract class RedundantVisibilityModifier : KtFirDiagnostic<KtModifierListOwner>() {
