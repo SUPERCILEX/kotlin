@@ -24488,6 +24488,12 @@ public class DiagnosticTestGenerated extends AbstractDiagnosticTest {
             }
 
             @Test
+            @TestMetadata("kt44861.kt")
+            public void testKt44861() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/sealed/kt44861.kt");
+            }
+
+            @Test
             @TestMetadata("Local.kt")
             public void testLocal() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/sealed/Local.kt");
@@ -24593,6 +24599,18 @@ public class DiagnosticTestGenerated extends AbstractDiagnosticTest {
             @TestMetadata("OperationWhen.kt")
             public void testOperationWhen() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/sealed/OperationWhen.kt");
+            }
+
+            @Test
+            @TestMetadata("protectedConstructors_disabled.kt")
+            public void testProtectedConstructors_disabled() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/sealed/protectedConstructors_disabled.kt");
+            }
+
+            @Test
+            @TestMetadata("protectedConstructors_enabled.kt")
+            public void testProtectedConstructors_enabled() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/sealed/protectedConstructors_enabled.kt");
             }
 
             @Test

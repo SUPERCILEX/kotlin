@@ -260,8 +260,8 @@ internal val KT_DIAGNOSTIC_CONVERTER = KtDiagnosticConverterBuilder.buildConvert
             token,
         )
     }
-    add(FirErrors.NON_PRIVATE_CONSTRUCTOR_IN_SEALED) { firDiagnostic ->
-        NonPrivateConstructorInSealedImpl(
+    add(FirErrors.NON_PRIVATE_OR_PROTECTED_CONSTRUCTOR_IN_SEALED) { firDiagnostic ->
+        NonPrivateOrProtectedConstructorInSealedImpl(
             firDiagnostic as FirPsiDiagnostic<*>,
             token,
         )
@@ -731,14 +731,18 @@ internal val KT_DIAGNOSTIC_CONVERTER = KtDiagnosticConverterBuilder.buildConvert
     }
     add(FirErrors.CONFLICTING_OVERLOADS) { firDiagnostic ->
         ConflictingOverloadsImpl(
-            firDiagnostic.a,
+            firDiagnostic.a.map { abstractFirBasedSymbol ->
+                firSymbolBuilder.buildSymbol(abstractFirBasedSymbol.fir as FirDeclaration)
+            },
             firDiagnostic as FirPsiDiagnostic<*>,
             token,
         )
     }
     add(FirErrors.REDECLARATION) { firDiagnostic ->
         RedeclarationImpl(
-            firDiagnostic.a,
+            firDiagnostic.a.map { abstractFirBasedSymbol ->
+                firSymbolBuilder.buildSymbol(abstractFirBasedSymbol.fir as FirDeclaration)
+            },
             firDiagnostic as FirPsiDiagnostic<*>,
             token,
         )

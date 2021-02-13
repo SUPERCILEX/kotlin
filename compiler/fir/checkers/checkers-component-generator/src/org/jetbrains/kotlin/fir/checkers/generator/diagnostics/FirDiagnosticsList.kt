@@ -88,7 +88,7 @@ val DIAGNOSTICS_LIST = DiagnosticListBuilder.buildDiagnosticList {
         val CONSTRUCTOR_IN_OBJECT by error<FirSourceElement, KtDeclaration>(PositioningStrategy.DECLARATION_SIGNATURE)
         val CONSTRUCTOR_IN_INTERFACE by error<FirSourceElement, KtDeclaration>(PositioningStrategy.DECLARATION_SIGNATURE)
         val NON_PRIVATE_CONSTRUCTOR_IN_ENUM by error<FirSourceElement, PsiElement>()
-        val NON_PRIVATE_CONSTRUCTOR_IN_SEALED by error<FirSourceElement, PsiElement>()
+        val NON_PRIVATE_OR_PROTECTED_CONSTRUCTOR_IN_SEALED by error<FirSourceElement, PsiElement>()
         val CYCLIC_CONSTRUCTOR_DELEGATION_CALL by warning<FirSourceElement, PsiElement>()
         val PRIMARY_CONSTRUCTOR_DELEGATION_CALL_EXPECTED by warning<FirSourceElement, PsiElement>(PositioningStrategy.SECONDARY_CONSTRUCTOR_DELEGATION_CALL)
         val SUPERTYPE_INITIALIZED_WITHOUT_PRIMARY_CONSTRUCTOR by warning<FirSourceElement, PsiElement>()
@@ -245,10 +245,10 @@ val DIAGNOSTICS_LIST = DiagnosticListBuilder.buildDiagnosticList {
     group("Redeclarations") {
         val MANY_COMPANION_OBJECTS by error<FirSourceElement, PsiElement>()
         val CONFLICTING_OVERLOADS by error<FirSourceElement, PsiElement>(PositioningStrategy.DECLARATION_SIGNATURE_OR_DEFAULT) {
-            parameter<String>("conflictingOverloads") // TODO use Collection<Symbol> instead of String
+            parameter<Collection<AbstractFirBasedSymbol<*>>>("conflictingOverloads")
         }
         val REDECLARATION by error<FirSourceElement, PsiElement>() {
-            parameter<String>("conflictingDeclaration") // TODO use Collection<Symbol> instead of String
+            parameter<Collection<AbstractFirBasedSymbol<*>>>("conflictingDeclarations")
         }
         val ANY_METHOD_IMPLEMENTED_IN_INTERFACE by error<FirSourceElement, PsiElement>()
     }

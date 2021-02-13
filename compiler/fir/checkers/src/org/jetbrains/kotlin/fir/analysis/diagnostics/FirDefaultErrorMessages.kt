@@ -101,7 +101,7 @@ import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.NONE_APPLICABLE
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.NON_ABSTRACT_FUNCTION_WITH_NO_BODY
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.NON_MEMBER_FUNCTION_NO_BODY
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.NON_PRIVATE_CONSTRUCTOR_IN_ENUM
-import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.NON_PRIVATE_CONSTRUCTOR_IN_SEALED
+import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.NON_PRIVATE_OR_PROTECTED_CONSTRUCTOR_IN_SEALED
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.NOTHING_TO_OVERRIDE
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.NOT_AN_ANNOTATION_CLASS
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors.NOT_A_LOOP_LABEL
@@ -247,7 +247,7 @@ class FirDefaultErrorMessages : DefaultErrorMessages.Extension {
             map.put(CONSTRUCTOR_IN_OBJECT, "Constructors are not allowed for objects")
             map.put(CONSTRUCTOR_IN_INTERFACE, "An interface may not have a constructor")
             map.put(NON_PRIVATE_CONSTRUCTOR_IN_ENUM, "Constructor must be private in enum class")
-            map.put(NON_PRIVATE_CONSTRUCTOR_IN_SEALED, "Constructor must be private in sealed class")
+            map.put(NON_PRIVATE_OR_PROTECTED_CONSTRUCTOR_IN_SEALED, "Constructor must be private or protected in sealed class")
             map.put(CYCLIC_CONSTRUCTOR_DELEGATION_CALL, "There's a cycle in the delegation calls chain")
             map.put(PRIMARY_CONSTRUCTOR_DELEGATION_CALL_EXPECTED, "Primary constructor call expected")
             map.put(SUPERTYPE_INITIALIZED_WITHOUT_PRIMARY_CONSTRUCTOR, "Supertype initialization is impossible without primary constructor")
@@ -402,8 +402,8 @@ class FirDefaultErrorMessages : DefaultErrorMessages.Extension {
 
             // Redeclarations
             map.put(MANY_COMPANION_OBJECTS, "Only one companion object is allowed per class")
-            map.put(CONFLICTING_OVERLOADS, "Conflicting overloads: {0}", TO_STRING) // *
-            map.put(REDECLARATION, "Conflicting declarations: {0}", TO_STRING) // *
+            map.put(CONFLICTING_OVERLOADS, "Conflicting overloads: {0}", SYMBOLS) // *
+            map.put(REDECLARATION, "Conflicting declarations: {0}", SYMBOLS) // *
             map.put(ANY_METHOD_IMPLEMENTED_IN_INTERFACE, "An interface may not implement a method of 'Any'") // &
 
             // Invalid local declarations

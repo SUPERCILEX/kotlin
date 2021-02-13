@@ -19788,6 +19788,12 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
             }
 
             @Test
+            @TestMetadata("nullabilityAssertions.kt")
+            public void testNullabilityAssertions() throws Exception {
+                runTest("compiler/testData/codegen/box/invokedynamic/lambdas/nullabilityAssertions.kt");
+            }
+
+            @Test
             @TestMetadata("primitiveValueParameters.kt")
             public void testPrimitiveValueParameters() throws Exception {
                 runTest("compiler/testData/codegen/box/invokedynamic/lambdas/primitiveValueParameters.kt");
@@ -19922,6 +19928,12 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
             }
 
             @Test
+            @TestMetadata("covariantOverrideWithPrimitive.kt")
+            public void testCovariantOverrideWithPrimitive() throws Exception {
+                runTest("compiler/testData/codegen/box/invokedynamic/sam/covariantOverrideWithPrimitive.kt");
+            }
+
+            @Test
             @TestMetadata("genericFunInterface.kt")
             public void testGenericFunInterface() throws Exception {
                 runTest("compiler/testData/codegen/box/invokedynamic/sam/genericFunInterface.kt");
@@ -19931,6 +19943,12 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
             @TestMetadata("genericFunInterfaceWithPrimitive.kt")
             public void testGenericFunInterfaceWithPrimitive() throws Exception {
                 runTest("compiler/testData/codegen/box/invokedynamic/sam/genericFunInterfaceWithPrimitive.kt");
+            }
+
+            @Test
+            @TestMetadata("nullabilityAssertions.kt")
+            public void testNullabilityAssertions() throws Exception {
+                runTest("compiler/testData/codegen/box/invokedynamic/sam/nullabilityAssertions.kt");
             }
 
             @Test
@@ -19955,6 +19973,12 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
             @TestMetadata("samConversionOnFunctionReference.kt")
             public void testSamConversionOnFunctionReference() throws Exception {
                 runTest("compiler/testData/codegen/box/invokedynamic/sam/samConversionOnFunctionReference.kt");
+            }
+
+            @Test
+            @TestMetadata("simpleFunInterfaceConstructor.kt")
+            public void testSimpleFunInterfaceConstructor() throws Exception {
+                runTest("compiler/testData/codegen/box/invokedynamic/sam/simpleFunInterfaceConstructor.kt");
             }
 
             @Test
@@ -19991,12 +20015,6 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
             @TestMetadata("unboundFunctionReferenceEquality.kt")
             public void testUnboundFunctionReferenceEquality() throws Exception {
                 runTest("compiler/testData/codegen/box/invokedynamic/sam/unboundFunctionReferenceEquality.kt");
-            }
-
-            @Test
-            @TestMetadata("voidReturnTypeAsGeneric.kt")
-            public void testVoidReturnTypeAsGeneric() throws Exception {
-                runTest("compiler/testData/codegen/box/invokedynamic/sam/voidReturnTypeAsGeneric.kt");
             }
 
             @Nested
@@ -20078,6 +20096,94 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
                 @TestMetadata("genericFunInterfaceWithInlineString.kt")
                 public void testGenericFunInterfaceWithInlineString() throws Exception {
                     runTest("compiler/testData/codegen/box/invokedynamic/sam/inlineClassInSignature/genericFunInterfaceWithInlineString.kt");
+                }
+            }
+
+            @Nested
+            @TestMetadata("compiler/testData/codegen/box/invokedynamic/sam/specializedGenerics")
+            @TestDataPath("$PROJECT_ROOT")
+            public class SpecializedGenerics {
+                @Test
+                public void testAllFilesPresentInSpecializedGenerics() throws Exception {
+                    KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/invokedynamic/sam/specializedGenerics"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JVM, true);
+                }
+
+                @Test
+                @TestMetadata("covariantOverride.kt")
+                public void testCovariantOverride() throws Exception {
+                    runTest("compiler/testData/codegen/box/invokedynamic/sam/specializedGenerics/covariantOverride.kt");
+                }
+
+                @Test
+                @TestMetadata("covariantOverrideWithNNothing.kt")
+                public void testCovariantOverrideWithNNothing() throws Exception {
+                    runTest("compiler/testData/codegen/box/invokedynamic/sam/specializedGenerics/covariantOverrideWithNNothing.kt");
+                }
+
+                @Test
+                @TestMetadata("inheritedWithChar.kt")
+                public void testInheritedWithChar() throws Exception {
+                    runTest("compiler/testData/codegen/box/invokedynamic/sam/specializedGenerics/inheritedWithChar.kt");
+                }
+
+                @Test
+                @TestMetadata("inheritedWithCharDiamond.kt")
+                public void testInheritedWithCharDiamond() throws Exception {
+                    runTest("compiler/testData/codegen/box/invokedynamic/sam/specializedGenerics/inheritedWithCharDiamond.kt");
+                }
+
+                @Test
+                @TestMetadata("inheritedWithCharExplicitlyOverridden.kt")
+                public void testInheritedWithCharExplicitlyOverridden() throws Exception {
+                    runTest("compiler/testData/codegen/box/invokedynamic/sam/specializedGenerics/inheritedWithCharExplicitlyOverridden.kt");
+                }
+
+                @Test
+                @TestMetadata("inheritedWithInt.kt")
+                public void testInheritedWithInt() throws Exception {
+                    runTest("compiler/testData/codegen/box/invokedynamic/sam/specializedGenerics/inheritedWithInt.kt");
+                }
+
+                @Test
+                @TestMetadata("inheritedWithString.kt")
+                public void testInheritedWithString() throws Exception {
+                    runTest("compiler/testData/codegen/box/invokedynamic/sam/specializedGenerics/inheritedWithString.kt");
+                }
+
+                @Test
+                @TestMetadata("inheritedWithUnit.kt")
+                public void testInheritedWithUnit() throws Exception {
+                    runTest("compiler/testData/codegen/box/invokedynamic/sam/specializedGenerics/inheritedWithUnit.kt");
+                }
+
+                @Test
+                @TestMetadata("mixGenericAndIntArray.kt")
+                public void testMixGenericAndIntArray() throws Exception {
+                    runTest("compiler/testData/codegen/box/invokedynamic/sam/specializedGenerics/mixGenericAndIntArray.kt");
+                }
+
+                @Test
+                @TestMetadata("mixGenericAndString.kt")
+                public void testMixGenericAndString() throws Exception {
+                    runTest("compiler/testData/codegen/box/invokedynamic/sam/specializedGenerics/mixGenericAndString.kt");
+                }
+
+                @Test
+                @TestMetadata("mixGenericArrayAndArrayOfString.kt")
+                public void testMixGenericArrayAndArrayOfString() throws Exception {
+                    runTest("compiler/testData/codegen/box/invokedynamic/sam/specializedGenerics/mixGenericArrayAndArrayOfString.kt");
+                }
+
+                @Test
+                @TestMetadata("mixPrimitiveAndBoxed.kt")
+                public void testMixPrimitiveAndBoxed() throws Exception {
+                    runTest("compiler/testData/codegen/box/invokedynamic/sam/specializedGenerics/mixPrimitiveAndBoxed.kt");
+                }
+
+                @Test
+                @TestMetadata("voidReturnTypeAsGeneric.kt")
+                public void testVoidReturnTypeAsGeneric() throws Exception {
+                    runTest("compiler/testData/codegen/box/invokedynamic/sam/specializedGenerics/voidReturnTypeAsGeneric.kt");
                 }
             }
         }
