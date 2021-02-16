@@ -91,7 +91,7 @@ object FirErrors {
     val SEALED_SUPERTYPE by error0<FirSourceElement, PsiElement>()
     val SEALED_SUPERTYPE_IN_LOCAL_CLASS by error0<FirSourceElement, PsiElement>()
 
-    //  Constructor problems
+    // Constructor problems
     val CONSTRUCTOR_IN_OBJECT by error0<FirSourceElement, KtDeclaration>(SourceElementPositioningStrategies.DECLARATION_SIGNATURE)
     val CONSTRUCTOR_IN_INTERFACE by error0<FirSourceElement, KtDeclaration>(SourceElementPositioningStrategies.DECLARATION_SIGNATURE)
     val NON_PRIVATE_CONSTRUCTOR_IN_ENUM by error0<FirSourceElement, PsiElement>()
@@ -119,7 +119,7 @@ object FirErrors {
     val NULLABLE_TYPE_OF_ANNOTATION_MEMBER by error0<FirSourceElement, KtTypeReference>()
     val VAR_ANNOTATION_PARAMETER by error0<FirSourceElement, KtParameter>(SourceElementPositioningStrategies.VAL_OR_VAR_NODE)
 
-    // Exposed visibility group
+    // Exposed visibility
     val EXPOSED_TYPEALIAS_EXPANDED_TYPE by error3<FirSourceElement, KtNamedDeclaration, FirEffectiveVisibility, FirMemberDeclaration, FirEffectiveVisibility>(SourceElementPositioningStrategies.DECLARATION_NAME)
     val EXPOSED_FUNCTION_RETURN_TYPE by error3<FirSourceElement, KtNamedDeclaration, FirEffectiveVisibility, FirMemberDeclaration, FirEffectiveVisibility>(SourceElementPositioningStrategies.DECLARATION_NAME)
     val EXPOSED_RECEIVER_TYPE by error3<FirSourceElement, KtTypeReference, FirEffectiveVisibility, FirMemberDeclaration, FirEffectiveVisibility>()
@@ -140,7 +140,7 @@ object FirErrors {
     // Applicability
     val NONE_APPLICABLE by error1<FirSourceElement, PsiElement, Collection<AbstractFirBasedSymbol<*>>>()
     val INAPPLICABLE_CANDIDATE by error1<FirSourceElement, PsiElement, AbstractFirBasedSymbol<*>>()
-    val INAPPLICABLE_LATEINIT_MODIFIER by error1<FirSourceElement, PsiElement, String>()
+    val INAPPLICABLE_LATEINIT_MODIFIER by error1<FirSourceElement, KtModifierListOwner, String>(SourceElementPositioningStrategies.LATEINIT_MODIFIER)
 
     // Ambiguity
     val AMBIGUITY by error1<FirSourceElement, PsiElement, Collection<AbstractFirBasedSymbol<*>>>()

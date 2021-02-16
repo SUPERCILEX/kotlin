@@ -56,11 +56,12 @@ internal class DeclarationsCheckerBuilder(
     private val identifierChecker: IdentifierChecker,
     private val languageVersionSettings: LanguageVersionSettings,
     private val typeSpecificityComparator: TypeSpecificityComparator,
-    private val diagnosticSuppressor: PlatformDiagnosticSuppressor
+    private val diagnosticSuppressor: PlatformDiagnosticSuppressor,
+    private val upperBoundChecker: UpperBoundChecker
 ) {
     fun withTrace(trace: BindingTrace) = DeclarationsChecker(
         descriptorResolver, originalModifiersChecker, annotationChecker, identifierChecker, trace, languageVersionSettings,
-        typeSpecificityComparator, diagnosticSuppressor
+        typeSpecificityComparator, diagnosticSuppressor, upperBoundChecker
     )
 }
 
@@ -72,7 +73,8 @@ class DeclarationsChecker(
     private val trace: BindingTrace,
     private val languageVersionSettings: LanguageVersionSettings,
     typeSpecificityComparator: TypeSpecificityComparator,
-    private val diagnosticSuppressor: PlatformDiagnosticSuppressor
+    private val diagnosticSuppressor: PlatformDiagnosticSuppressor,
+    private val upperBoundChecker: UpperBoundChecker
 ) {
 
     private val modifiersChecker = modifiersChecker.withTrace(trace)
@@ -200,7 +202,8 @@ class DeclarationsChecker(
     private class TypeAliasDeclarationCheckingReportStrategy(
         private val trace: BindingTrace,
         typeAliasDescriptor: TypeAliasDescriptor,
-        declaration: KtTypeAlias
+        declaration: KtTypeAlias,
+        val upperBoundChecker: UpperBoundChecker
     ) : TypeAliasExpansionReportStrategy {
         private val typeReference = declaration.getTypeReference()
                 ?: throw AssertionError("Incorrect type alias declaration for $typeAliasDescriptor")
@@ -222,15 +225,12 @@ class DeclarationsChecker(
         }
 
         override fun boundsViolationInSubstitution(
-            bound: KotlinType,
+            substitutor: TypeSubstitutor,
             unsubstitutedArgument: KotlinType,
             argument: KotlinType,
             typeParameter: TypeParameterDescriptor
         ) {
-            // TODO more precise diagnostics
-            if (!argument.containsTypeAliasParameters() && !bound.containsTypeAliasParameters()) {
-                trace.report(UPPER_BOUND_VIOLATED_IN_TYPEALIAS_EXPANSION.on(typeReference, bound, argument, typeParameter))
-            }
+            upperBoundChecker.checkBounds(null, argument, typeParameter, substitutor, trace, typeReference)
         }
 
         override fun repeatedAnnotation(annotation: AnnotationDescriptor) {
@@ -241,7 +241,7 @@ class DeclarationsChecker(
 
     private fun checkTypeAliasExpansion(declaration: KtTypeAlias, typeAliasDescriptor: TypeAliasDescriptor) {
         val typeAliasExpansion = TypeAliasExpansion.createWithFormalArguments(typeAliasDescriptor)
-        val reportStrategy = TypeAliasDeclarationCheckingReportStrategy(trace, typeAliasDescriptor, declaration)
+        val reportStrategy = TypeAliasDeclarationCheckingReportStrategy(trace, typeAliasDescriptor, declaration, upperBoundChecker)
         TypeAliasExpander(reportStrategy, true).expandWithoutAbbreviation(typeAliasExpansion, Annotations.EMPTY)
     }
 
@@ -360,7 +360,7 @@ class DeclarationsChecker(
 
         for (delegationSpecifier in classOrObject.superTypeListEntries) {
             val typeReference = delegationSpecifier.typeReference ?: continue
-            typeReference.type()?.let { DescriptorResolver.checkBounds(typeReference, it, trace) }
+            typeReference.type()?.let { upperBoundChecker.checkBounds(typeReference, it, trace) }
         }
 
         if (classOrObject !is KtClass) return
@@ -383,7 +383,7 @@ class DeclarationsChecker(
         DescriptorResolver.checkUpperBoundTypes(trace, upperBoundCheckRequests, false)
 
         for (request in upperBoundCheckRequests) {
-            DescriptorResolver.checkBounds(request.upperBound, request.upperBoundType, trace)
+            upperBoundChecker.checkBounds(request.upperBound, request.upperBoundType, trace)
         }
     }
 

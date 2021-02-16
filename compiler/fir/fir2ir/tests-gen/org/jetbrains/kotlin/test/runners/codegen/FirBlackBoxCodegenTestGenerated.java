@@ -2441,6 +2441,12 @@ public class FirBlackBoxCodegenTestGenerated extends AbstractFirBlackBoxCodegenT
         }
 
         @Test
+        @TestMetadata("kt44483.kt")
+        public void testKt44483() throws Exception {
+            runTest("compiler/testData/codegen/box/callableReference/kt44483.kt");
+        }
+
+        @Test
         @TestMetadata("nested.kt")
         public void testNested() throws Exception {
             runTest("compiler/testData/codegen/box/callableReference/nested.kt");
@@ -16721,6 +16727,12 @@ public class FirBlackBoxCodegenTestGenerated extends AbstractFirBlackBoxCodegenT
             @TestMetadata("lackOfNullCheckOnNullableInsideBuild.kt")
             public void testLackOfNullCheckOnNullableInsideBuild() throws Exception {
                 runTest("compiler/testData/codegen/box/inference/builderInference/lackOfNullCheckOnNullableInsideBuild.kt");
+            }
+
+            @Test
+            @TestMetadata("propagateInferenceSessionIntoDeclarationAnalyzers.kt")
+            public void testPropagateInferenceSessionIntoDeclarationAnalyzers() throws Exception {
+                runTest("compiler/testData/codegen/box/inference/builderInference/propagateInferenceSessionIntoDeclarationAnalyzers.kt");
             }
 
             @Test
@@ -37302,94 +37314,6 @@ public class FirBlackBoxCodegenTestGenerated extends AbstractFirBlackBoxCodegenT
     }
 
     @Nested
-    @TestMetadata("compiler/testData/codegen/box/signatureAnnotations")
-    @TestDataPath("$PROJECT_ROOT")
-    public class SignatureAnnotations {
-        @Test
-        public void testAllFilesPresentInSignatureAnnotations() throws Exception {
-            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/signatureAnnotations"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JVM_IR, true);
-        }
-
-        @Test
-        @TestMetadata("defaultAndNamedCombination.kt")
-        public void testDefaultAndNamedCombination() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultAndNamedCombination.kt");
-        }
-
-        @Test
-        @TestMetadata("defaultBoxTypes.kt")
-        public void testDefaultBoxTypes() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultBoxTypes.kt");
-        }
-
-        @Test
-        @TestMetadata("defaultEnumType.kt")
-        public void testDefaultEnumType() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultEnumType.kt");
-        }
-
-        @Test
-        @TestMetadata("defaultLongLiteral.kt")
-        public void testDefaultLongLiteral() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultLongLiteral.kt");
-        }
-
-        @Test
-        @TestMetadata("defaultMultipleParams.kt")
-        public void testDefaultMultipleParams() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultMultipleParams.kt");
-        }
-
-        @Test
-        @TestMetadata("defaultNull.kt")
-        public void testDefaultNull() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultNull.kt");
-        }
-
-        @Test
-        @TestMetadata("defaultNullableBoxTypes.kt")
-        public void testDefaultNullableBoxTypes() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultNullableBoxTypes.kt");
-        }
-
-        @Test
-        @TestMetadata("defaultOverrides.kt")
-        public void testDefaultOverrides() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultOverrides.kt");
-        }
-
-        @Test
-        @TestMetadata("defaultPrimitiveTypes.kt")
-        public void testDefaultPrimitiveTypes() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultPrimitiveTypes.kt");
-        }
-
-        @Test
-        @TestMetadata("defaultValueInConstructor.kt")
-        public void testDefaultValueInConstructor() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultValueInConstructor.kt");
-        }
-
-        @Test
-        @TestMetadata("defaultWithJavaBase.kt")
-        public void testDefaultWithJavaBase() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultWithJavaBase.kt");
-        }
-
-        @Test
-        @TestMetadata("defaultWithKotlinBase.kt")
-        public void testDefaultWithKotlinBase() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultWithKotlinBase.kt");
-        }
-
-        @Test
-        @TestMetadata("reorderedParameterNames.kt")
-        public void testReorderedParameterNames() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/reorderedParameterNames.kt");
-        }
-    }
-
-    @Nested
     @TestMetadata("compiler/testData/codegen/box/smap")
     @TestDataPath("$PROJECT_ROOT")
     public class Smap {
@@ -37508,6 +37432,12 @@ public class FirBlackBoxCodegenTestGenerated extends AbstractFirBlackBoxCodegenT
         @TestMetadata("kt42517.kt")
         public void testKt42517() throws Exception {
             runTest("compiler/testData/codegen/box/smartCasts/kt42517.kt");
+        }
+
+        @Test
+        @TestMetadata("kt44804.kt")
+        public void testKt44804() throws Exception {
+            runTest("compiler/testData/codegen/box/smartCasts/kt44804.kt");
         }
 
         @Test

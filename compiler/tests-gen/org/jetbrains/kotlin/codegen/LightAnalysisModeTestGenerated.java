@@ -2145,6 +2145,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
             runTest("compiler/testData/codegen/box/callableReference/kt37604.kt");
         }
 
+        @TestMetadata("kt44483.kt")
+        public void testKt44483() throws Exception {
+            runTest("compiler/testData/codegen/box/callableReference/kt44483.kt");
+        }
+
         @TestMetadata("nested.kt")
         public void testNested() throws Exception {
             runTest("compiler/testData/codegen/box/callableReference/nested.kt");
@@ -13905,6 +13910,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
             @TestMetadata("lackOfNullCheckOnNullableInsideBuild.kt")
             public void testLackOfNullCheckOnNullableInsideBuild() throws Exception {
                 runTest("compiler/testData/codegen/box/inference/builderInference/lackOfNullCheckOnNullableInsideBuild.kt");
+            }
+
+            @TestMetadata("propagateInferenceSessionIntoDeclarationAnalyzers.kt")
+            public void testPropagateInferenceSessionIntoDeclarationAnalyzers() throws Exception {
+                runTest("compiler/testData/codegen/box/inference/builderInference/propagateInferenceSessionIntoDeclarationAnalyzers.kt");
             }
 
             @TestMetadata("specialCallsWithCallableReferences.kt")
@@ -29791,84 +29801,6 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
         }
     }
 
-    @TestMetadata("compiler/testData/codegen/box/signatureAnnotations")
-    @TestDataPath("$PROJECT_ROOT")
-    @RunWith(JUnit3RunnerWithInners.class)
-    public static class SignatureAnnotations extends AbstractLightAnalysisModeTest {
-        private void runTest(String testDataFilePath) throws Exception {
-            KotlinTestUtils.runTest(this::doTest, TargetBackend.JVM, testDataFilePath);
-        }
-
-        public void testAllFilesPresentInSignatureAnnotations() throws Exception {
-            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/signatureAnnotations"), Pattern.compile("^(.+)\\.kt$"), null, TargetBackend.JVM, true);
-        }
-
-        @TestMetadata("defaultAndNamedCombination.kt")
-        public void testDefaultAndNamedCombination() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultAndNamedCombination.kt");
-        }
-
-        @TestMetadata("defaultBoxTypes.kt")
-        public void testDefaultBoxTypes() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultBoxTypes.kt");
-        }
-
-        @TestMetadata("defaultEnumType.kt")
-        public void testDefaultEnumType() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultEnumType.kt");
-        }
-
-        @TestMetadata("defaultLongLiteral.kt")
-        public void testDefaultLongLiteral() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultLongLiteral.kt");
-        }
-
-        @TestMetadata("defaultMultipleParams.kt")
-        public void testDefaultMultipleParams() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultMultipleParams.kt");
-        }
-
-        @TestMetadata("defaultNull.kt")
-        public void testDefaultNull() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultNull.kt");
-        }
-
-        @TestMetadata("defaultNullableBoxTypes.kt")
-        public void testDefaultNullableBoxTypes() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultNullableBoxTypes.kt");
-        }
-
-        @TestMetadata("defaultOverrides.kt")
-        public void testDefaultOverrides() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultOverrides.kt");
-        }
-
-        @TestMetadata("defaultPrimitiveTypes.kt")
-        public void testDefaultPrimitiveTypes() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultPrimitiveTypes.kt");
-        }
-
-        @TestMetadata("defaultValueInConstructor.kt")
-        public void testDefaultValueInConstructor() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultValueInConstructor.kt");
-        }
-
-        @TestMetadata("defaultWithJavaBase.kt")
-        public void testDefaultWithJavaBase() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultWithJavaBase.kt");
-        }
-
-        @TestMetadata("defaultWithKotlinBase.kt")
-        public void testDefaultWithKotlinBase() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/defaultWithKotlinBase.kt");
-        }
-
-        @TestMetadata("reorderedParameterNames.kt")
-        public void testReorderedParameterNames() throws Exception {
-            runTest("compiler/testData/codegen/box/signatureAnnotations/reorderedParameterNames.kt");
-        }
-    }
-
     @TestMetadata("compiler/testData/codegen/box/smap")
     @TestDataPath("$PROJECT_ROOT")
     @RunWith(JUnit3RunnerWithInners.class)
@@ -29977,6 +29909,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
         @TestMetadata("kt42517.kt")
         public void testKt42517() throws Exception {
             runTest("compiler/testData/codegen/box/smartCasts/kt42517.kt");
+        }
+
+        @TestMetadata("kt44804.kt")
+        public void testKt44804() throws Exception {
+            runTest("compiler/testData/codegen/box/smartCasts/kt44804.kt");
         }
 
         @TestMetadata("lambdaArgumentWithoutType.kt")
