@@ -19988,6 +19988,12 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
             }
 
             @Test
+            @TestMetadata("samExtFunWithCapturingLambda.kt")
+            public void testSamExtFunWithCapturingLambda() throws Exception {
+                runTest("compiler/testData/codegen/box/invokedynamic/sam/samExtFunWithCapturingLambda.kt");
+            }
+
+            @Test
             @TestMetadata("simpleFunInterfaceConstructor.kt")
             public void testSimpleFunInterfaceConstructor() throws Exception {
                 runTest("compiler/testData/codegen/box/invokedynamic/sam/simpleFunInterfaceConstructor.kt");
@@ -37438,6 +37444,24 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
         @TestMetadata("kt44804.kt")
         public void testKt44804() throws Exception {
             runTest("compiler/testData/codegen/box/smartCasts/kt44804.kt");
+        }
+
+        @Test
+        @TestMetadata("kt44814.kt")
+        public void testKt44814() throws Exception {
+            runTest("compiler/testData/codegen/box/smartCasts/kt44814.kt");
+        }
+
+        @Test
+        @TestMetadata("kt44932.kt")
+        public void testKt44932() throws Exception {
+            runTest("compiler/testData/codegen/box/smartCasts/kt44932.kt");
+        }
+
+        @Test
+        @TestMetadata("kt44942.kt")
+        public void testKt44942() throws Exception {
+            runTest("compiler/testData/codegen/box/smartCasts/kt44942.kt");
         }
 
         @Test
