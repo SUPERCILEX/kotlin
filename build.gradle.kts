@@ -325,11 +325,8 @@ extra["tasksWithWarnings"] = listOf(
     ":kotlin-stdlib:compileTestKotlin",
     ":kotlin-stdlib-jdk7:compileTestKotlin",
     ":kotlin-stdlib-jdk8:compileTestKotlin",
-    ":compiler:cli:compileKotlin",
-    ":kotlin-scripting-compiler:compileKotlin",
     ":plugins:uast-kotlin:compileKotlin",
-    ":plugins:uast-kotlin:compileTestKotlin",
-    ":plugins:uast-kotlin-idea:compileKotlin"
+    ":plugins:uast-kotlin:compileTestKotlin"
 )
 
 val tasksWithWarnings: List<String> by extra
@@ -945,6 +942,12 @@ tasks {
             doFirst {
                 println("##teamcity[setParameter name='bootstrap.kotlin.version' value='$bootstrapKotlinVersion']")
             }
+        }
+    }
+
+    register("publishGradlePluginArtifacts") {
+        idePluginDependency {
+            dependsOnKotlinGradlePluginPublish()
         }
     }
 
