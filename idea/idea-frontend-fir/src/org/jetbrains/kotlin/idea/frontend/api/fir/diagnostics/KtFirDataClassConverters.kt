@@ -242,6 +242,13 @@ internal val KT_DIAGNOSTIC_CONVERTER = KtDiagnosticConverterBuilder.buildConvert
             token,
         )
     }
+    add(FirErrors.SUPERTYPE_NOT_A_CLASS_OR_INTERFACE) { firDiagnostic ->
+        SupertypeNotAClassOrInterfaceImpl(
+            firDiagnostic.a,
+            firDiagnostic as FirPsiDiagnostic<*>,
+            token,
+        )
+    }
     add(FirErrors.CONSTRUCTOR_IN_OBJECT) { firDiagnostic ->
         ConstructorInObjectImpl(
             firDiagnostic as FirPsiDiagnostic<*>,
@@ -719,6 +726,18 @@ internal val KT_DIAGNOSTIC_CONVERTER = KtDiagnosticConverterBuilder.buildConvert
         VarOverriddenByValImpl(
             firSymbolBuilder.buildSymbol(firDiagnostic.a as FirDeclaration),
             firSymbolBuilder.buildSymbol(firDiagnostic.b as FirDeclaration),
+            firDiagnostic as FirPsiDiagnostic<*>,
+            token,
+        )
+    }
+    add(FirErrors.NON_FINAL_MEMBER_IN_FINAL_CLASS) { firDiagnostic ->
+        NonFinalMemberInFinalClassImpl(
+            firDiagnostic as FirPsiDiagnostic<*>,
+            token,
+        )
+    }
+    add(FirErrors.NON_FINAL_MEMBER_IN_OBJECT) { firDiagnostic ->
+        NonFinalMemberInObjectImpl(
             firDiagnostic as FirPsiDiagnostic<*>,
             token,
         )

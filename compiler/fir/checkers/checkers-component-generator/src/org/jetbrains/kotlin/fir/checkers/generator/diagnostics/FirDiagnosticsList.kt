@@ -36,7 +36,7 @@ object DIAGNOSTICS_LIST : DiagnosticList() {
     val GENERAL_SYNTAX by object : DiagnosticGroup("General syntax") {
         val ILLEGAL_CONST_EXPRESSION by error<FirSourceElement, PsiElement>()
         val ILLEGAL_UNDERSCORE by error<FirSourceElement, PsiElement>()
-        val EXPRESSION_REQUIRED by error<FirSourceElement, PsiElement>()
+        val EXPRESSION_REQUIRED by error<FirSourceElement, PsiElement>(PositioningStrategy.SELECTOR_BY_QUALIFIED)
         val BREAK_OR_CONTINUE_OUTSIDE_A_LOOP by error<FirSourceElement, PsiElement>()
         val NOT_A_LOOP_LABEL by error<FirSourceElement, PsiElement>()
         val VARIABLE_EXPECTED by error<FirSourceElement, PsiElement>()
@@ -45,10 +45,10 @@ object DIAGNOSTICS_LIST : DiagnosticList() {
     }
 
     val UNRESOLVED by object : DiagnosticGroup("Unresolved") {
-        val HIDDEN by error<FirSourceElement, PsiElement> {
+        val HIDDEN by error<FirSourceElement, PsiElement>(PositioningStrategy.REFERENCE_BY_QUALIFIED) {
             parameter<AbstractFirBasedSymbol<*>>("hidden")
         }
-        val UNRESOLVED_REFERENCE by error<FirSourceElement, PsiElement> {
+        val UNRESOLVED_REFERENCE by error<FirSourceElement, PsiElement>(PositioningStrategy.REFERENCE_BY_QUALIFIED) {
             parameter<String>("reference")
         }
         val UNRESOLVED_LABEL by error<FirSourceElement, PsiElement>()
@@ -62,7 +62,7 @@ object DIAGNOSTICS_LIST : DiagnosticList() {
     val SUPER by object : DiagnosticGroup("Super") {
         val SUPER_IS_NOT_AN_EXPRESSION by error<FirSourceElement, PsiElement>()
         val SUPER_NOT_AVAILABLE by error<FirSourceElement, PsiElement>()
-        val ABSTRACT_SUPER_CALL by error<FirSourceElement, PsiElement>()
+        val ABSTRACT_SUPER_CALL by error<FirSourceElement, PsiElement>(PositioningStrategy.REFERENCE_BY_QUALIFIED)
         val INSTANCE_ACCESS_BEFORE_SUPER_CALL by error<FirSourceElement, PsiElement> {
             parameter<String>("target")
         }
@@ -82,6 +82,9 @@ object DIAGNOSTICS_LIST : DiagnosticList() {
         val CLASS_IN_SUPERTYPE_FOR_ENUM by error<FirSourceElement, PsiElement>()
         val SEALED_SUPERTYPE by error<FirSourceElement, PsiElement>()
         val SEALED_SUPERTYPE_IN_LOCAL_CLASS by error<FirSourceElement, PsiElement>()
+        val SUPERTYPE_NOT_A_CLASS_OR_INTERFACE by error<FirSourceElement, KtElement> {
+            parameter<String>("reason")
+        }
     }
 
     val CONSTRUCTOR_PROBLEMS by object : DiagnosticGroup("Constructor problems") {
@@ -149,20 +152,21 @@ object DIAGNOSTICS_LIST : DiagnosticList() {
     }
 
     val APPLICABILITY by object : DiagnosticGroup("Applicability") {
-        val NONE_APPLICABLE by error<FirSourceElement, PsiElement> {
+        val NONE_APPLICABLE by error<FirSourceElement, PsiElement>(PositioningStrategy.REFERENCE_BY_QUALIFIED) {
             parameter<Collection<AbstractFirBasedSymbol<*>>>("candidates")
         }
 
-        val INAPPLICABLE_CANDIDATE by error<FirSourceElement, PsiElement> {
+        val INAPPLICABLE_CANDIDATE by error<FirSourceElement, PsiElement>(PositioningStrategy.REFERENCE_BY_QUALIFIED) {
             parameter<AbstractFirBasedSymbol<*>>("candidate")
         }
+
         val INAPPLICABLE_LATEINIT_MODIFIER by error<FirSourceElement, KtModifierListOwner>(PositioningStrategy.LATEINIT_MODIFIER) {
             parameter<String>("reason")
         }
     }
 
     val AMBIGUIRY by object : DiagnosticGroup("Ambiguity") {
-        val AMBIGUITY by error<FirSourceElement, PsiElement> {
+        val AMBIGUITY by error<FirSourceElement, PsiElement>(PositioningStrategy.REFERENCE_BY_QUALIFIED) {
             parameter<Collection<AbstractFirBasedSymbol<*>>>("candidates")
         }
         val ASSIGN_OPERATOR_AMBIGUITY by error<FirSourceElement, PsiElement> {
@@ -240,6 +244,8 @@ object DIAGNOSTICS_LIST : DiagnosticList() {
             parameter<FirMemberDeclaration>("overridingDeclaration")
             parameter<FirMemberDeclaration>("overriddenDeclaration")
         }
+        val NON_FINAL_MEMBER_IN_FINAL_CLASS by warning<FirSourceElement, KtNamedDeclaration>(PositioningStrategy.OPEN_MODIFIER)
+        val NON_FINAL_MEMBER_IN_OBJECT by warning<FirSourceElement, KtNamedDeclaration>(PositioningStrategy.OPEN_MODIFIER)
     }
 
     val REDECLARATIONS by object : DiagnosticGroup("Redeclarations") {
@@ -356,10 +362,10 @@ object DIAGNOSTICS_LIST : DiagnosticList() {
     }
 
     val NULLABILITY by object : DiagnosticGroup("Nullability") {
-        val UNSAFE_CALL by error<FirSourceElement, PsiElement>(PositioningStrategy.DOT_BY_SELECTOR) {
+        val UNSAFE_CALL by error<FirSourceElement, PsiElement>(PositioningStrategy.DOT_BY_QUALIFIED) {
             parameter<ConeKotlinType>("receiverType")
         }
-        val UNSAFE_IMPLICIT_INVOKE_CALL by error<FirSourceElement, PsiElement> {
+        val UNSAFE_IMPLICIT_INVOKE_CALL by error<FirSourceElement, PsiElement>(PositioningStrategy.REFERENCE_BY_QUALIFIED) {
             parameter<ConeKotlinType>("receiverType")
         }
         val UNSAFE_INFIX_CALL by error<FirSourceElement, KtExpression> {
@@ -383,7 +389,7 @@ object DIAGNOSTICS_LIST : DiagnosticList() {
     }
 
     val FUNCTION_CONTRACTS by object : DiagnosticGroup("Function contracts") {
-        val ERROR_IN_CONTRACT_DESCRIPTION by error<FirSourceElement, KtElement> {
+        val ERROR_IN_CONTRACT_DESCRIPTION by error<FirSourceElement, KtElement>(PositioningStrategy.SELECTOR_BY_QUALIFIED) {
             parameter<String>("reason")
         }
     }
@@ -396,7 +402,7 @@ object DIAGNOSTICS_LIST : DiagnosticList() {
         val REDUNDANT_SINGLE_EXPRESSION_STRING_TEMPLATE by warning<FirSourceElement, PsiElement>()
         val CAN_BE_VAL by warning<FirSourceElement, KtDeclaration>(PositioningStrategy.VAL_OR_VAR_NODE)
         val CAN_BE_REPLACED_WITH_OPERATOR_ASSIGNMENT by warning<FirSourceElement, KtExpression>(PositioningStrategy.OPERATOR)
-        val REDUNDANT_CALL_OF_CONVERSION_METHOD by warning<FirSourceElement, PsiElement>()
+        val REDUNDANT_CALL_OF_CONVERSION_METHOD by warning<FirSourceElement, PsiElement>(PositioningStrategy.SELECTOR_BY_QUALIFIED)
         val ARRAY_EQUALITY_OPERATOR_CAN_BE_REPLACED_WITH_EQUALS by warning<FirSourceElement, KtExpression>(PositioningStrategy.OPERATOR)
         val EMPTY_RANGE by warning<FirSourceElement, PsiElement>()
         val REDUNDANT_SETTER_PARAMETER_TYPE by warning<FirSourceElement, PsiElement>()
@@ -404,7 +410,7 @@ object DIAGNOSTICS_LIST : DiagnosticList() {
         val ASSIGNED_VALUE_IS_NEVER_READ by warning<FirSourceElement, PsiElement>()
         val VARIABLE_INITIALIZER_IS_REDUNDANT by warning<FirSourceElement, PsiElement>()
         val VARIABLE_NEVER_READ by warning<FirSourceElement, KtNamedDeclaration>(PositioningStrategy.DECLARATION_NAME)
-        val USELESS_CALL_ON_NOT_NULL by warning<FirSourceElement, PsiElement>()
+        val USELESS_CALL_ON_NOT_NULL by warning<FirSourceElement, PsiElement>(PositioningStrategy.SELECTOR_BY_QUALIFIED)
     }
 }
 
