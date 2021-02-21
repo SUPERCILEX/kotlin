@@ -715,6 +715,11 @@ public class LazyBodyIsNotTouchedTilContractsPhaseTestGenerated extends Abstract
             runTest("compiler/fir/analysis-tests/testData/resolve/callResolution/invokeWithReceiverAndArgument.kt");
         }
 
+        @TestMetadata("kt37056.kt")
+        public void testKt37056() throws Exception {
+            runTest("compiler/fir/analysis-tests/testData/resolve/callResolution/kt37056.kt");
+        }
+
         @TestMetadata("lambdaAsReceiver.kt")
         public void testLambdaAsReceiver() throws Exception {
             runTest("compiler/fir/analysis-tests/testData/resolve/callResolution/lambdaAsReceiver.kt");
@@ -2883,6 +2888,11 @@ public class LazyBodyIsNotTouchedTilContractsPhaseTestGenerated extends Abstract
         @TestMetadata("smartcastToNothing.kt")
         public void testSmartcastToNothing() throws Exception {
             runTest("compiler/fir/analysis-tests/testData/resolve/smartcasts/smartcastToNothing.kt");
+        }
+
+        @TestMetadata("smartcastToTypeParameter.kt")
+        public void testSmartcastToTypeParameter() throws Exception {
+            runTest("compiler/fir/analysis-tests/testData/resolve/smartcasts/smartcastToTypeParameter.kt");
         }
 
         @TestMetadata("compiler/fir/analysis-tests/testData/resolve/smartcasts/booleans")

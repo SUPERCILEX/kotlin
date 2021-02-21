@@ -12377,6 +12377,12 @@ public class DiagnosticTestGenerated extends AbstractDiagnosticTest {
                 }
 
                 @Test
+                @TestMetadata("approximateContravariantCapturedTypes.kt")
+                public void testApproximateContravariantCapturedTypes() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/inference/capturedTypes/approximateContravariantCapturedTypes.kt");
+                }
+
+                @Test
                 @TestMetadata("avoidCreatingUselessCapturedTypes.kt")
                 public void testAvoidCreatingUselessCapturedTypes() throws Exception {
                     runTest("compiler/testData/diagnostics/tests/inference/capturedTypes/avoidCreatingUselessCapturedTypes.kt");
@@ -25739,6 +25745,18 @@ public class DiagnosticTestGenerated extends AbstractDiagnosticTest {
             @TestMetadata("smartcastOnSameFieldOfDifferentInstances.kt")
             public void testSmartcastOnSameFieldOfDifferentInstances() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/smartCasts/smartcastOnSameFieldOfDifferentInstances.kt");
+            }
+
+            @Test
+            @TestMetadata("smartcastToInvisibleType_java.kt")
+            public void testSmartcastToInvisibleType_java() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/smartCasts/smartcastToInvisibleType_java.kt");
+            }
+
+            @Test
+            @TestMetadata("smartcastToInvisibleType_kotlin.kt")
+            public void testSmartcastToInvisibleType_kotlin() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/smartCasts/smartcastToInvisibleType_kotlin.kt");
             }
 
             @Test
