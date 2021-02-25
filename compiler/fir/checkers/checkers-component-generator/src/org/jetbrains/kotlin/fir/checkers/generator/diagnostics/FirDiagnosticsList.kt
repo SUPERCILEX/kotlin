@@ -9,6 +9,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiTypeElement
 import org.jetbrains.kotlin.contracts.description.EventOccurrencesRange
 import org.jetbrains.kotlin.descriptors.Visibility
+import org.jetbrains.kotlin.diagnostics.WhenMissingCase
 import org.jetbrains.kotlin.fir.FirEffectiveVisibility
 import org.jetbrains.kotlin.fir.FirSourceElement
 import org.jetbrains.kotlin.fir.PrivateForInline
@@ -16,7 +17,6 @@ import org.jetbrains.kotlin.fir.declarations.FirCallableDeclaration
 import org.jetbrains.kotlin.fir.declarations.FirClass
 import org.jetbrains.kotlin.fir.declarations.FirMemberDeclaration
 import org.jetbrains.kotlin.fir.expressions.FirExpression
-import org.jetbrains.kotlin.fir.expressions.WhenMissingCase
 import org.jetbrains.kotlin.fir.symbols.AbstractFirBasedSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.*
 import org.jetbrains.kotlin.fir.types.ConeKotlinType
@@ -165,7 +165,7 @@ object DIAGNOSTICS_LIST : DiagnosticList() {
         }
     }
 
-    val AMBIGUIRY by object : DiagnosticGroup("Ambiguity") {
+    val AMBIGUITY by object : DiagnosticGroup("Ambiguity") {
         val AMBIGUITY by error<FirSourceElement, PsiElement>(PositioningStrategy.REFERENCE_BY_QUALIFIED) {
             parameter<Collection<AbstractFirBasedSymbol<*>>>("candidates")
         }
@@ -292,9 +292,13 @@ object DIAGNOSTICS_LIST : DiagnosticList() {
         // TODO: val ANONYMOUS_FUNCTION_WITH_NAME by error1<FirSourceElement, PsiElement, Name>(SourceElementPositioningStrategies.DECLARATION_NAME)
         val ANONYMOUS_FUNCTION_PARAMETER_WITH_DEFAULT_VALUE by error<FirSourceElement, KtParameter>(PositioningStrategy.PARAMETER_DEFAULT_VALUE)
         val USELESS_VARARG_ON_PARAMETER by warning<FirSourceElement, KtParameter>()
+        val MULTIPLE_VARARG_PARAMETERS by error<FirSourceElement, KtParameter>(PositioningStrategy.PARAMETER_VARARG_MODIFIER)
+        val FORBIDDEN_VARARG_PARAMETER_TYPE by error<FirSourceElement, KtParameter>(PositioningStrategy.PARAMETER_VARARG_MODIFIER) {
+            parameter<ConeKotlinType>("varargParameterType")
+        }
     }
 
-    val PROPERTIES_ANS_ACCESSORS by object : DiagnosticGroup("Properties & accessors") {
+    val PROPERTIES_AND_ACCESSORS by object : DiagnosticGroup("Properties & accessors") {
         val ABSTRACT_PROPERTY_IN_NON_ABSTRACT_CLASS by error<FirSourceElement, KtModifierListOwner>(PositioningStrategy.MODALITY_MODIFIER) {
             parameter<FirMemberDeclaration>("property")
             parameter<FirMemberDeclaration>("containingClass") // TODO use FirClass instead of FirMemberDeclaration
@@ -315,8 +319,8 @@ object DIAGNOSTICS_LIST : DiagnosticList() {
 
         val ABSTRACT_PROPERTY_WITH_GETTER by error<FirSourceElement, KtPropertyAccessor>()
         val ABSTRACT_PROPERTY_WITH_SETTER by error<FirSourceElement, KtPropertyAccessor>()
-        val PRIVATE_SETTER_FOR_ABSTRACT_PROPERTY by error<FirSourceElement, PsiElement>()
-        val PRIVATE_SETTER_FOR_OPEN_PROPERTY by error<FirSourceElement, PsiElement>()
+        val PRIVATE_SETTER_FOR_ABSTRACT_PROPERTY by error<FirSourceElement, KtModifierListOwner>(PositioningStrategy.PRIVATE_MODIFIER)
+        val PRIVATE_SETTER_FOR_OPEN_PROPERTY by error<FirSourceElement, KtModifierListOwner>(PositioningStrategy.PRIVATE_MODIFIER)
         val EXPECTED_PRIVATE_DECLARATION by error<FirSourceElement, KtModifierListOwner>(PositioningStrategy.VISIBILITY_MODIFIER)
     }
 
@@ -381,7 +385,7 @@ object DIAGNOSTICS_LIST : DiagnosticList() {
         // TODO: val UNEXPECTED_SAFE_CALL by ...
     }
 
-    val WHNE_EXPRESSIONS by object : DiagnosticGroup("When expressions") {
+    val WHEN_EXPRESSIONS by object : DiagnosticGroup("When expressions") {
         val NO_ELSE_IN_WHEN by error<FirSourceElement, KtWhenExpression>(PositioningStrategy.WHEN_EXPRESSION) {
             parameter<List<WhenMissingCase>>("missingWhenCases")
         }

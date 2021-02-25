@@ -9,6 +9,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiTypeElement
 import org.jetbrains.kotlin.contracts.description.EventOccurrencesRange
 import org.jetbrains.kotlin.descriptors.Visibility
+import org.jetbrains.kotlin.diagnostics.WhenMissingCase
 import org.jetbrains.kotlin.fir.FirEffectiveVisibility
 import org.jetbrains.kotlin.fir.FirSourceElement
 import org.jetbrains.kotlin.fir.analysis.diagnostics.SourceElementPositioningStrategies
@@ -16,7 +17,6 @@ import org.jetbrains.kotlin.fir.declarations.FirCallableDeclaration
 import org.jetbrains.kotlin.fir.declarations.FirClass
 import org.jetbrains.kotlin.fir.declarations.FirMemberDeclaration
 import org.jetbrains.kotlin.fir.expressions.FirExpression
-import org.jetbrains.kotlin.fir.expressions.WhenMissingCase
 import org.jetbrains.kotlin.fir.symbols.AbstractFirBasedSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirClassLikeSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirPropertySymbol
@@ -198,6 +198,8 @@ object FirErrors {
     val FUNCTION_DECLARATION_WITH_NO_NAME by error0<FirSourceElement, KtFunction>(SourceElementPositioningStrategies.DECLARATION_SIGNATURE)
     val ANONYMOUS_FUNCTION_PARAMETER_WITH_DEFAULT_VALUE by error0<FirSourceElement, KtParameter>(SourceElementPositioningStrategies.PARAMETER_DEFAULT_VALUE)
     val USELESS_VARARG_ON_PARAMETER by warning0<FirSourceElement, KtParameter>()
+    val MULTIPLE_VARARG_PARAMETERS by error0<FirSourceElement, KtParameter>(SourceElementPositioningStrategies.PARAMETER_VARARG_MODIFIER)
+    val FORBIDDEN_VARARG_PARAMETER_TYPE by error1<FirSourceElement, KtParameter, ConeKotlinType>(SourceElementPositioningStrategies.PARAMETER_VARARG_MODIFIER)
 
     // Properties & accessors
     val ABSTRACT_PROPERTY_IN_NON_ABSTRACT_CLASS by error2<FirSourceElement, KtModifierListOwner, FirMemberDeclaration, FirMemberDeclaration>(SourceElementPositioningStrategies.MODALITY_MODIFIER)
@@ -212,8 +214,8 @@ object FirErrors {
     val DELEGATED_PROPERTY_IN_INTERFACE by error0<FirSourceElement, KtPropertyDelegate>()
     val ABSTRACT_PROPERTY_WITH_GETTER by error0<FirSourceElement, KtPropertyAccessor>()
     val ABSTRACT_PROPERTY_WITH_SETTER by error0<FirSourceElement, KtPropertyAccessor>()
-    val PRIVATE_SETTER_FOR_ABSTRACT_PROPERTY by error0<FirSourceElement, PsiElement>()
-    val PRIVATE_SETTER_FOR_OPEN_PROPERTY by error0<FirSourceElement, PsiElement>()
+    val PRIVATE_SETTER_FOR_ABSTRACT_PROPERTY by error0<FirSourceElement, KtModifierListOwner>(SourceElementPositioningStrategies.PRIVATE_MODIFIER)
+    val PRIVATE_SETTER_FOR_OPEN_PROPERTY by error0<FirSourceElement, KtModifierListOwner>(SourceElementPositioningStrategies.PRIVATE_MODIFIER)
     val EXPECTED_PRIVATE_DECLARATION by error0<FirSourceElement, KtModifierListOwner>(SourceElementPositioningStrategies.VISIBILITY_MODIFIER)
 
     // Multi-platform projects
