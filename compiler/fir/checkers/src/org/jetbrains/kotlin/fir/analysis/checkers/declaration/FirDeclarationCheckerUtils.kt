@@ -41,16 +41,25 @@ internal fun checkExpectDeclarationVisibilityAndBody(
     }
 }
 
-internal fun checkPropertyInitializer(
+internal fun checkProperty(
     containingClass: FirRegularClass?,
+    property: FirProperty,
+    modifierList: FirModifierList?,
+    reporter: DiagnosticReporter,
+    context: CheckerContext
+) {
+    checkPropertyInitializer(containingClass, modifierList, property, reporter, context)
+    checkPropertyAccessors(property, reporter, context)
+}
+
+private fun checkPropertyInitializer(
+    containingClass: FirRegularClass?,
+    modifierList: FirModifierList?,
     property: FirProperty,
     reporter: DiagnosticReporter,
     context: CheckerContext
 ) {
     val inInterface = containingClass?.isInterface == true
-    // If multiple (potentially conflicting) modality modifiers are specified, not all modifiers are recorded at `status`.
-    // So, our source of truth should be the full modifier list retrieved from the source.
-    val modifierList = with(FirModifierList) { property.source.getModifierList() }
     val hasAbstractModifier = modifierList?.modifiers?.any { it.token == KtTokens.ABSTRACT_KEYWORD } == true
     val isAbstract = property.isAbstract || hasAbstractModifier
     if (isAbstract) {
@@ -119,6 +128,18 @@ internal fun checkPropertyInitializer(
                     }
                 }
             }
+        }
+    }
+}
+
+private fun checkPropertyAccessors(
+    property: FirProperty,
+    reporter: DiagnosticReporter,
+    context: CheckerContext
+) {
+    property.setter?.source?.let {
+        if (property.isVal) {
+            reporter.reportOn(it, FirErrors.VAL_WITH_SETTER, context)
         }
     }
 }
