@@ -5355,6 +5355,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
             runTest("compiler/testData/codegen/box/constants/comparisonTrue.kt");
         }
 
+        @TestMetadata("constValFromAnotherModuleInConsVal.kt")
+        public void testConstValFromAnotherModuleInConsVal() throws Exception {
+            runTest("compiler/testData/codegen/box/constants/constValFromAnotherModuleInConsVal.kt");
+        }
+
         @TestMetadata("constantsInWhen.kt")
         public void testConstantsInWhen() throws Exception {
             runTest("compiler/testData/codegen/box/constants/constantsInWhen.kt");
@@ -12313,6 +12318,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
             runTest("compiler/testData/codegen/box/fir/ClassBuilder.kt");
         }
 
+        @TestMetadata("classCanNotBeCastedToVoid.kt")
+        public void testClassCanNotBeCastedToVoid() throws Exception {
+            runTest("compiler/testData/codegen/box/fir/classCanNotBeCastedToVoid.kt");
+        }
+
         @TestMetadata("ConstValAccess.kt")
         public void testConstValAccess() throws Exception {
             runTest("compiler/testData/codegen/box/fir/ConstValAccess.kt");
@@ -13788,6 +13798,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
         @TestMetadata("integerLiteralTypeInLamdaReturnType.kt")
         public void testIntegerLiteralTypeInLamdaReturnType() throws Exception {
             runTest("compiler/testData/codegen/box/inference/integerLiteralTypeInLamdaReturnType.kt");
+        }
+
+        @TestMetadata("intersectionTypeInArguments.kt")
+        public void testIntersectionTypeInArguments() throws Exception {
+            runTest("compiler/testData/codegen/box/inference/intersectionTypeInArguments.kt");
         }
 
         @TestMetadata("kt10822.kt")
