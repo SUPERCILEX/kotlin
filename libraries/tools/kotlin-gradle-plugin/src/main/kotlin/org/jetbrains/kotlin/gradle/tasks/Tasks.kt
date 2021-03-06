@@ -141,18 +141,10 @@ public class GradleCompileTaskProvider {
         sessionsDir = GradleCompilerRunner.sessionsDir(task.project)
         projectName = task.project.rootProject.name.normalizeForFlagFile()
         val modulesInfo = GradleCompilerRunner.buildModulesInfo(task.project.gradle)
-        buildModulesInfo = if (!isConfigurationCacheAvailable(task.project.gradle)) {
-            task.project.provider {
-                object : IncrementalModuleInfoProvider {
-                    override val info = modulesInfo
-                }
-            }
-        } else {
-            task.project.gradle.sharedServices.registerIfAbsent(
-                IncrementalModuleInfoBuildService.getServiceName(), IncrementalModuleInfoBuildService::class.java
-            ) {
-                it.parameters.info.set(modulesInfo)
-            }
+        buildModulesInfo = task.project.gradle.sharedServices.registerIfAbsent(
+            IncrementalModuleInfoBuildService.getServiceName(), IncrementalModuleInfoBuildService::class.java
+        ) {
+            it.parameters.info.set(modulesInfo)
         }
         path = task.path
         logger = task.logger
@@ -631,7 +623,11 @@ internal open class KotlinCompileWithWorkers @Inject constructor(
     private val workerExecutor: WorkerExecutor
 ) : KotlinCompile() {
 
-    override fun compilerRunner() = GradleCompilerRunnerWithWorkers(GradleCompileTaskProvider(this), workerExecutor)
+    override fun compilerRunner() =
+        GradleCompilerRunnerWithWorkers(
+            GradleCompileTaskProvider(this),
+            workerExecutor
+        )
 }
 
 @CacheableTask
@@ -639,14 +635,22 @@ internal open class Kotlin2JsCompileWithWorkers @Inject constructor(
     private val workerExecutor: WorkerExecutor
 ) : Kotlin2JsCompile() {
 
-    override fun compilerRunner() = GradleCompilerRunnerWithWorkers(GradleCompileTaskProvider(this), workerExecutor)
+    override fun compilerRunner() =
+        GradleCompilerRunnerWithWorkers(
+            GradleCompileTaskProvider(this),
+            workerExecutor
+        )
 }
 
 @CacheableTask
 internal open class KotlinCompileCommonWithWorkers @Inject constructor(
     private val workerExecutor: WorkerExecutor
 ) : KotlinCompileCommon() {
-    override fun compilerRunner() = GradleCompilerRunnerWithWorkers(GradleCompileTaskProvider(this), workerExecutor)
+    override fun compilerRunner() =
+        GradleCompilerRunnerWithWorkers(
+            GradleCompileTaskProvider(this),
+            workerExecutor
+        )
 }
 
 @CacheableTask

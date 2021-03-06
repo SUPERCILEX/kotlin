@@ -19,20 +19,23 @@ import org.jetbrains.kotlin.fir.declarations.impl.FirDefaultPropertyAccessor
 import org.jetbrains.kotlin.fir.types.FirImplicitTypeRef
 import org.jetbrains.kotlin.lexer.KtTokens
 
-internal fun isInsideExpectClass(containingClass: FirRegularClass, context: CheckerContext): Boolean =
-    isInsideSpecificClass(containingClass, context) { klass -> klass.isExpect }
+internal fun isInsideExpectClass(containingClass: FirRegularClass, context: CheckerContext): Boolean {
+    return isInsideSpecificClass(containingClass, context) { klass -> klass.isExpect }
+}
 
-internal fun isInsideExternalClass(containingClass: FirRegularClass, context: CheckerContext): Boolean =
-    isInsideSpecificClass(containingClass, context) { klass -> klass.isExternal }
+internal fun isInsideExternalClass(containingClass: FirRegularClass, context: CheckerContext): Boolean {
+    return isInsideSpecificClass(containingClass, context) { klass -> klass.isExternal }
+}
 
 // Note that the class that contains the currently visiting declaration will *not* be in the context's containing declarations *yet*.
 private inline fun isInsideSpecificClass(
     containingClass: FirRegularClass,
     context: CheckerContext,
     predicate: (FirRegularClass) -> Boolean
-): Boolean =
-    predicate.invoke(containingClass) ||
+): Boolean {
+    return predicate.invoke(containingClass) ||
             context.containingDeclarations.asReversed().any { it is FirRegularClass && predicate.invoke(it) }
+}
 
 internal fun FirMemberDeclaration.isEffectivelyExpect(
     containingClass: FirRegularClass?,
@@ -72,19 +75,7 @@ internal fun checkExpectDeclarationVisibilityAndBody(
     }
 }
 
-internal fun checkProperty(
-    containingClass: FirRegularClass?,
-    property: FirProperty,
-    modifierList: FirModifierList?,
-    isInitialized: Boolean,
-    reporter: DiagnosticReporter,
-    context: CheckerContext
-) {
-    checkPropertyInitializer(containingClass, property, modifierList, isInitialized, reporter, context)
-    checkPropertyAccessors(property, reporter, context)
-}
-
-private fun checkPropertyInitializer(
+internal fun checkPropertyInitializer(
     containingClass: FirRegularClass?,
     property: FirProperty,
     modifierList: FirModifierList?,
@@ -163,7 +154,7 @@ private fun checkPropertyInitializer(
     }
 }
 
-private fun checkPropertyAccessors(
+internal fun checkPropertyAccessors(
     property: FirProperty,
     reporter: DiagnosticReporter,
     context: CheckerContext
