@@ -12550,6 +12550,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
             runTest("compiler/testData/codegen/box/funInterface/irrelevantPrivateDeclarations.kt");
         }
 
+        @TestMetadata("kt44827_funInterface.kt")
+        public void testKt44827_funInterface() throws Exception {
+            runTest("compiler/testData/codegen/box/funInterface/kt44827_funInterface.kt");
+        }
+
         @TestMetadata("multimodule.kt")
         public void testMultimodule() throws Exception {
             runTest("compiler/testData/codegen/box/funInterface/multimodule.kt");
@@ -20799,6 +20804,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
             runTest("compiler/testData/codegen/box/multiplatform/expectClassInJvmMultifileFacade.kt");
         }
 
+        @TestMetadata("expectProperty.kt")
+        public void testExpectProperty() throws Exception {
+            runTest("compiler/testData/codegen/box/multiplatform/expectProperty.kt");
+        }
+
         @TestMetadata("noArgActualConstructor.kt")
         public void testNoArgActualConstructor() throws Exception {
             runTest("compiler/testData/codegen/box/multiplatform/noArgActualConstructor.kt");
@@ -21369,6 +21379,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
         @TestMetadata("kt42758.kt")
         public void testKt42758() throws Exception {
             runTest("compiler/testData/codegen/box/objects/kt42758.kt");
+        }
+
+        @TestMetadata("kt45170.kt")
+        public void testKt45170() throws Exception {
+            runTest("compiler/testData/codegen/box/objects/kt45170.kt");
         }
 
         @TestMetadata("kt535.kt")
@@ -23390,6 +23405,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
         @TestMetadata("typeInferredFromGetter.kt")
         public void testTypeInferredFromGetter() throws Exception {
             runTest("compiler/testData/codegen/box/properties/typeInferredFromGetter.kt");
+        }
+
+        @TestMetadata("unreachableUninitializedProperty.kt")
+        public void testUnreachableUninitializedProperty() throws Exception {
+            runTest("compiler/testData/codegen/box/properties/unreachableUninitializedProperty.kt");
         }
 
         @TestMetadata("compiler/testData/codegen/box/properties/const")
@@ -29562,6 +29582,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
         @TestMetadata("kt31908.kt")
         public void testKt31908() throws Exception {
             runTest("compiler/testData/codegen/box/sam/kt31908.kt");
+        }
+
+        @TestMetadata("kt44827_sam.kt")
+        public void testKt44827_sam() throws Exception {
+            runTest("compiler/testData/codegen/box/sam/kt44827_sam.kt");
         }
 
         @TestMetadata("kt4753.kt")

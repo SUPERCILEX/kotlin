@@ -15185,6 +15185,12 @@ public class IrBlackBoxCodegenTestGenerated extends AbstractIrBlackBoxCodegenTes
         }
 
         @Test
+        @TestMetadata("kt44827_funInterface.kt")
+        public void testKt44827_funInterface() throws Exception {
+            runTest("compiler/testData/codegen/box/funInterface/kt44827_funInterface.kt");
+        }
+
+        @Test
         @TestMetadata("multimodule.kt")
         public void testMultimodule() throws Exception {
             runTest("compiler/testData/codegen/box/funInterface/multimodule.kt");
@@ -24535,6 +24541,12 @@ public class IrBlackBoxCodegenTestGenerated extends AbstractIrBlackBoxCodegenTes
         }
 
         @Test
+        @TestMetadata("expectProperty.kt")
+        public void testExpectProperty() throws Exception {
+            runTest("compiler/testData/codegen/box/multiplatform/expectProperty.kt");
+        }
+
+        @Test
         @TestMetadata("noArgActualConstructor.kt")
         public void testNoArgActualConstructor() throws Exception {
             runTest("compiler/testData/codegen/box/multiplatform/noArgActualConstructor.kt");
@@ -25168,6 +25180,12 @@ public class IrBlackBoxCodegenTestGenerated extends AbstractIrBlackBoxCodegenTes
         @TestMetadata("kt42758.kt")
         public void testKt42758() throws Exception {
             runTest("compiler/testData/codegen/box/objects/kt42758.kt");
+        }
+
+        @Test
+        @TestMetadata("kt45170.kt")
+        public void testKt45170() throws Exception {
+            runTest("compiler/testData/codegen/box/objects/kt45170.kt");
         }
 
         @Test
@@ -27498,6 +27516,12 @@ public class IrBlackBoxCodegenTestGenerated extends AbstractIrBlackBoxCodegenTes
         @TestMetadata("typeInferredFromGetter.kt")
         public void testTypeInferredFromGetter() throws Exception {
             runTest("compiler/testData/codegen/box/properties/typeInferredFromGetter.kt");
+        }
+
+        @Test
+        @TestMetadata("unreachableUninitializedProperty.kt")
+        public void testUnreachableUninitializedProperty() throws Exception {
+            runTest("compiler/testData/codegen/box/properties/unreachableUninitializedProperty.kt");
         }
 
         @Nested
@@ -37066,6 +37090,12 @@ public class IrBlackBoxCodegenTestGenerated extends AbstractIrBlackBoxCodegenTes
         @TestMetadata("kt31908.kt")
         public void testKt31908() throws Exception {
             runTest("compiler/testData/codegen/box/sam/kt31908.kt");
+        }
+
+        @Test
+        @TestMetadata("kt44827_sam.kt")
+        public void testKt44827_sam() throws Exception {
+            runTest("compiler/testData/codegen/box/sam/kt44827_sam.kt");
         }
 
         @Test
