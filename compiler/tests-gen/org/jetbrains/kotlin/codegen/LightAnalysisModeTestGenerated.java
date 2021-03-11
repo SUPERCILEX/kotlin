@@ -1186,6 +1186,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
             runTest("compiler/testData/codegen/box/binaryOp/bitwiseOpNullable.kt");
         }
 
+        @TestMetadata("boxingOfLiteralReceiverWithIntegerValueType.kt")
+        public void testBoxingOfLiteralReceiverWithIntegerValueType() throws Exception {
+            runTest("compiler/testData/codegen/box/binaryOp/boxingOfLiteralReceiverWithIntegerValueType.kt");
+        }
+
         @TestMetadata("call.kt")
         public void testCall() throws Exception {
             runTest("compiler/testData/codegen/box/binaryOp/call.kt");
@@ -16647,6 +16652,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
                 runTest("compiler/testData/codegen/box/invokedynamic/lambdas/bigArityExtLambda.kt");
             }
 
+            @TestMetadata("genericLambdaSignature.kt")
+            public void ignoreGenericLambdaSignature() throws Exception {
+                runTest("compiler/testData/codegen/box/invokedynamic/lambdas/genericLambdaSignature.kt");
+            }
+
             @TestMetadata("lambdaSerializable.kt")
             public void ignoreLambdaSerializable() throws Exception {
                 runTest("compiler/testData/codegen/box/invokedynamic/lambdas/lambdaSerializable.kt");
@@ -16773,6 +16783,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
         @TestDataPath("$PROJECT_ROOT")
         @RunWith(JUnit3RunnerWithInners.class)
         public static class Sam extends AbstractLightAnalysisModeTest {
+            @TestMetadata("genericLambdaSignature.kt")
+            public void ignoreGenericLambdaSignature() throws Exception {
+                runTest("compiler/testData/codegen/box/invokedynamic/sam/genericLambdaSignature.kt");
+            }
+
             @TestMetadata("suspendFunInterface.kt")
             public void ignoreSuspendFunInterface() throws Exception {
                 runTest("compiler/testData/codegen/box/invokedynamic/sam/suspendFunInterface.kt");
@@ -18576,6 +18591,16 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
                     runTest("compiler/testData/codegen/box/jvm8/defaults/allCompatibility/privateFunInInterface.kt");
                 }
 
+                @TestMetadata("privateFunWithDefaultArg.kt")
+                public void testPrivateFunWithDefaultArg() throws Exception {
+                    runTest("compiler/testData/codegen/box/jvm8/defaults/allCompatibility/privateFunWithDefaultArg.kt");
+                }
+
+                @TestMetadata("privateFunWithDefaultArg2.kt")
+                public void testPrivateFunWithDefaultArg2() throws Exception {
+                    runTest("compiler/testData/codegen/box/jvm8/defaults/allCompatibility/privateFunWithDefaultArg2.kt");
+                }
+
                 @TestMetadata("propertyAnnotation.kt")
                 public void testPropertyAnnotation() throws Exception {
                     runTest("compiler/testData/codegen/box/jvm8/defaults/allCompatibility/propertyAnnotation.kt");
@@ -18584,6 +18609,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
                 @TestMetadata("simpleFunction.kt")
                 public void testSimpleFunction() throws Exception {
                     runTest("compiler/testData/codegen/box/jvm8/defaults/allCompatibility/simpleFunction.kt");
+                }
+
+                @TestMetadata("superCall.kt")
+                public void testSuperCall() throws Exception {
+                    runTest("compiler/testData/codegen/box/jvm8/defaults/allCompatibility/superCall.kt");
                 }
 
                 @TestMetadata("compiler/testData/codegen/box/jvm8/defaults/allCompatibility/delegationBy")
@@ -18871,6 +18901,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
                 @TestMetadata("privateFunInInterface.kt")
                 public void testPrivateFunInInterface() throws Exception {
                     runTest("compiler/testData/codegen/box/jvm8/defaults/noDefaultImpls/privateFunInInterface.kt");
+                }
+
+                @TestMetadata("privateFunWithDefaultArg.kt")
+                public void testPrivateFunWithDefaultArg() throws Exception {
+                    runTest("compiler/testData/codegen/box/jvm8/defaults/noDefaultImpls/privateFunWithDefaultArg.kt");
                 }
 
                 @TestMetadata("privateSuspend.kt")

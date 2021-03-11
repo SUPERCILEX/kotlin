@@ -1335,6 +1335,12 @@ public class IrBlackBoxCodegenTestGenerated extends AbstractIrBlackBoxCodegenTes
         }
 
         @Test
+        @TestMetadata("boxingOfLiteralReceiverWithIntegerValueType.kt")
+        public void testBoxingOfLiteralReceiverWithIntegerValueType() throws Exception {
+            runTest("compiler/testData/codegen/box/binaryOp/boxingOfLiteralReceiverWithIntegerValueType.kt");
+        }
+
+        @Test
         @TestMetadata("call.kt")
         public void testCall() throws Exception {
             runTest("compiler/testData/codegen/box/binaryOp/call.kt");
@@ -19940,6 +19946,12 @@ public class IrBlackBoxCodegenTestGenerated extends AbstractIrBlackBoxCodegenTes
             }
 
             @Test
+            @TestMetadata("genericLambdaSignature.kt")
+            public void testGenericLambdaSignature() throws Exception {
+                runTest("compiler/testData/codegen/box/invokedynamic/lambdas/genericLambdaSignature.kt");
+            }
+
+            @Test
             @TestMetadata("lambdaSerializable.kt")
             public void testLambdaSerializable() throws Exception {
                 runTest("compiler/testData/codegen/box/invokedynamic/lambdas/lambdaSerializable.kt");
@@ -20119,6 +20131,12 @@ public class IrBlackBoxCodegenTestGenerated extends AbstractIrBlackBoxCodegenTes
             @TestMetadata("genericFunInterfaceWithPrimitive.kt")
             public void testGenericFunInterfaceWithPrimitive() throws Exception {
                 runTest("compiler/testData/codegen/box/invokedynamic/sam/genericFunInterfaceWithPrimitive.kt");
+            }
+
+            @Test
+            @TestMetadata("genericLambdaSignature.kt")
+            public void testGenericLambdaSignature() throws Exception {
+                runTest("compiler/testData/codegen/box/invokedynamic/sam/genericLambdaSignature.kt");
             }
 
             @Test
@@ -22063,6 +22081,18 @@ public class IrBlackBoxCodegenTestGenerated extends AbstractIrBlackBoxCodegenTes
                 }
 
                 @Test
+                @TestMetadata("privateFunWithDefaultArg.kt")
+                public void testPrivateFunWithDefaultArg() throws Exception {
+                    runTest("compiler/testData/codegen/box/jvm8/defaults/allCompatibility/privateFunWithDefaultArg.kt");
+                }
+
+                @Test
+                @TestMetadata("privateFunWithDefaultArg2.kt")
+                public void testPrivateFunWithDefaultArg2() throws Exception {
+                    runTest("compiler/testData/codegen/box/jvm8/defaults/allCompatibility/privateFunWithDefaultArg2.kt");
+                }
+
+                @Test
                 @TestMetadata("privateSuspend.kt")
                 public void testPrivateSuspend() throws Exception {
                     runTest("compiler/testData/codegen/box/jvm8/defaults/allCompatibility/privateSuspend.kt");
@@ -22078,6 +22108,12 @@ public class IrBlackBoxCodegenTestGenerated extends AbstractIrBlackBoxCodegenTes
                 @TestMetadata("simpleFunction.kt")
                 public void testSimpleFunction() throws Exception {
                     runTest("compiler/testData/codegen/box/jvm8/defaults/allCompatibility/simpleFunction.kt");
+                }
+
+                @Test
+                @TestMetadata("superCall.kt")
+                public void testSuperCall() throws Exception {
+                    runTest("compiler/testData/codegen/box/jvm8/defaults/allCompatibility/superCall.kt");
                 }
 
                 @Test
@@ -22406,6 +22442,12 @@ public class IrBlackBoxCodegenTestGenerated extends AbstractIrBlackBoxCodegenTes
                 @TestMetadata("privateFunInInterface.kt")
                 public void testPrivateFunInInterface() throws Exception {
                     runTest("compiler/testData/codegen/box/jvm8/defaults/noDefaultImpls/privateFunInInterface.kt");
+                }
+
+                @Test
+                @TestMetadata("privateFunWithDefaultArg.kt")
+                public void testPrivateFunWithDefaultArg() throws Exception {
+                    runTest("compiler/testData/codegen/box/jvm8/defaults/noDefaultImpls/privateFunWithDefaultArg.kt");
                 }
 
                 @Test

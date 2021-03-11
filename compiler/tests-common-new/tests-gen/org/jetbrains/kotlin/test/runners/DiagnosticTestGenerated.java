@@ -18938,6 +18938,12 @@ public class DiagnosticTestGenerated extends AbstractDiagnosticTest {
             }
 
             @Test
+            @TestMetadata("literalReceiverWithIntegerValueType.kt")
+            public void testLiteralReceiverWithIntegerValueType() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/numbers/literalReceiverWithIntegerValueType.kt");
+            }
+
+            @Test
             @TestMetadata("numberAsUnionAndIntersection.kt")
             public void testNumberAsUnionAndIntersection() throws Exception {
                 runTest("compiler/testData/diagnostics/tests/numbers/numberAsUnionAndIntersection.kt");
@@ -32240,6 +32246,12 @@ public class DiagnosticTestGenerated extends AbstractDiagnosticTest {
                 @TestMetadata("isNullOrEmpty.kt")
                 public void testIsNullOrEmpty() throws Exception {
                     runTest("compiler/testData/diagnostics/testsWithStdLib/contracts/fromStdlib/isNullOrEmpty.kt");
+                }
+
+                @Test
+                @TestMetadata("kt45243.kt")
+                public void testKt45243() throws Exception {
+                    runTest("compiler/testData/diagnostics/testsWithStdLib/contracts/fromStdlib/kt45243.kt");
                 }
 
                 @Test
