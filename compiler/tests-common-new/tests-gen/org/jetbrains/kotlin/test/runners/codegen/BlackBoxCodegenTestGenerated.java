@@ -137,6 +137,12 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
         }
 
         @Test
+        @TestMetadata("genericAnnotations.kt")
+        public void testGenericAnnotations() throws Exception {
+            runTest("compiler/testData/codegen/box/annotations/genericAnnotations.kt");
+        }
+
+        @Test
         @TestMetadata("javaAnnotationArrayValueDefault.kt")
         public void testJavaAnnotationArrayValueDefault() throws Exception {
             runTest("compiler/testData/codegen/box/annotations/javaAnnotationArrayValueDefault.kt");
@@ -847,6 +853,12 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
         }
 
         @Test
+        @TestMetadata("kt42932.kt")
+        public void testKt42932() throws Exception {
+            runTest("compiler/testData/codegen/box/arrays/kt42932.kt");
+        }
+
+        @Test
         @TestMetadata("kt4348.kt")
         public void testKt4348() throws Exception {
             runTest("compiler/testData/codegen/box/arrays/kt4348.kt");
@@ -856,6 +868,12 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
         @TestMetadata("kt4357.kt")
         public void testKt4357() throws Exception {
             runTest("compiler/testData/codegen/box/arrays/kt4357.kt");
+        }
+
+        @Test
+        @TestMetadata("kt45410.kt")
+        public void testKt45410() throws Exception {
+            runTest("compiler/testData/codegen/box/arrays/kt45410.kt");
         }
 
         @Test
@@ -7829,6 +7847,12 @@ public class BlackBoxCodegenTestGenerated extends AbstractBlackBoxCodegenTest {
             @TestMetadata("breakInExpr.kt")
             public void testBreakInExpr() throws Exception {
                 runTest("compiler/testData/codegen/box/controlStructures/breakContinueInExpressions/breakInExpr.kt");
+            }
+
+            @Test
+            @TestMetadata("breakInLoopConditions.kt")
+            public void testBreakInLoopConditions() throws Exception {
+                runTest("compiler/testData/codegen/box/controlStructures/breakContinueInExpressions/breakInLoopConditions.kt");
             }
 
             @Test

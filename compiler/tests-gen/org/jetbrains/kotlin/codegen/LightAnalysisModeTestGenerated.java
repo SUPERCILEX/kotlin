@@ -127,6 +127,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
             runTest("compiler/testData/codegen/box/annotations/fileClassWithFileAnnotation.kt");
         }
 
+        @TestMetadata("genericAnnotations.kt")
+        public void testGenericAnnotations() throws Exception {
+            runTest("compiler/testData/codegen/box/annotations/genericAnnotations.kt");
+        }
+
         @TestMetadata("javaAnnotationArrayValueDefault.kt")
         public void testJavaAnnotationArrayValueDefault() throws Exception {
             runTest("compiler/testData/codegen/box/annotations/javaAnnotationArrayValueDefault.kt");
@@ -742,6 +747,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
             runTest("compiler/testData/codegen/box/arrays/kt4118.kt");
         }
 
+        @TestMetadata("kt42932.kt")
+        public void testKt42932() throws Exception {
+            runTest("compiler/testData/codegen/box/arrays/kt42932.kt");
+        }
+
         @TestMetadata("kt4348.kt")
         public void testKt4348() throws Exception {
             runTest("compiler/testData/codegen/box/arrays/kt4348.kt");
@@ -750,6 +760,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
         @TestMetadata("kt4357.kt")
         public void testKt4357() throws Exception {
             runTest("compiler/testData/codegen/box/arrays/kt4357.kt");
+        }
+
+        @TestMetadata("kt45410.kt")
+        public void testKt45410() throws Exception {
+            runTest("compiler/testData/codegen/box/arrays/kt45410.kt");
         }
 
         @TestMetadata("kt503.kt")
@@ -6026,6 +6041,11 @@ public class LightAnalysisModeTestGenerated extends AbstractLightAnalysisModeTes
         @TestDataPath("$PROJECT_ROOT")
         @RunWith(JUnit3RunnerWithInners.class)
         public static class BreakContinueInExpressions extends AbstractLightAnalysisModeTest {
+            @TestMetadata("breakInLoopConditions.kt")
+            public void ignoreBreakInLoopConditions() throws Exception {
+                runTest("compiler/testData/codegen/box/controlStructures/breakContinueInExpressions/breakInLoopConditions.kt");
+            }
+
             private void runTest(String testDataFilePath) throws Exception {
                 KotlinTestUtils.runTest(this::doTest, TargetBackend.JVM, testDataFilePath);
             }
